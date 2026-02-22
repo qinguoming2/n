@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="git-极简手册常用命令" data-depth="1"><a href="#git-极简手册常用命令">Git 极简手册(常用命令)</a><ol><li data-target-id="_1-初始化--克隆" data-depth="2"><a href="#_1-初始化--克隆">1. 初始化 / 克隆</a></li><li data-target-id="_2-基础操作" data-depth="2"><a href="#_2-基础操作">2. 基础操作</a></li><li data-target-id="_3-查看提交记录" data-depth="2"><a href="#_3-查看提交记录">3. 查看提交记录</a></li><li data-target-id="_4-同步远程仓库" data-depth="2"><a href="#_4-同步远程仓库">4. 同步远程仓库</a></li><li data-target-id="_5-分支最常用" data-depth="2"><a href="#_5-分支最常用">5. 分支(最常用)</a></li><li data-target-id="_6-撤销--回退" data-depth="2"><a href="#_6-撤销--回退">6. 撤销 / 回退</a></li><li data-target-id="_7-配置第一次用才需要" data-depth="2"><a href="#_7-配置第一次用才需要">7. 配置(第一次用才需要)</a></li><li data-target-id="超简工作流" data-depth="2"><a href="#超简工作流">超简工作流</a></li><li data-target-id="进阶使用" data-depth="2"><a href="#进阶使用">进阶使用</a><ol><li data-target-id="修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库" data-depth="3"><a href="#修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库">修改本地 Git 仓库关联的远程仓库链接，然后提交代码到新的远程仓库</a></li></ol></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="page-break" data-hidden=""></div><h1 id="git-极简手册常用命令">Git 极简手册(常用命令)</h1><h2 id="_1-初始化--克隆">1. 初始化 / 克隆</h2><pre><code class="language-bash"># 新建本地仓库
+git init
+
+# 克隆远程仓库
+git clone 仓库地址</code></pre><h2 id="_2-基础操作">2. 基础操作</h2><pre><code class="language-bash"># 查看文件状态
+git status
+
+# 添加文件到暂存区
+git add 文件名
+git add .        # 全部添加</code></pre><pre><code class="language-bash"># 提交到本地仓库
+git commit -m &quot;这里写提交说明&quot;</code></pre><h2 id="_3-查看提交记录">3. 查看提交记录</h2><pre><code class="language-bash">git log          # 查看完整提交
+git log --oneline# 简洁版</code></pre><h2 id="_4-同步远程仓库">4. 同步远程仓库</h2><pre><code class="language-bash"># 拉取远程最新代码
+git pull
+
+# 推送到远程
+git push</code></pre><h2 id="_5-分支最常用">5. 分支(最常用)</h2><pre><code class="language-bash"># 查看所有分支
+git branch
+
+# 新建分支
+git branch 分支名
+
+# 切换分支
+git checkout 分支名
+git switch 分支名   # 新版推荐</code></pre><pre><code class="language-bash"># 合并分支(比如把 dev 合并到 main)
+git checkout main
+git merge dev</code></pre><h2 id="_6-撤销--回退">6. 撤销 / 回退</h2><pre><code class="language-bash"># 撤销工作区修改(还没 add)
+git checkout -- 文件名
+
+# 取消暂存(已经 add . 想撤回)
+git reset HEAD 文件名</code></pre><h2 id="_7-配置第一次用才需要">7. 配置(第一次用才需要)</h2><pre><code class="language-bash">git config --global user.name &quot;你的名字&quot;
+git config --global user.email &quot;你的邮箱&quot;</code></pre><hr /><h2 id="超简工作流">超简工作流</h2><ol><li>写代码</li><li><span class="codespan-content"><code>git add .</code></span></li><li><span class="codespan-content"><code>git commit -m &quot;说明&quot;</code></span></li><li><span class="codespan-content"><code>git pull</code></span></li><li><span class="codespan-content"><code>git push</code></span></li></ol><h2 id="进阶使用">进阶使用</h2><h3 id="修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库">修改本地 Git 仓库关联的远程仓库链接，然后提交代码到新的远程仓库</h3><pre><code class="language-bash"># 查看当前远程仓库链接
+git remote -v
+
+# 删除旧的远程链接
+git remote remove origin
+
+# 添加新的远程链接
+git remote add origin https://github.com/新用户名/新仓库名.git
+
+# 验证新的远程链接
+git remote -v
+
+# 1. 查看本地修改(可选，确认要提交的内容)
+git status
+
+# 2. 添加所有修改到暂存区
+git add .
+
+# 3. 提交到本地仓库(必须写提交说明)
+git commit -m &quot;修改了xxx功能/更新代码&quot;
+
+# 4. 推送到新的远程仓库(首次推新仓库可能需要指定分支)
+# 常规推送(已关联分支)
+git push
+
+# 首次推送新仓库/分支不存在时，执行(main是默认分支,也可能是master)
+git push -u origin main</code></pre></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
