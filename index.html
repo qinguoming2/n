@@ -1,60 +1,41 @@
 <!DOCTYPE html>
-<!--suppress ALL -->
 <html lang="zh">
-
-<head>
+  <head>
     <meta name="generator" content="Quarkdown">
     <meta charset="UTF-8">
     <meta name="description" content="a blog demo">
     <meta name="author" content="qinguoming">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content=".">
     <title>blog</title>
     <script src="./script/quarkdown.js"></script>
     <script>const capabilities = window.quarkdownCapabilities</script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./theme/theme.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="./theme/theme.css" rel="stylesheet">
     <style>
-        body {}
 
-        .page-break {
-            break-before: always;
-        }
+body {
+    --qd-main-font-size: 12.0pt;}
 
-        .quarkdown-plain .page-break {
-            break-before: avoid;
-            break-after: avoid;
-        }
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
 
-        body.quarkdown-plain.quarkdown-plain {}
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
 
-        body.quarkdown-slides.quarkdown-slides .reveal {}
+@page {
+    size: auto auto;
+    margin: 0;}
 
-        @page {
-            size: auto auto;
-            margin: 0;
-        }
-
-        p {}
-    </style>
-    <script>
-        const doc = new PlainDocument();
-        prepare(doc);
-    </script>
-</head>
-
-<body class="quarkdown quarkdown-plain">
-    <aside id="margin-area-left" class="margin-area"></aside>
-    <main>
-        <div class="container fullwidth" style="justify-items: center; text-align: center;">
-            <p>Blog Index</p>
-        </div>
-        <ul>
-            <li><a href="./About">关于我</a></li>
-            <li><a href="./Wilson_PS4">Wilson非协调单元在PS4的推导</a></li>
-        </ul>
-    </main>
-    <aside id="margin-area-right" class="margin-area"></aside>
-</body>
-
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="无数青山水拍天" data-depth="1"><a href="#无数青山水拍天">无数青山水拍天</a><ol><li data-target-id="介绍" data-depth="2"><a href="#介绍">介绍</a></li><li data-target-id="中文帮助" data-depth="2"><a href="#中文帮助">中文帮助</a></li><li data-target-id="文章列表" data-depth="2"><a href="#文章列表">文章列表</a><ol><li data-target-id="数值分析" data-depth="3"><a href="#数值分析">数值分析</a></li><li data-target-id="单元技术" data-depth="3"><a href="#单元技术">单元技术</a></li></ol></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><p></p><p></p><div class="container fullwidth" style="justify-items: center; text-align: center;"><div class="page-break" data-hidden=""></div><h1 id="无数青山水拍天">无数青山水拍天</h1></div><h2 id="介绍">介绍</h2><ul><li><a href="./About">关于我</a></li></ul><h2 id="中文帮助">中文帮助</h2><ul><li><a href="./quarkdown_guidelines">快速入门</a></li></ul><h2 id="文章列表">文章列表</h2><h3 id="数值分析">数值分析</h3><ul><li><a href="./IBVP_of_ODEs_Notes">常微分方程初&amp;边值问题数值解</a></li></ul><h3 id="单元技术">单元技术</h3><ul><li><a href="./Wilson_PS4">Wilson非协调单元在PS4的推导</a></li></ul></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
 </html>
