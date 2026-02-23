@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" rel="stylesheet" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" defer="true" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script>capabilities.math = true;
+
+window.texMacros = {}</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="数值积分与数值微分" data-depth="1"><a href="#数值积分与数值微分">数值积分与数值微分</a></li><li data-target-id="数值积分" data-depth="1"><a href="#数值积分">数值积分</a><ol><li data-target-id="_1-引言" data-depth="2"><a href="#_1-引言">1. 引言</a></li><li data-target-id="_2-几个常用积分公式及其复合公式" data-depth="2"><a href="#_2-几个常用积分公式及其复合公式">2. 几个常用积分公式及其复合公式</a><ol><li data-target-id="_21-求积公式" data-depth="3"><a href="#_21-求积公式">2.1 求积公式</a></li><li data-target-id="_22-代数精度" data-depth="3"><a href="#_22-代数精度">2.2 代数精度</a></li><li data-target-id="_23-复合积分" data-depth="3"><a href="#_23-复合积分">2.3 复合积分</a></li><li data-target-id="_24-常用积分公式的python实现" data-depth="3"><a href="#_24-常用积分公式的python实现">2.4 常用积分公式的python实现</a></li></ol></li><li data-target-id="_3-变步长方法与外推加速技术" data-depth="2"><a href="#_3-变步长方法与外推加速技术">3. 变步长方法与外推加速技术</a><ol><li data-target-id="python代码实现" data-depth="3"><a href="#python代码实现">Python代码实现</a></li></ol></li><li data-target-id="_4-牛顿-科茨公式newton-cotes-formula" data-depth="2"><a href="#_4-牛顿-科茨公式newton-cotes-formula">4. 牛顿-科茨公式(Newton-Cotes formula)</a><ol><li data-target-id="newton-cotes公式的python实现" data-depth="3"><a href="#newton-cotes公式的python实现">NEWTON-COTES公式的PYTHON实现</a></li></ol></li><li data-target-id="_5-高斯公式gauss-formula" data-depth="2"><a href="#_5-高斯公式gauss-formula">5. 高斯公式(Gauss formula)</a><ol><li data-target-id="_51-常用的高斯型公式" data-depth="3"><a href="#_51-常用的高斯型公式">5.1 常用的高斯型公式</a></li><li data-target-id="_52-高斯积分的应用" data-depth="3"><a href="#_52-高斯积分的应用">5.2 高斯积分的应用</a></li></ol></li><li data-target-id="_6-多重积分" data-depth="2"><a href="#_6-多重积分">6. 多重积分</a><ol><li data-target-id="_61-从一重积分推广到二重积分" data-depth="3"><a href="#_61-从一重积分推广到二重积分">6.1 从一重积分推广到二重积分</a></li><li data-target-id="_62-蒙特卡罗方法" data-depth="3"><a href="#_62-蒙特卡罗方法">6.2 蒙特卡罗方法</a></li></ol></li></ol></li><li data-target-id="数值微分" data-depth="1"><a href="#数值微分">数值微分</a><ol><li data-target-id="_7基于拉格朗日插值多项式的求导方法" data-depth="2"><a href="#_7基于拉格朗日插值多项式的求导方法">7.基于拉格朗日插值多项式的求导方法</a><ol><li data-target-id="两点公式" data-depth="3"><a href="#两点公式">两点公式</a></li><li data-target-id="三点及五点公式" data-depth="3"><a href="#三点及五点公式">三点及五点公式</a></li></ol></li><li data-target-id="_8-基于样条函数的求导方法" data-depth="2"><a href="#_8-基于样条函数的求导方法">8. 基于样条函数的求导方法</a></li></ol></li><li data-target-id="数值实验" data-depth="1"><a href="#数值实验">数值实验</a></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="page-break" data-hidden=""></div><h1 id="数值积分与数值微分">数值积分与数值微分</h1><blockquote><p><a href="https://www.cnblogs.com/aksoam/p/18332123">https://www.cnblogs.com/aksoam/p/18332123</a></p></blockquote><figure><img src="media/2026433-20240730125437069-2102425550@-1852554260.png" alt="img" /></figure><div class="page-break" data-hidden=""></div><h1 id="数值积分">数值积分</h1><h2 id="_1-引言">1. 引言</h2><p>高数中计算积分思路基本是牛顿莱布尼兹法:</p><formula data-block="">I[f]=\int_{a}^{b}f(x)\mathrm{d}x=F(b)-F(a),</formula><formula data-block="">F^{\prime}(x)=f(x).</formula><p>实际计算中,原函数一般无法求出.给不出解析解,只能求出数值解.</p><p>设在区间 [a,b], (不妨先设 a,b 为有限数 ) 上 , <formula>f(x) ≈ P_n (x), P_n (x)</formula>  为某个较&rdquo;简单&rdquo;的函数 , 则显然有</p><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\int_a^bP_n(x)\mathrm{d}x.</formula><p>如果 <formula>\operatorname*{max}_{a\leqslant x\leqslant b}|f(x)-P_{n}(x)|\leqslant\varepsilon</formula> ,则误差估计:</p><formula data-block="">\left|\int_a^bf(x)\mathrm{d}x-\int_a^bP_n(x)\mathrm{d}x\right|\leqslant(b-a)\varepsilon.</formula><h2 id="_2-几个常用积分公式及其复合公式">2. 几个常用积分公式及其复合公式</h2><ul><li>中点公式</li></ul><p>对f(x),使用 <formula>f(\frac{a+b}{2})</formula> 近似代替.有:</p><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\int_a^bf\left(\frac{a+b}{2}\right)\mathrm{d}x=(b-a)f\left(\frac{a+b}{2}\right).\tag{1}</formula><p>误差估计:</p><formula data-block="">\int_a^bf(x)\mathrm{d}x-(b-a)f\left(\frac{a+b}{2}\right)=\frac{1}{12}(b-a)^3f''(\xi).</formula><ul><li>梯形公式</li></ul><p>拉格朗日插值多项式 <formula>L_n(x)</formula> :</p><formula data-block="">L_n(x)=\sum_{j=0}^ny_jl_j(x)=\sum_{j=0}^ny_j\prod_{\substack{i=0\\i\neq j}}^n\frac{x-x_i}{x_j-x_i}.</formula><p><formula>n=1</formula> 时, <formula>L_1(x)=l_0(x)y_0+l_1(x)y_1</formula> ,用 <formula>L_1(x)</formula>  近似代替 f(x) 称为线性插值 , 公式(3.9)称为线性插值多项式或一次插值多项式.即:</p><formula data-block="">L_1(x)=\frac{x-x_1}{x_0-x_1}y_0+\frac{x-x_0}{x_1-x_0}y_1.</formula><p><formula>n=2</formula> 时, <formula>L_2(x)=l_0(x)y_0+l_1(x)y_1+l_2(x)y_2</formula> ,用 <formula>L_2(x)</formula> 近似代替 f(x) 称为二次插值或抛物线插值 , 称式 (3.10) 为二次插值多项式</p><formula data-block="">L_2(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}y_0+\frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}y_1+\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}y_2</formula><p>基于 <formula>x=a,x=b</formula> 两节点构造线性插值函数 <formula>L_1(x)</formula> ,近似代替原函数 <formula>f(x)</formula> ,得到梯形公式.</p><formula data-block="">L_1(x)=\frac{x-b}{a-b}f(a)+\frac{x-a}{b-a}f(b)</formula><formula data-block="">\begin{aligned}
+\int_{a}^{b}f(x)\mathrm{d}x& \approx\int_{a}^{b}L_{1}(x)\mathrm{d}x=\int_{a}^{b}\left[{\frac{x-b}{a-b}}f(a)+{\frac{x-a}{b-a}}f(b)\right]\mathrm{d}x \\
+&=\frac{1}{2}(b-a)\left[f(a)+f(b)\right].
+\end{aligned}\tag{2}</formula><p>误差估计:</p><formula data-block="">\int_a^bf(x)\mathrm{d}x-\frac{1}{2}(b-a)\left[f(a)+f(b)\right]=-\frac{1}{12}(b-a)^3f''(\xi), \xi\in(a,b)</formula><ul><li>辛普森 (Simpson) 公式(抛物型公式)</li></ul><formula data-block="">\text{若 }f(x)\text{ 用通过节点 }x_0=a, x_1=\frac{a+b}{2}, x_2=b\text{ 的二次插值多项式 }L_2(x)\text{ 代替}</formula><formula data-block="">f(x)\approx L_2(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}f(x_0)+\frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}f(x_1)+\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}f(x_2)</formula><p>可以得到积分公式:</p><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\int_a^bL_2(x)\mathrm{d}x=\frac16(b-a)\left[f(a)+4f\left(\frac{a+b}2\right)+f(b)\right].\tag{3}</formula><p>误差估计:</p><formula data-block="">\int_a^bf(x)\mathrm dx-\frac{1}{6}(b-a)\left[f(a)+4f\left(\frac{a+b}{2}\right)+f(b)\right]=-\frac{(b-a)^5}{2880}f^{(4)}(\xi),\quad\xi\in(a,b).</formula><h3 id="_21-求积公式">2.1 求积公式</h3><p>回顾以上三个积分公式,可以看出:一般地 , 若已知函数 f(x) 在区间 [a,b] 内节点 <formula>x_0 ,x_1 ,··· ,x_n</formula> 上的值 <formula>f(x_0), f(x_), ···,f(x_n )</formula> , 则称形如</p><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x_i)</formula><p>的式子为求积公式 , 其中  <formula>x_i</formula>  称为求积节点 ,  <formula>\omega_i</formula> 称为求积系数 . 求积节点及求积系数不依赖于被积函数 f(x) 的具体形式 .</p><p>记 <formula>Q[f]=\sum_{i=0}^n\omega_if(x_i),</formula> 则误差(余项)为: <formula>R[f]=I[f]-Q[f].</formula></p><h3 id="_22-代数精度">2.2 代数精度</h3><p>定义 5.2.1 如果对所有次数小于等于 m 的多项式 f(x), 等式</p><formula data-block="">\int_a^bf(x)\mathrm{d}x=\sum_{i=0}^n\omega_if(x_i)</formula><p>成立 , 但对某个次数为 m + 1 的多项式 f(x),等式不精确成立 , 则称求积公式 (5.8) 的代数精度为 m 次</p><p>代数精度适用于判断求积公式好坏的标准之一.如何计算公式代数精度如下做法:</p><ul><li>以中点公式为例</li></ul><p>中点公式的误差估计(余项)为 <formula>R[f]=\frac{1}{12}(b-a)^3f''(\xi),\quad\xi\in(a,b),</formula> ,当f(x)分别取 <formula>1,x,x^2</formula> 时,有</p><formula data-block="">R[f]=0,0,\frac{1}{6}(b-a)^3</formula><p>所以,中点公式的代数精度为 <formula>m=1</formula> .</p><ul><li>另一种方式</li></ul><p>将 <formula>1,x,x^2,···,x^{m+1}</formula> 分别代入求积公式两边,分别计算,对比.直到m+1次幂时等式不成立,则称求积公式的代数精度为m次.</p><figure><img src="media/2026433-20240730143645649-558546973@-670463393.png" alt="img" /></figure><h3 id="_23-复合积分">2.3 复合积分</h3><blockquote><p>在通常情况下 , 积分区间 [a,b] 的长度 b−a 不是非常小 , 因此为了确保计算精度 , 通常采用复合求积公式</p></blockquote><p>复合积分 , 就是将积分区间分为若干份 , 在每一个 &quot; 小区间 &quot; 上用低阶求积公式 (1),(2) 或 (3) 进行计算 , 再将计算值相加即得原积分的近似值</p><p>将积分区间 [a,b] 分为 n 等分 , 记步长 <formula>h=\frac{b-a}{n}</formula> ,节点为  <formula>x_{i}=a+ih(i=0,1,\cdots,n),</formula> 并记 <formula>x_{i+\frac12}=\frac12(x_i+x_{i+1})</formula> ,根据定积分形式</p><formula data-block="">\int_a^bf(x)\mathrm{d}x=\sum_{i=0}^{n-1}\int_{x_i}^{x_{i+1}}f(x)\mathrm{d}x,</formula><p>当n取值足够大,即 <formula>h</formula> 足够小,在每个区间应用低阶积分公式,就得到了复合积分公式.</p><ul><li>复合中点公式</li></ul><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\sum_{i=0}^{n-1}hf\left(x_{i+\frac{1}{2}}\right)\triangleq M_n\tag{4}</formula><ul><li>复合梯形公式</li></ul><formula data-block="">\begin{aligned}
+\int_{a}^{b}f(x)\mathrm{d}x& \approx\sum_{i=0}^{n-1}\frac{h}{2}\left[f(x_{i})+f(x_{i+1})\right] \\
+&=\frac h2\left[f(a)+2\sum_{i=1}^{n-1}f\left(x_i\right)+f(b)\right]\triangleq T_n.
+\end{aligned}\tag{5}</formula><ul><li>复合辛普森公式</li></ul><formula data-block="">\begin{aligned}
+\int_{a}^{b}f(x)\mathrm{d}x& \approx\sum_{i=0}^{n-1}\frac{h}{6}\left[f(x_{i})+4f(x_{i+\frac{1}{2}})+f(x_{i+1})\right] \\
+&=\frac{h}{6}\left[f(a)+4\sum_{i=0}^{n-1}f(x_{i+\frac12})+2\sum_{i=1}^{n-1}f(x_{i})+f(b)\right]\triangleq S_{n}.\tag{6}
+\end{aligned}</formula><p>三个公式的误差余项分别为:</p><formula data-block="">\begin{aligned}R_{M}=&\int_{a}^{b}f(x)\mathrm{d}x-M_{n}=\sum_{i=0}^{n-1}\int_{x_{i}}^{x_{i+1}}f(x)\mathrm{d}x-\sum_{i=0}^{n-1}hf(x_{i+\frac{1}{2}})\\=&\sum_{i=0}^{n-1}\frac{1}{12}h^{3}f^{\prime\prime}(\xi).\end{aligned}</formula><formula data-block="">R_T=\int_a^bf(x)\mathrm{d}x-T_n=-\frac1{12}(b-a)h^2f''(\eta),\quad\eta\in(a,b),</formula><formula data-block="">R_{S}=\int_{a}^{b}f(x)\mathrm{d}x-S_{n}=-\frac{1}{2880}(b-a)h^{4}f^{(4)}(\eta),\quad\eta\in(a,b).</formula><h3 id="_24-常用积分公式的python实现">2.4 常用积分公式的python实现</h3><p>6种常用积分公式的python实现如下:</p><pre><code class="language-python"># -*- coding: utf-8 -*-
+# 数值计算方法实现(python)
+import numpy as np
+from typing import List, Tuple,Union
+
+### y = 4/( 1+x^2 )
+# f= lambda x: 4/( 1+x**2 )
+
+def MidPointInteg1d(f, a:float, b:float)-&gt;float:
+    &quot;&quot;&quot;一维中点积分公式&quot;&quot;&quot;
+    return (b-a)*f((a+b)/2)
+
+def ComMidPointInteg1d(f, a:float, b:float, n:int)-&gt;float:
+    &quot;&quot;&quot;一维复合中点积分公式&quot;&quot;&quot;
+    h=(b-a)/n
+    x=np.linspace(a+0.5*h,b-0.5*h,n)
+    return h*sum([f(xi) for xi in x])
+
+def trapezoidInteg1d(f, a:float, b:float)-&gt;float:
+    &quot;&quot;&quot;一维梯形积分公式&quot;&quot;&quot;
+    return (b-a)*(f(a)+f(b))/2.0
+
+def ComtrapezoidInteg1d(f, a:float, b:float, n:int)-&gt;float:
+    &quot;&quot;&quot;一维复合梯形积分公式&quot;&quot;&quot;
+    h=(b-a)/n
+    # x_i  (i=0,1,...,n)
+    x=[a+i*h for i in range(n+1)]
+    return 0.5*h*(-f(a)-f(b)+2*sum([f(xi) for xi in x]))
+
+def SimpsonInteg1d(f, a:float, b:float)-&gt;float:
+    &quot;&quot;&quot;一维 Simpson 积分公式&quot;&quot;&quot;
+    return (b-a)*(f(a)+4*f((a+b)/2.0)+f(b))/6.0
+
+def ComSimpsonInteg1d(f, a:float, b:float, n:int)-&gt;float:
+    &quot;&quot;&quot;一维复合 Simpson 积分公式&quot;&quot;&quot;
+    h=(b-a)/n
+    # x_i  (i=0,1,...,n)
+    x=[a+i*h for i in range(n+1)]
+    t1=sum([f(0.5*(x[i]+x[i+1])) for i in range(0,n)])
+    t2=sum([f(x[i]) for i in range(1,n)])
+    return (h/6.0)*(f(a)+f(b)+4*t1+2*t2)
+
+def integ1d(f:object, 
+            a:float, 
+            b:float,
+            **kwargs)-&gt;float:
+    &quot;&quot;&quot;一维数值积分&quot;&quot;&quot;
+    if kwargs[&#39;method&#39;]==1:
+        return MidPointInteg1d(f, a, b)
+    if kwargs[&#39;method&#39;]==2:
+        return trapezoidInteg1d(f, a, b)
+    if kwargs[&#39;method&#39;]==3:
+        return SimpsonInteg1d(f, a, b)
+
+def ComInteg1d(f, 
+                a:float, 
+                b:float, 
+                n:int,
+                **kwargs)-&gt;float:
+    &quot;&quot;&quot;一维复合积分&quot;&quot;&quot;
+    if kwargs[&#39;method&#39;]==1:
+        return ComMidPointInteg1d(f, a, b, n)
+    if kwargs[&#39;method&#39;]==2:
+        return ComtrapezoidInteg1d(f, a, b, n)
+    if kwargs[&#39;method&#39;]==3:
+        return ComSimpsonInteg1d(f, a, b, n)
+    
+def showError(Numerical:float, Exact:float)-&gt;None:
+    &quot;&quot;&quot;显示误差&quot;&quot;&quot;
+    print(f&quot;数值解: {Numerical}, 精确解: { Exact}, 误差: {0.01*(Exact-Numerical)}%&quot;)
+    </code></pre><p>验证:</p><pre><code class="language-python"># f(x)=e^(-x)
+f=lambda x: np.exp(-x)
+accVal=0.6321
+
+# 积分范围
+a,b=0,1
+
+# 计算积分
+integ1=integ1d(f,a,b,method=1)
+integ2=integ1d(f,a,b,method=2)
+integ3=integ1d(f,a,b,method=3)
+
+print(f&quot;中点积分:{integ1}&quot;)
+showError(integ1,accVal)
+
+print(f&quot;梯形积分:{integ2}&quot;)
+showError(integ2,accVal)
+
+print(f&quot;Simpson积分: {integ3}&quot;)
+showError(integ3,accVal)
+
+输出:
+中点积分:0.6065306597126334
+数值解: 0.6065306597126334, 精确解: 0.6321, 误差: 0.0404514163698253
+梯形积分:0.6839397205857212
+数值解: 0.6839397205857212, 精确解: 0.6321, 误差: -0.08201189777839135
+Simpson积分: 0.6323336800036626
+数值解: 0.6323336800036626, 精确解: 0.6321, 误差: -0.0003696883462468591</code></pre><p>步长数目越多,误差越小.</p><pre><code class="language-python">f2= lambda x: x*np.exp(-1*x)*np.cos(2*x)
+
+# 积分范围
+a,b=0,2*np.pi
+n =[2**i for i in range(9)]
+extract=-0.122122499
+
+e1,e2,e3=[],[],[]
+# 复合积分计算
+for ni in n:
+    integ_mid=ComInteg1d(f2,a,b,ni,method=1)
+    integ_trap=ComInteg1d(f2,a,b,ni,method=2)
+    integ_simpson=ComInteg1d(f2,a,b,ni,method=3)
+    e1.append(abs(integ_mid-extract))
+    e2.append(abs(integ_trap-extract))
+    e3.append(abs(integ_simpson-extract))
+
+from matplotlib import pyplot as plt
+plt.plot(np.log10(n),np.log10(e1),label=&#39;Midpoint&#39;)
+plt.plot(np.log10(n),np.log10(e2),label=&#39;Trapezoidal&#39;)
+plt.plot(np.log10(n),np.log10(e3),label=&#39;Simpson&#39;)
+plt.xlabel(&#39;Log_10(n)&#39;)
+plt.ylabel(&#39;Log_10(Error)&#39;)
+plt.legend()
+plt.show()</code></pre><figure><img src="media/2026433-20240730175635581-2056696787@1194354142.png" alt="img" /></figure><h2 id="_3-变步长方法与外推加速技术">3. 变步长方法与外推加速技术</h2><blockquote><p>复合中点公式、梯形公式以及辛普森公式都是有效的求积方法 , 步长 h 越小 ,
+计算精度越高 . 但在实际运用上述求积公式进行计算时须事先选取一个合适的步长 h,**因此在给定计算精度的情形下 , 往往通过不断调整步长的方式进行计算 **</p></blockquote><ul><li>变步长梯形法</li></ul><p>在实际计算中往往会采用让步长逐次折半的方式 , 反复使用复合求积公式进行计算 , 直至相邻两次计算结果之差的绝对值小于给定的计算精度为止 . 这种方法即称为<strong>变步长算法</strong></p><p>变步长梯形方法的优点是算法简单 , 编程容易 ; 缺点是收敛速度较慢</p><figure><img src="media/2026433-20240730181806485-18720573@-212415351.png" alt="img" /></figure><h3 id="python代码实现">Python代码实现</h3><pre><code class="language-python">def VarStepInteg1d(f, a:float, b:float,precision:float=1e-5,
+                    **kwargs)-&gt;float:
+    &quot;&quot;&quot;一维变步长积分&quot;&quot;&quot;
+    k=0
+    Tn=ComInteg1d(f, a, b, 1, method=kwargs[&#39;method&#39;])
+    print(f&quot;第0次积分, 步长: {(b-a)/(2**k)}, 结果: {Tn}&quot;)
+    while True:
+        k+=1
+        T2n=ComInteg1d(f, a, b, 2**k, method=kwargs[&#39;method&#39;])
+        print(f&quot;第{k}次积分, 步长: {(b-a)/(2**k)}, 结果: {T2n}&quot;)
+        if abs(T2n-Tn)&lt;=precision:
+            print(f&quot;精度要求达到, 迭代次数: {k}, 步长: {(b-a)/(2**k)}&quot;)
+            return T2n
+        else:
+            Tn=T2n
+
+f3=lambda x: np.sin(x)/x if x!=0 else 1
+# 积分范围
+a,b=0,1
+# 计算积分
+VarStepInteg1d(f3,a,b,1e-7,method=2)
+# 输出:
+# 第0次积分, 步长: 1.0, 结果: 0.9207354924039483
+# 第1次积分, 步长: 0.5, 结果: 0.9397932848061772
+# 第2次积分, 步长: 0.25, 结果: 0.9445135216653895
+# 第3次积分, 步长: 0.125, 结果: 0.9456908635827014
+# 第4次积分, 步长: 0.0625, 结果: 0.945985029934386
+# 第5次积分, 步长: 0.03125, 结果: 0.9460585609627681
+# 第6次积分, 步长: 0.015625, 结果: 0.946076943060063
+# 第7次积分, 步长: 0.0078125, 结果: 0.9460815385431518
+# 第8次积分, 步长: 0.00390625, 结果: 0.9460826874113473
+# 第9次积分, 步长: 0.001953125, 结果: 0.9460829746282345
+# 第10次积分, 步长: 0.0009765625, 结果: 0.9460830464324462
+# 精度要求达到, 迭代次数: 10, 步长: 0.0009765625</code></pre><ul><li>外推加速技术与龙贝格求积方法</li></ul><blockquote><p><a href="https://sites.millersville.edu/rbuchanan/math375/Romberg.pdf">讲义链接</a></p></blockquote><figure><img src="media/2026433-20240731104706737-2038621058@767586896.png" alt="img" /></figure><h2 id="_4-牛顿-科茨公式newton-cotes-formula">4. 牛顿-科茨公式(Newton-Cotes formula)</h2><p>中点公式、梯形公式及辛普森公式可分别看成是 f(x) 用常数、线性插值函数和抛物型插值函数代替再积分所得 . 若将此想法进一步推广 , 将 f(x) 用 n + 1 个等距节点上的 n 次拉格朗日插值多项式代替 , 即得所谓的牛顿–科茨 (Newton-Cotes) 公式.</p><p>设  <formula>x_i=a+ih, h=\frac{b-a}{n},</formula> 作 f(x) 的 n 次拉格朗日插值多项式  <formula>L_n (x)</formula> .为方便起见 , 令 <formula>x=a+th, t\in[0,n],</formula> 则  <formula>L_n (x)</formula>  可表示为</p><formula data-block="">L_n(x)=\sum_{i=0}^n\frac{(-1)^{n-i}}{i!(n-i)!}\prod_{j=0,j\neq i}^n(t-j)f(x_i),</formula><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\int_a^bL_n(x)\mathrm{d}x=\sum_{i=0}^n\omega_if(x_i).</formula><p>求积系数 <formula>\omega_i</formula> 的为:</p><formula data-block="">\begin{aligned}\omega_{i}=&(b-a)\frac{(-1)^{n-i}}{ni!(n-i)!}\int_{0}^{n}\prod_{j=0,j\neq i}^{n}(t-j)\mathrm{d}t\\=&(b-a)C_{i}^{(n)},\end{aligned}</formula><formula data-block="">C_i^{(n)}=\frac{(-1)^{n-i}}{ni!(n-i)!}\int_0^n\prod_{j=0,j\neq i}^n(t-j)\mathrm{d}t,</formula><p><formula>C_i^{(n)}</formula> 为科茨系数,仅与区间节点数目及第 i 个节点有关 .</p><figure><img src="media/2026433-20240731111812397-431025882@1759475980.png" alt="img" /></figure><blockquote><p>n &gt; 8 时科茨系数有正有负 , 此时对应的求积公式的稳定性得不到保证 . 且由于对高次插值多项式来说 , 收敛性一般不成立 , 故在实际计算中一般不采用高阶的牛顿 – 科茨公式(n &gt; 8).</p></blockquote><p><strong>定理5.4.1</strong>: 当 n 为奇数时 , 牛顿 – 科茨公式 (5.23) 的代数精度至少为 n 次 ; 而当 n 为偶数时 , 代数精度至少为 n + 1 次 .</p><p>该求积公式是稳定的.而当n&gt;7时,由于求积系数,有正有负,<strong>因此稳定性一般不成立,收敛性一般也不成立</strong>.因此对高阶牛顿科茨公式,</p><p>牛顿 – 科茨公式误差 <formula>R[f]</formula> 为:</p><formula data-block="">\begin{aligned}
+R[f]=& h^{n+2}\int_{0}^{n}\prod_{i=0}^{n}(n-i-s)\mathrm{d}s \\
+=& (-1)^{n+1}h^{n+2}\int_{0}^{n}\prod_{i=0}^{n}[s-(n-i)]\mathrm{d}s. 
+\end{aligned}</formula><blockquote><p>尽管它具有较高的代数精度,一般不采用.常用的是中点公式、梯形公式和抛物型公式的复合求积公式以及下节的采用非等分节点的高斯(Gauss)公式</p></blockquote><h3 id="newton-cotes公式的python实现">NEWTON-COTES公式的PYTHON实现</h3><pre><code class="language-python">def Integ1dNewtonCotes(f,a:float,b:float,n:int)-&gt;float:
+    &quot;&quot;&quot;给定n(&gt;=1)个点,计算一维牛顿-科特斯积分&quot;&quot;&quot;
+    if n&lt;=0:
+        raise ValueError(&quot;牛顿-科特斯积分时,n最小值为1&quot;)
+    weights=NewtonCotes_weights(a,b,n)
+    h=(b-a)/n
+    x=[a+i*h for i in range(n+1)]
+    return sum([weights[i]*f(x[i]) for i in range(n+1)])
+
+# check ok
+def NewtonCotes_factor(i:int,n:int)-&gt;float:
+    &quot;&quot;&quot;计算牛顿-科特斯积分的第i个权重&quot;&quot;&quot;
+    import math
+    import numpy as np
+    def f(t:float):
+        s=1.0
+        for j in range(n+1):
+            if j==i:
+                continue
+            s=s*(t-j)
+        return s
+    t1=((-1)**(n-i))/(n*math.factorial(i)*math.factorial(n-i))
+    t2=Integ1dGuassLegendre(f,0,n)
+    return t1*t2
+
+def NewtonCotes_weights(a:float,b:float,n:int=10)-&gt;List[float]:
+    &quot;&quot;&quot;计算牛顿-科特斯积分的权重数组&quot;&quot;&quot;
+    weights=[(b-a)*NewtonCotes_factor(i,n) for i in range(n+1)]
+    return np.array(weights)</code></pre><h2 id="_5-高斯公式gauss-formula">5. 高斯公式(Gauss formula)</h2><p>考虑带权函数的求积公式:</p><formula data-block="">I[f]=\int_a^b\rho(x)f(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x_i)\tag{7}</formula><p>其中函数  <formula>ρ(x) > 0</formula>  为已知函数 , 称为权函数.</p><p><strong>定义</strong>:若对于节点  <formula>x_i</formula>  ∈ [a,b] 及求积系数  <formula>\omega_i</formula>  , 求积公式(7)的代数精度为 2n+1, 则称节点  <formula>x_i</formula>  为高斯点 ,  <formula>\omega_i</formula>  为高斯系数 , 相应的求积公式 (7) 称为带权的高斯公式</p><p>高斯公式可看成是 f(x) 用高斯点上的n次插值多项式代替所得积分值 . 下面给出了确定高斯点的一种求解方法</p><blockquote><p><strong>定理5.5.2</strong>  <formula>x_i</formula>  (i = 0,1,··· ,n) 是求积公式 (7) 的高斯点的充分必要条件是 : 多项式  <formula>\Pi(x)=\prod_{i=0}^n(x-x_i)</formula>  与任意次数不超过 n 的多项式 q(x) 关于权函数 ρ(x) 正交:
+  <formula>\int_a^b\rho(x)\Pi(x)q(x)\mathrm{d}x=0.</formula></p></blockquote><figure><img src="media/2026433-20240731113739942-979798861@-1358791591.png" alt="img" /></figure><figure><img src="media/2026433-20240731113807632-1777449143@2127096118.png" alt="img" /></figure><h3 id="_51-常用的高斯型公式">5.1 常用的高斯型公式</h3><formula data-block="">I[f]=\int_a^b\rho(x)f(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x_i)\tag{7}</formula><h4 id="高斯--勒让德公式">高斯 – 勒让德公式</h4><p>令  <formula>\rho(x)\equiv1, [a,b]=[-1,1]</formula>  ,此时关于权函数  <formula>\rho(x)=1</formula>  的区间 [−1,1] 上的正交多项式为<strong>勒让德 (Legendre) 正交多项式</strong>.</p><p>n=0时:</p><formula data-block="">\int_{-1}^1f(x)\mathrm{d}x\approx2f(0),</formula><p>n=1时:</p><formula data-block="">\int_{-1}^1f(x)\mathrm{d}x\approx f\left(-\frac{1}{\sqrt{3}}\right)+f\left(\frac{1}{\sqrt{3}}\right).</formula><p>n=2时:</p><formula data-block="">\int_{-1}^1f(x)\mathrm{d}x\approx\frac{5}{9}f\left(-\sqrt{\frac{3}{5}}\right)+\frac{8}{9}f(0)+\frac{5}{9}f\left(\sqrt{\frac{3}{5}}\right).</formula><p>对于一般区间[a,b]的积分,需要先变换积分区间,然后使用高斯-勒让德公式计算.</p><formula data-block="">x=\frac{a+b}{2}+\frac{b-a}{2}t</formula><formula data-block="">\int_a^bf(x)\mathrm{d}x=\frac{b-a}{2}\int_{-1}^1f\left(\frac{a+b}{2}+\frac{b-a}{2}t\right)\mathrm{d}t.</formula><formula data-block="">\int_a^bf(x)\mathrm{d}x\approx\frac{b-a}{2}\sum_{i=0}^n\omega_if\left(\frac{a+b}{2}+\frac{b-a}{2}x_i\right),</formula><p>其中,  <formula>\omega_i</formula>  为高斯系数,  <formula>x_i</formula>  为高斯点.</p><p>常用的高斯点及高斯系数表:</p><figure><img src="media/2026433-20240731115211049-1607808674@935194027.png" alt="img" /></figure><h4 id="高斯--切比雪夫公式">高斯 – 切比雪夫公式</h4><p>令  <formula>\rho(x) = \frac{1}{\sqrt{1-x^{2}}}, [a,b] = [-1,1].</formula> ,高斯点 <formula>x_i</formula> 分布和对应高斯系数 <formula>\omega_i</formula> 为:</p><formula data-block="">x_i=\cos\frac{2i+1}{2(n+1)}\pi,\quad i=0,1,\cdots,n.</formula><formula data-block="">\omega_i=\frac{\pi}{n+1}.</formula><p>积分区间为[-1,+1]的高斯–切比雪夫公式为:</p><formula data-block="">\int_{-1}^1\frac{1}{\sqrt{1-x^2}}f(x)\mathrm{d}x\approx\frac{\pi}{n+1}\sum_{i=0}^nf\left(\cos\frac{2i+1}{2(n+1)}\pi\right).</formula><p>n=2时:</p><formula data-block="">\int_{-1}^1\frac{1}{\sqrt{1-x^2}}f(x)\mathrm{d}x\approx\frac{\pi}{3}\left[f\left(-\frac{\sqrt{3}}{2}\right)+f(0)+f\left(\frac{\sqrt{3}}{2}\right)\right].</formula><h4 id="高斯--拉盖尔公式">高斯 – 拉盖尔公式</h4><p>令  <formula>\rho(x)=\mathrm{e}^{-x}, [a,b]=[0,\infty).</formula>  此时高斯系数为:</p><formula data-block="">\omega_i=\frac{x_i}{L_{n+2}^2(x_i)},\quad i=0,1,\cdots,n.</formula><p>高斯 – 拉盖尔积分公式为:</p><formula data-block="">\int_0^\infty\mathrm{e}^{-x}f(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_if(x)</formula><p>n=0时:</p><formula data-block="">\int_0^\infty\mathrm{e}^{-x}f(x)\mathrm{d}x\approx f(1).</formula><p>n=1时:</p><formula data-block="">\int_0^\infty\mathrm{e}^{-x}f(x)\mathrm{d}x\approx\frac{2+\sqrt2}{4}f(2-\sqrt2)+\frac{2-\sqrt2}{4}f(2+\sqrt2).</formula><p>n=2,3,4时的高斯点和高斯系数:</p><figure><img src="media/2026433-20240731120851702-1125485061@1422429709.png" alt="img" /></figure><ul><li>公式变换</li></ul><p>对于形如  <formula>\int_{\alpha}^{\infty}\mathrm{e}^{-\beta x}f(x)\mathrm{d}x (\beta>0)</formula>  的积分,需要转换为标准高斯-拉盖尔公式的形式:</p><p>$ x=\frac{1}{\beta}t+\alpha  $</p><formula data-block="">\begin{aligned}
+\int_{\alpha}^{\infty}\mathrm{e}^{-\beta x}f(x)\mathrm{d}x& ={\frac{1}{\beta}}\mathrm{e}^{-\alpha\beta}\int_{0}^{\infty}\mathrm{e}^{-t}f\left({\frac{1}{\beta}}t+\alpha\right)\mathrm{d}t \\
+&\approx\frac{1}{\beta}\mathrm{e}^{-\alpha\beta}\sum_{i=0}^{n}\omega_{i}f\left(\frac{x_{i}}{\beta}+\alpha\right).
+\end{aligned}</formula><p>对于形如  <formula>\int_0^\infty g(x)\mathrm{d}x</formula>  的积分,首先确保g(x)是收敛的,其次需要转换为标准高斯-拉盖尔公式的形式:</p><formula data-block="">\begin{gathered}
+\int_{0}^{\infty}g(x)\mathrm{d}x =\int_{0}^{\infty}\mathrm{e}^{-x}f(x)\mathrm{d}x\approx\sum_{i=0}^{n}\omega_{i}f(x_{i}) \\
+=\sum_{i=0}^{n}\omega_{i}\mathrm{e}^{x_{i}}g(x_{i}). 
+\end{gathered}</formula><h4 id="高斯--埃尔米特-gauss-hermite-公式">高斯 – 埃尔米特 (Gauss-Hermite) 公式</h4><p>令  <formula>\rho(x) = \mathrm{e}^{-x^{2}}, [a,b] = (-\infty,+\infty).</formula>  ,高斯点为n+1次埃尔米特正交多项式  <formula>H_{n+1}(x)</formula>  的零点, 对应高斯系数为:</p><formula data-block="">\omega_i=\frac{2^{n+2}(n+1)!\sqrt{\pi}}{\left[H_{n+2}(x_i)\right]^2},\quad i=0,1,\cdots,n.</formula><p>此时求积公式为:</p><formula data-block="">\int_{-\infty}^{+\infty}\mathrm{e}^{-x^{2}}f(x)\mathrm{d}x\approx\sum_{i=0}^{n}\omega_{i}f(x_{i}),</formula><p>n = 1 时的高斯 – 埃尔米特公式为</p><formula data-block="">\int_{-\infty}^{+\infty}\mathrm{e}^{-x^2}f(x)\mathrm{d}x\approx\frac{\sqrt{\pi}}{2}f\left(-\frac{\sqrt{2}}{2}\right)+\frac{\sqrt{\pi}}{2}f\left(\frac{\sqrt{2}}{2}\right).</formula><p>n = 2 时的高斯 – 埃尔米特公式为</p><formula data-block="">\int_{-\infty}^{+\infty}\mathrm e^{-x^2}f(x)\mathrm dx\approx\frac{\sqrt{\pi}}{6}f\left(-\frac{\sqrt{6}}{2}\right)+\frac{2\sqrt{\pi}}{3}f(0)+\frac{\sqrt{\pi}}{6}f\left(\frac{\sqrt{6}}{2}\right)</formula><p><strong>高斯 – 埃尔米特公式的另一形式如下</strong>,g(x)需要保证广义积分收敛性:</p><formula data-block="">\int_{-\infty}^{+\infty}g(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_i\mathrm{e}^{x_i^2}g(x_i).</formula><figure><img src="media/2026433-20240731122131075-2033846352@168281798.png" alt="img" /></figure><h3 id="_52-高斯积分的应用">5.2 高斯积分的应用</h3><h4 id="几种积分的python实现">几种积分的Python实现</h4><pre><code class="language-python">def Integ1dGuassLegendre(f, a:float=-1, b:float=1, n:int=5)-&gt;float:
+    &quot;&quot;&quot;给定积分区间[a,b]和高斯积分点个数n,计算一维高斯-勒让德积分公式&quot;&quot;&quot;
+    # 计算勒让德-高斯积分点及权重
+    roots, weights = legendre_gauss_points_and_weights(n)
+    if a==-1 and b==1:
+        # 标准型积分
+        result=sum([wi*f(xi) for xi,wi in zip(roots,weights)])
+        return result
+    else:
+        # 非标准型积分, 需变换积分区间
+        t= lambda x: 0.5*(b-a)*x+0.5*(b+a)
+        result=0.5*(b-a)*sum([wi*f(t(xi)) for xi,wi in zip(roots,weights)])
+        return result
+
+def legendre_gauss_points_and_weights(n:int)-&gt;Tuple[List[float],List[float]]:
+    &quot;&quot;&quot;给定高斯点个数n,计算[-1,+1]内的勒让德-高斯积分点及权重&quot;&quot;&quot;
+    import scipy.special as sp
+    # 计算勒让德多项式的根(即高斯点)
+    roots, weights = sp.roots_legendre(n)
+    # sp.roots_legendre函数会返回勒让德多项式的根(即高斯点)及其对应的高斯系数.
+    return roots, weights
+
+def Integ1dGuassHermite(f,n:int=3,Is_standard:bool=True)-&gt;float:
+    &quot;&quot;&quot;给定n(&gt;=1)值,积分范围[-inf,+inf],计算一维高斯-埃尔米特积分&quot;&quot;&quot;
+    # 计算埃尔米特-高斯积分点及权重
+    if n&lt;=0:
+        raise ValueError(&quot;高斯-埃尔米特积分时,n必须大于0&quot;)
+    print(f&quot;积分点个数: {n+1}, 积分范围: [-inf,+inf]&quot;)
+    roots, weights = gauss_hermite_points_and_weights(n+1)
+    if Is_standard:
+        # 为标准型积分
+        result=sum([wi*f(xi) for xi,wi in zip(roots,weights)])
+        return result
+    else:
+        # 计算 \int_{-inf}^{+inf} g(x) dx
+        result=sum([wi*np.exp(xi**2)*f(xi) for xi,wi in zip(roots,weights)])
+        return result
+
+def gauss_hermite_points_and_weights(n:int)-&gt;Tuple[List[float],List[float]]:
+    &quot;&quot;&quot;给定高斯点个数n,计算[-inf,+inf]内的埃尔米特-高斯积分点及权重&quot;&quot;&quot;
+    import scipy.special as sp
+    # 计算埃尔米特多项式的根(即高斯点)及其对应的高斯系数
+    roots, weights = sp.roots_hermite(n)
+    return roots, weights</code></pre><figure><img src="media/2026433-20240731141413163-2006079988@-147100279.png" alt="img" /></figure><ul><li>Answer:</li></ul><pre><code class="language-python">f3=lambda x: np.sin(x)/x if x!=0 else 1
+from formu_lib import *
+# 积分范围
+a,b=0,1
+
+# 计算积分
+r1=VarStepInteg1d(f3,a,b,1e-7,method=2)
+
+# 使用高斯勒让德方法计算积分
+r2=Integ1dGuassLegendre(f3,a,b)
+
+print(f&quot;复化梯形积分:{r1}&quot;)
+print(f&quot;高斯勒让德积分:{r2}&quot;)
+
+showError(r1,0.9460831)
+showError(r2,0.9460831)
+
+# 输出:
+# 复化梯形积分:0.9460830464324462
+# 高斯勒让德积分:0.9460830703672151
+# 数值解: 0.9460830464324462, 精确解: 0.9460831, 误差: 5.662034733111406e-08
+# 数值解: 0.9460830703672151, 精确解: 0.9460831, 误差: 3.132154553076945e-08</code></pre><figure><img src="media/2026433-20240731141553013-1970289837@-1024684607.png" alt="img" /></figure><ul><li>Answer:</li></ul><pre><code class="language-python">def f4(alpha:int):
+    return lambda x: abs(x)**(alpha+0.75)
+
+a,b=-1,1
+
+r={}
+n=[1,10,50,100,500,1000]
+for alpha in [0,1,2]:
+    re=[]
+    for ni in n:
+        re.append(Integ1dGuassLegendre(f4(alpha=alpha),a,b,ni))
+    r[alpha]=re
+
+from matplotlib import pyplot as plt
+for alpha in [0,1,2]:
+    plt.plot(n,r[alpha],label=f&quot;alpha={alpha}&quot;)
+plt.xlabel(&#39;gauss points number&#39;)
+plt.ylabel(&#39; Integrate Value&#39;)
+plt.legend()
+plt.show()</code></pre><figure><img src="media/2026433-20240731142849390-1689835535@-1775307797.png" alt="img" /></figure><figure><img src="media/2026433-20240731142937925-552720726@1654242040.png" alt="img" /></figure><ul><li>Answer:</li></ul><pre><code class="language-python"># %%
+# 例题5.5.8
+from formu_lib import *
+f5=lambda x: np.cos(x)
+
+result=Integ1dGuassHermite(f5,5)
+showError(result, 1.3803884470)
+
+# 积分点个数: 5, 积分范围: [-inf,+inf]
+# 数值解: 1.3803900759356564, 精确解: 1.380388447, 误差: -1.1800559906898897e-06</code></pre><figure><img src="media/2026433-20240731152408875-2021620065@-855155886.png" alt="img" /></figure><ul><li>Answer:</li></ul><pre><code class="language-python"># %%
+# 例题5.5.9
+from formu_lib import *
+g=lambda x: 1/(1+x**3)
+n=[1,5,10,50,100]
+result=[Integ1dGuassLaguerre(g,ni,beta=0) for ni in n]
+print(f&quot;广义积分结果:{result}&quot;)
+# 广义积分结果:1.1693599387646283
+from matplotlib import pyplot as plt
+
+plt.plot(n,result)
+plt.xlabel(&#39;gauss points number&#39;)
+plt.ylabel(&#39; Integrate Value&#39;)
+plt.title(&#39;Gauss-Laguerre Integration Value VS Points Number&#39;)
+plt.show()
+# 收敛于1.2091</code></pre><figure><img src="media/2026433-20240731154157304-1551122757@-662560010.png" alt="img" /></figure><h2 id="_6-多重积分">6. 多重积分</h2><p>本节考虑多重积分的两种计算方法:</p><ul><li>第一种方法可看成前面几节关于单重积分的推广 ,计算重数较小的积分时有效 .</li><li>第二种方法称为蒙特卡罗 (Monte Carlo) 方法 , 是一种随机算法 , 处理高维积分时特别有效</li></ul><h3 id="_61-从一重积分推广到二重积分">6.1 从一重积分推广到二重积分</h3><p>以二重积分为例,考虑:</p><formula data-block="">I=\iint_{\Omega}f(x,y)\mathrm{d}x\mathrm{d}y,</formula><p>其中, <formula>\Omega={a\leq x\leq b,\varphi_1(x)\leq y\leq \varphi_2(x)}</formula></p><figure><img src="media/2026433-20240731155253331-1723401440@497183090.png" alt="img" /></figure><p>根据二重积分性质:</p><formula data-block="">I=\iint_\Omega f(x,y)\mathrm{d}x\mathrm{d}y=\int_a^b\mathrm{d}x\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\mathrm{d}y.</formula><p>令:</p><formula data-block="">F(x)=\int_{\varphi_1(x)}^{\varphi_2(x)}f(x,y)\mathrm{d}y,</formula><formula data-block="">I=\int_a^bF(x)\mathrm{d}x\approx\sum_{i=0}^n\omega_i^{(1)}F(x_i).</formula><p>为了求出 <formula>F(x_i)</formula> ,将区间  <formula>[\varphi_1(x),\varphi_2(x)]</formula>  分为m份. 利用单重积分求积公式得:</p><formula data-block="">F(x_i)=\int_{\varphi_1(x_i)}^{\varphi_2(x_i)}f(x_i,y)\mathrm{d}y\approx\sum_{j=0}^m\omega_j^{(2)}f(x_i,y_j).</formula><p><formula>\omega_i^{(1)}\text{ 和 }\omega_j^{(2)}</formula>  分别是 x 方向和 y 方向的求积系数.记  <formula>\omega_{ij}=\omega_i^{(1)}\cdot\omega_j^{(2)}</formula>  ,则有二重积分的求积公式:</p><formula data-block="">I=\iint_\Omega f(x,y)\mathrm{d}x\mathrm{d}y\approx\sum_{i=0}^n\sum_{j=0}^m\omega_{ij}f(x_i,y_j).\tag{8}</formula><blockquote><p>以上就是二重积分的思路.</p></blockquote><p>因此一般来说 , 计算高维数值积分用复合辛普森公式以及前几节介绍的方法都失效.</p><h3 id="_62-蒙特卡罗方法">6.2 蒙特卡罗方法</h3><blockquote><p>一般地 , 我们将随机数序列的模拟方法称为蒙特卡罗方法 .</p></blockquote><p>记  <formula>X_i (i = 1,2,··· ,N)</formula>  为相互独立的服从区间 [0,1] 上均匀分布的随机变量,则:</p><formula data-block="">I_N[f]=\frac{1}{N}\sum_{i=1}^Nf(X_i).</formula><p><formula>X_i</formula>  可通过 N 次独立实验得到 . 由概率论中的大数定理 , 当 N → ∞ 时 , I N [f] 依概率收敛于 f(x)的积分值, 即:</p><formula data-block="">I_N[f]\xrightarrow{\mathrm{P}}I[f].</formula><p>可以估计f的方差  <formula>Var(f)</formula>  ,取随机变量X的N个样本值  <formula>X_1,X_2,\cdots,X_N</formula>  ,令:</p><formula data-block="">\overline{I}_N=\frac{1}{N}\sum_{i=1}^{N}f(X_i).</formula><p>then:</p><formula data-block="">{\operatorname{Var}(f)}\approx{\frac{1}{N}}\sum_{i=1}^{N}(f(X_{i})-\overline{I}_{N})^{2}</formula><p>这个思路推广到高维积分:</p><formula data-block="">I=\int_0^1\cdots\int_0^1f(x_1,x_2,\cdots,x_d)\mathrm{d}x_1\mathrm{d}x_2\cdots\mathrm{d}x_d.</formula><p>仍可取 N 次独立样本值的算术平均:</p><formula data-block="">I_N[f]=\frac{1}{N}\sum_{i=1}^Nf(x_1^{(i)},x_2^{(i)},\cdots,x_d^{(i)})</formula><p>作为多重积分 I 的无偏估计量 , 其方差仍为 <formula>\frac{\mathrm{Var}(f)}{N}</formula> ,<strong>收敛速度不受积分区域维数 d 的影响</strong>.</p><blockquote><p>在实际计算中, <formula>X_i</formula> 一般是程序生成的伪随机数, matlab的rand() 可以产生服从均匀分布U(0,1) 的随机数 ( 实际上是伪随机数 ), python的numpy.random.rand() 可以产生服从均匀分布U(0,1) 的随机数.</p></blockquote><ul><li>推广到[a,b]的积分范围</li></ul><p>那么,如果计算积分:</p><formula data-block="">I=\int_a^bf(x)dx</formula><p>对应的蒙特卡洛积分为</p><formula data-block="">I^N=\frac1N\sum_{i=1}^N\frac{f(X_i)}{pdf(X_i)}</formula><p>其中,  <formula>pdf(X_i)</formula>  是概率密度函数, 它描述了随机变量X的概率分布.之前的X~U(0,1),pdf(X)=1/(1-0),如果X~U(a,b),则pdf(X)=1/(b-a).</p><ul><li>积分范围推广到[-inf,+inf]的蒙特卡洛方法</li></ul><p>积分:</p><formula data-block="">F=\int_{-\infty}^{+\infty}f(x)\mathrm{d}x.</formula><p>可以看成是服从于正态分布随机变量 X 的函数 h(X) 的数学期望, 通过 N 次独立取样的算术平均近似计算:</p><formula data-block="">F\approx F_{N}=\frac{1}{N}\sum_{i=1}^{N}h(x_{i}),\quad h(x)=\sqrt{2\pi}\mathrm{e}^{\frac{x^{2}}{2}}f(x).</formula><p>可以证明: <formula>E(F_N)=F</formula></p><blockquote><p>资料链接:</p><ul><li><a href="https://wyman1024.github.io/monte-carlo/">https://wyman1024.github.io/monte-carlo/</a></li><li><a href="https://cosx.org/2010/03/monte-carlo-method-to-compute-integration">https://cosx.org/2010/03/monte-carlo-method-to-compute-integration</a></li><li><a href="https://reichtumqian.github.io/ScientificComputingWiKi/">https://reichtumqian.github.io/ScientificComputingWiKi/</a></li></ul></blockquote><h4 id="编程实现代码">编程实现:代码</h4><pre><code class="language-python">from typing import Callable,Union,List
+def MonteCarloInt2d(f:Callable,x:Union[float,List[float]],
+                    y:Union[float,List[float]],n:int=10000)-&gt;float:
+    &quot;&quot;&quot;蒙特卡洛2d积分&quot;&quot;&quot;
+    
+    import random
+    rseed=random.randint(0,10000)
+    np.random.seed(rseed)
+    n=int(n)
+    low_x,high_x=x
+    low_y,high_y=y
+    
+    S=(high_x-low_x)*(high_y-low_y)
+    # 生成随机浮点数在[low_x,high_x]和[low_y,high_y]之间的坐标
+    xys=np.random.uniform(low=[low_x,low_y], high=[high_x,high_y], size=(n,2))
+    return (S/n)*sum([f(xys[ind,0],xys[ind,1]) for ind in range(xys.shape[0])])
+
+def MonteCarloInt2d(f:Callable,x:Union[float,List[float]],
+                    y:Union[float,List[float]],n:int=10000)-&gt;float:
+    &quot;&quot;&quot;蒙特卡洛2d积分&quot;&quot;&quot;
+    
+    import random
+    rseed=random.randint(0,10000)
+    np.random.seed(rseed)
+    n=int(n)
+    low_x,high_x=x
+    low_y,high_y=y
+    
+    S=(high_x-low_x)*(high_y-low_y)
+    # 生成随机浮点数在[low_x,high_x]和[low_y,high_y]之间的坐标
+    xys=np.random.uniform(low=[low_x,low_y], high=[high_x,high_y], size=(n,2))
+    return (S/n)*sum([f(xys[ind,0],xys[ind,1]) for ind in range(xys.shape[0])])</code></pre><h4 id="测试-1d积分">测试: 1d积分</h4><pre><code class="language-python">import scipy
+def f(x):
+    return x**2 + 2*x + 1
+
+a,b=-1,2
+v=MonteCarloInt1d(f,a,b,1e6)
+print(f&quot;integral of f(-1,2) is {v:.4f}&quot;)
+
+scipy_result,error = scipy.integrate.quad(f, a, b)
+print(f&quot;SciPy积分结果: {scipy_result},error: {error}&quot;)
+
+# &lt;!-- 输出结果 --&gt;
+# integral of f(-1,2) is 8.9909
+# SciPy积分结果: 9.0,error: 9.992007221626409e-14</code></pre><h4 id="测试-2d积分">测试: 2d积分</h4><pre><code class="language-python">from scipy.integrate import dblquad
+def f(x, y):
+    return x**2 + y**2
+
+# 使用SciPy计算2d积分
+def scipy_integrate_2d(f, a, b, c, d):
+    result, error = dblquad(f, a, b, lambda x: c, lambda x: d)
+    return result
+
+a, b = 0, 1
+c, d = 0, 1
+
+# 使用蒙特卡洛方法计算2d积分
+monte_carlo_result = MonteCarloInt2d(f, [a,b],[ c, d])
+print(f&quot;蒙特卡洛2d积分结果: {monte_carlo_result}&quot;)
+
+# 使用SciPy计算2d积分
+scipy_result = scipy_integrate_2d(f, a, b, c, d)
+print(f&quot;SciPy 2d积分结果: {scipy_result}&quot;)
+
+# &lt;!-- 输出结果 --&gt;
+# 蒙特卡洛2d积分结果: 0.6676998082037032
+# SciPy 2d积分结果: 0.6666666666666669</code></pre><div class="page-break" data-hidden=""></div><h1 id="数值微分">数值微分</h1><blockquote><p>讨论如下问题:已知函数 f(x) 在离散点处的函数值 f(x i )(i = 1,2,··· ,n), 求 f(x)导数.</p></blockquote><p>介绍两种近似方法:</p><ul><li>基于拉格朗日插值多项式的求导方法</li><li>基于样条函数的求导方法</li></ul><h2 id="_7基于拉格朗日插值多项式的求导方法">7.基于拉格朗日插值多项式的求导方法</h2><p>已知  <formula>f(x)</formula>  在离散点处的函数值  <formula>f(x_i )(i = 1,2,··· ,n)</formula> , 可以作出 n 次拉格朗日插值多项式  <formula>L_n(x)</formula>  ,再利用  <formula>L_n(x)</formula>  的导数来近似代替  <formula>f(x)</formula>  的导数 , 此方法称为<strong>基于拉格朗日插值多项式的数值求导方法</strong></p><p>插值余项为:</p><formula data-block="">R_{n}(x)=f(x)-L_{n}(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\Pi(x),\quad\xi\in(a,b).</formula><formula data-block="">R'_{n}(x)=f'(x_i)-L'_n(x_i)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\Pi'(x_i)=\frac{f^{(n+1)}(\xi)}{(n+1)!}\prod_{j=0,j\neq i}^n(x_i-x_j).\tag{10}</formula><blockquote><p>基于拉格朗日插值的求导方法的缺点是</p><ul><li>只能求出节点处的导数</li><li>数据  <formula>f(x_j)</formula>  有一定误差以及h很小时,数值误差较大,即算法不稳定.</li><li>高次插值会产生龙格现象,因此实际应用中多采用<strong>低次</strong>拉格朗日插值型求导公式</li></ul></blockquote><p>以下是基于<strong>等距节点的低阶求导计算公式</strong></p><h3 id="两点公式">两点公式</h3><p>作 f(x) 的线性插值公式:</p><formula data-block="">L_1(x)=\frac{x-x_1}{x_0-x_1}f(x_0)+\frac{x-x_0}{x_1-x_0}f(x_1),</formula><p>求导后,令 <formula>x=x_0, x_1-x_0=h,</formula> 得:</p><formula data-block="">L_1'(x_0)=\frac{f(x_1)-f(x_0)}h.</formula><p>根据公式(10),余项为  <formula>\frac{f^{\prime\prime}(\xi)}{2}(x_0-x_1)</formula> ,即:</p><formula data-block="">f^{\prime}(x_{0})=\frac{f(x_{1})-f(x_{0})}{h}-\frac{h}{2}f^{\prime\prime}(\xi),\quad\xi\in(x_{0},x_{1}).\tag{11-1}</formula><formula data-block="">f^{\prime}(x_{1})=\frac{f(x_{1})-f(x_{0})}{h}+\frac{h}{2}f^{\prime\prime}(\xi),\quad\xi\in(x_{0},x_{1}).\tag{11-2}</formula><p>略去余项,(11-1),(11-2)称为计算导数的<strong>两点公式</strong>.分别是向前差商公式和向后差商公式,精度1阶,误差 <formula>O(h)</formula> .</p><h3 id="三点及五点公式">三点及五点公式</h3><blockquote><p>两个公式共同点在于,在一些点处的微分算不出来,<a href="https://www.math.pku.edu.cn/teachers/lidf/docs/statcomp/html/_statcompbook/approx-diff.html">微分个数损失</a></p></blockquote><p>作 f(x) 的二次插值多项式:</p><formula data-block="">L_2(x)=\frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}f(x_0)+\frac{(x-x_0)(x-x_1)}{(x_1-x_0)(x_1-x_2)}f(x_1)+\frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}f(x_2).</formula><p>令  <formula>x=x_0+th, x_i=x_0+ih,</formula>  上式变成:</p><formula data-block="">L_2(x_0+th)=\frac{1}{2}(t-1)(t-2)f(x_0)-t(t-2)f(x_1)+\frac{1}{2}t(t-1)f(x_2),</formula><p>求导,并令t=0,1,2,得:</p><formula data-block="">\begin{aligned}
+&f^{\prime}(x_{0}) = \frac{1}{2h}[-3f(x_{0})+4f(x_{1})-f(x_{2})]+\frac{h^{2}}{3}f^{(3)}(\xi), \\
+&f^{\prime}(x_{1}) = \frac{1}{2h}[-f(x_{0})+f(x_{2})]-\frac{h^{2}}{6}f^{(3)}(\xi), \\
+&f^{\prime}(x_{2}) = \frac{1}{2h}[f(x_{0})-4f(x_{1})+3f(x_{2})]+\frac{h^{2}}{3}f^{(3)}(\xi).\tag{12} 
+\end{aligned}</formula><p>以上是带余项的计算导数的<strong>三点公式</strong>,精度2阶,误差 <formula>O(h^2)</formula> .(12-2)为中心差商公式.</p><p>同理,五点求导公式为:</p><formula data-block="">\begin{aligned}
+&f'(x_{0}) =\frac{1}{12h}(-25f_{0}+48f_{1}-36f_{2}+16f_{3}-3f_{4})+\frac{h^{4}}{5}f^{(5)}(\xi), \\
+&f'(x_{1}) =\frac{1}{12h}(-3f_{0}-10f_{1}+18f_{2}-6f_{3}+f_{4})-\frac{h^{4}}{20}f^{(5)}(\xi), \\
+&f'(x_{2}) =\frac{1}{12h}(f_{0}-8f_{1}+8f_{3}-f_{4})-\frac{h^{4}}{30}f^{(5)}(\xi), \\
+&f'(x_{3}) =\frac{1}{12h}(-f_{0}+6f_{1}-18f_{2}+10f_{3}+3f_{4})-\frac{h^{4}}{20}f^{(5)}(\xi), \\
+&f'(x_{4}) =\frac{1}{12h}(3f_{0}-16f_{1}+36f_{2}-48f_{3}+25f_{4})+\frac{h^{4}}{5}f^{(5)}(\xi). \tag{13}
+\end{aligned}</formula><blockquote><p>五点公式一般比三点公式精确 , 三点公式一般比两点公式精确 ;. 但在实际计算中 , 由于数据  <formula>f_i</formula>  有误差 , 并不是h 越小计算效果越好</p></blockquote><h2 id="_8-基于样条函数的求导方法">8. 基于样条函数的求导方法</h2><blockquote><p>本节我们将用样条函数  <formula>S(x)</formula>  代替拉格朗日插值多项式  <formula>L_n(x)</formula> 作为函数  <formula>f(x)</formula> 的近似.若 <formula>f(x)\in C^4[a,b],</formula> 则有估计:</p></blockquote><formula data-block="">\max_{a\leqslant x\leqslant b}|f^{(k)}(x)-S^{(k)}(x)|\leqslant Ch^{4-k},\quad k=0,1,2,3,</formula><p>其中, <formula>h=\max_{0\leqslant i\leqslant n-1}h_i.</formula></p><blockquote><p>此时不但 f(x) 与 S(x) 的函数值很 &quot; 接近 &quot;, 它们的导数值也很 &quot; 接近 &quot;</p></blockquote><p>设<formula>a=x_0< x_1 <...< x_n = b</formula> , <formula>h_i=x_{i+1}-x_i(i=0,1,\cdots ,n-1)$,且样条函数S(x)在</formula> x_i <formula>处的导数为</formula> S^{\prime}(x_i)=m_i <formula>,则在区间</formula> (x_i,x_{i+1}) $ 上,S(x)为三次多项式,即:</p><formula data-block="">\begin{gathered}
+S_i(x) =\frac{h_{i}+2(x-x_{i})}{h_{i}^{3}}(x-x_{i+1})^{2}f_{i}+\frac{h_{i}-2(x-x_{i+1})}{h_{i}^{3}}(x-x_{i})^{2}f_{i+1} \\
++\frac{(x-x_i)(x-x_{i+1})^2}{h_i^2}m_i+\frac{(x-x_{i+1})(x-x_{i+1})^2}{h_i^2}m_{i+1}. 
+\end{gathered}\tag{14}</formula><p>想要求出 <formula>m_i(i=0,1,\cdots,n)</formula> .需要 <formula>S''(x)</formula> 在 <formula>x_i</formula> 处连续以及边界条件.</p><ol><li>若 <formula>S'(x_0)=f_0'=m_0, S'(x_n)=f_n'=m_n</formula> 已知 <formula>m_i</formula> 满足方程组:</li></ol><figure><img src="media/2026433-20240731183131324-1876510672@795045909.png" alt="img" /></figure><figure><img src="media/2026433-20240731183346237-1935177586@-319783965.png" alt="img" /></figure><p>上述方程组 (5.62), (5.65), (5.66) 称为三转角方程组 . 可用追赶法进行求解 . 再将计算结果代入式 (5.61) 中便得 S(x) 以及 S(x) 在任意点 x 处的导数值</p><p>由于上述求导数的方法需要求解线性方程组 , 因此也称为隐式格式 . 它具有数值计算稳定的特点 , <strong>可以求出任意点 ( 不一定为节点 ) 的导数值 , 而且精度较高 .</strong></p><div class="page-break" data-hidden=""></div><h1 id="数值实验">数值实验</h1><figure><img src="media/2026433-20240731184731026-1535827967@-582553477.png" alt="img" /></figure><pre><code class="language-python"># 数值实验t1
+from formu_lib import *
+def Com3pGausslengendre(f,a:float,b:float,n:int):
+    # 复合三点高斯-勒让德计算积分
+    x=[a+i*(b-a)/n for i in range(n+1)]
+    return sum([Integ1dGuassLegendre(f,x[i],x[i+1],3)for i in range(n)])
+
+# 积分函数
+pi=lambda x: 4/(1+x**2)
+
+# 积分范围
+a,b=0,1
+
+# 复合simpson计算积分
+r1=VarStepInteg1d(pi,a,b,1e-8,method=3)
+
+r2=Com3pGausslengendre(pi,a,b,100)
+showError(r1,np.pi)
+showError(r2,np.pi)
+# 数值解: 3.1415926535528365, 精确解: 3.141592653589793, 误差: 1.1763670223853885e-11
+# 数值解: 3.1415926535897927, 精确解: 3.141592653589793, 误差: 1.4135798584282297e-16</code></pre><figure><img src="media/2026433-20240731184753166-1869276211@-839353628.png" alt="img" /></figure><pre><code class="language-python"># t2
+from formu_lib import *
+
+# 积分函数
+f=lambda x: np.sqrt(4-np.sin(x)**2)
+a,b=0,np.pi/4
+
+r1=VarStepInteg1d(f,a,b,1e-6,method=3)
+showError(r1,1.53439197)
+# 数值解: 1.5343920054108953, 精确解: 1.53439197, 误差: -2.3078128678621626e-08</code></pre><figure><img src="media/2026433-20240731185007577-435516571@1061280299.png" alt="img" /></figure><p>求解代码:</p><pre><code class="language-python">from formu_lib import *
+
+# 积分函数
+f8=lambda x: 1/(1+x**2)
+a,b=-5,5
+
+result=[]
+accurateVal=[]
+ns=[]
+for n in range(1,51):
+    result.append(Integ1dNewtonCotes(f8,a,b,n))
+    ns.append(n)
+    accurateVal.append(2*np.arctan(5))
+
+from matplotlib import pyplot as plt
+plt.plot(ns,result,label=&#39;Numerical solution&#39;)
+plt.plot(ns,accurateVal,label=&#39;Accurate solution&#39;)
+plt.xlabel(&#39;Newton-Cotes points number&#39;)
+plt.ylabel(&#39; Integrate Value&#39;)
+plt.title(&#39;Newton-Cotes Integration Value VS Points Number&#39;)
+plt.show()</code></pre><figure><img src="media/2026433-20240731212956495-321695396@1476258157.png" alt="img" /></figure><p>从上图可以看出,当随着n的增加, 牛顿-科特斯积分的逐渐不稳定, 但误差也越来越大.不收敛.</p><figure><img src="media/2026433-20240731184834437-683637556@259312813.png" alt="img" /></figure><p>code:</p><pre><code class="language-python"># t4
+from formu_lib import *
+x=[1900,1910,1920,1930,1940,1950,1960,1970,1980,1990]
+fs=[76.0,92.0,106.5,123.2,131.7,150.7,179.3,204.0,226.5,251.4]
+
+df1=diff1dForward(x,fs)
+df2=diff1dBackward(x,fs)
+df3=diff1dCentral(x,fs)
+plotLines([x,x[:],x[:],x],[fs,df1,df2,df3],[&quot;Population&quot;,&quot;Population growth rate-forward&quot;,&quot;Population growth rate-backward&quot;,&quot;Population growth rate-center&quot;])</code></pre><figure><img src="media/2026433-20240801114324390-2123047601@1692689475.png" alt="alt text" /></figure><figure><img src="media/2026433-20240731184902918-1734852619@-1084416800.png" alt="img" /></figure><figure><img src="media/2026433-20240731184919259-483162080@390249502.png" alt="img" /></figure><p>资料:<a href="https://zh.wikipedia.org/wiki/%E9%A1%AF%E5%BC%8F%E5%92%8C%E9%9A%B1%E5%BC%8F%E6%96%B9%E6%B3%95">显式和隐式方法 - 维基百科,自由的百科全书</a></p><p>取步长为h,则:  <formula>x_{i}=a+ih,i=0,1,2,...,n,h=\frac{b-a}{n},x_{i+1}-x_{i}=h.</formula>  使用向前差商公式,则有:</p><formula data-block="">y'(x_{i})=\frac{y(x_{i+1})-y(x_{i})}{h}</formula><p>代入方程后:</p><formula data-block="">y(x_{i+1})-y(x_{i})=h f[x_{i},y(x_{i})],</formula><formula data-block="">y(x_{i+1})=y(x_{i})+h f[x_{i},y(x_{i})],</formula><p>这是显式格式.</p><p>如果使用向后差商公式,则有:</p><formula data-block="">y'(x_{i+1})=\frac{y(x_{i+1})-y(x_{i})}{h}</formula><p>代入方程后:</p><formula data-block="">y(x_{i+1})-y(x_{i})=h f[x_{i+1},y(x_{i+1})],</formula><formula data-block="">y(x_{i+1})-h f[x_{i+1},y(x_{i+1})]=y(x_{i})</formula><p>这是隐式格式</p><ul><li>验证</li></ul><p>取 <formula>f(x,y)=-y^2,a=0,y(0)=1,b=5>x>a,n取值为100</formula> ,则:</p><pre><code class="language-python"># t6
+from formu_lib import *
+import numpy as np
+a,b,n=0,5,100
+h=(b-a)/n
+x=[a+i*h for i in range(n+1)]
+
+f=lambda x: -x*x
+
+# result var
+ye,yi=np.zeros(n+1),np.zeros(n+1)
+ye[0],yi[0]=1,1
+
+# explicit method
+for i in range(n):
+    ye[i+1]=ye[i]+h*f(ye[i])
+
+# implicit method
+for i in range(n):
+    yi[i+1]=(-1-np.sqrt(1+4*h*yi[i]))/(2*h)
+
+plotLines([x,x],[ye,yi],[&quot;y(x)-explictSol&quot;,&quot;y(x)-implicitSol&quot;])</code></pre><figure><img src="media/2026433-20240801181011461-1716966322@1052727938.png" alt="img" /></figure><p>精确结果:
+<img src="media/2026433-20240801173624387-1462548291@2018129809.png" alt="img" /></p><figure><img src="media/2026433-20240804150901102-2082893312@1838302270.png" alt="img" /></figure><pre><code class="language-python">import numpy as np
+a,b,n=0,1,100
+h=(b-a)/n
+x=[a+i*h for i in range(n+1)]
+
+# 计算y&#39;(x)=x+y(x) and y(0)=1 ,0&lt;=x&lt;=1
+# 使用向前差商公式离散:y&#39;(x_i)=(y(x_{i+1})-y(x_i))/h
+#   ==&gt;y(x_{i+1})=(1+h)*y(x_i)+h*x_i
+
+# result var
+
+# explicit method
+ye=np.zeros(n+1)
+ye[0]=1
+for i in range(n):
+    ye[i+1]=ye[i]*(1+h)+h*x[i]
+
+# implicit method
+# yi=np.zeros(n+1)
+# yi[0]=1
+# for i in range(n):
+#     yi[i+1]=(-1+np.sqrt(1+4*h*yi[i]))/(2*h)
+
+# extract solution
+yex=[2*np.exp(xi)-xi-1 for xi in x]
+
+plotLines([x,x],[ye,yex],[&quot;y(x)-explictSol&quot;,&quot;y(x)-ExtractSol&quot;])</code></pre><figure><img src="media/2026433-20240804150939473-234585734@-870950333.png" alt="img" /></figure></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
