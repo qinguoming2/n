@@ -37,11 +37,11 @@ body.quarkdown-slides.quarkdown-slides .reveal {
 p {
 }</style>
     <script>prepare(new PlainDocument());</script>
-<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="git-极简手册常用命令" data-depth="1"><a href="#git-极简手册常用命令">Git 极简手册(常用命令)</a><ol><li data-target-id="_1-初始化--克隆" data-depth="2"><a href="#_1-初始化--克隆">1. 初始化 / 克隆</a></li><li data-target-id="_2-基础操作" data-depth="2"><a href="#_2-基础操作">2. 基础操作</a></li><li data-target-id="_3-查看提交记录" data-depth="2"><a href="#_3-查看提交记录">3. 查看提交记录</a></li><li data-target-id="_4-同步远程仓库" data-depth="2"><a href="#_4-同步远程仓库">4. 同步远程仓库</a></li><li data-target-id="_5-分支最常用" data-depth="2"><a href="#_5-分支最常用">5. 分支(最常用)</a></li><li data-target-id="_6-撤销--回退" data-depth="2"><a href="#_6-撤销--回退">6. 撤销 / 回退</a></li><li data-target-id="_7-配置第一次用才需要" data-depth="2"><a href="#_7-配置第一次用才需要">7. 配置(第一次用才需要)</a></li><li data-target-id="超简工作流" data-depth="2"><a href="#超简工作流">超简工作流</a></li><li data-target-id="进阶使用" data-depth="2"><a href="#进阶使用">进阶使用</a><ol><li data-target-id="修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库" data-depth="3"><a href="#修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库">修改本地 Git 仓库关联的远程仓库链接，然后提交代码到新的远程仓库</a></li></ol></li></ol></li></ol></nav>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="git-极简手册常用命令" data-depth="1"><a href="#git-极简手册常用命令">Git 极简手册(常用命令)</a><ol><li data-target-id="_1-初始化--克隆" data-depth="2"><a href="#_1-初始化--克隆">1. 初始化 / 克隆</a></li><li data-target-id="_2-基础操作" data-depth="2"><a href="#_2-基础操作">2. 基础操作</a></li><li data-target-id="_3-查看提交记录" data-depth="2"><a href="#_3-查看提交记录">3. 查看提交记录</a></li><li data-target-id="_4-同步远程仓库" data-depth="2"><a href="#_4-同步远程仓库">4. 同步远程仓库</a></li><li data-target-id="_5-分支最常用" data-depth="2"><a href="#_5-分支最常用">5. 分支(最常用)</a></li><li data-target-id="_6-撤销--回退" data-depth="2"><a href="#_6-撤销--回退">6. 撤销 / 回退</a></li><li data-target-id="_7-配置第一次用才需要" data-depth="2"><a href="#_7-配置第一次用才需要">7. 配置(第一次用才需要)</a></li><li data-target-id="超简工作流" data-depth="2"><a href="#超简工作流">超简工作流</a></li><li data-target-id="进阶使用" data-depth="2"><a href="#进阶使用">进阶使用</a><ol><li data-target-id="修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库" data-depth="3"><a href="#修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库">修改本地 Git 仓库关联的远程仓库链接，然后提交代码到新的远程仓库</a></li><li data-target-id="报错处理-recv-failure-connection-was-reset" data-depth="3"><a href="#报错处理-recv-failure-connection-was-reset">报错处理: Recv failure: Connection was reset</a></li></ol></li></ol></li></ol></nav>
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="git-极简手册常用命令">Git 极简手册(常用命令)</h1><h2 id="_1-初始化--克隆">1. 初始化 / 克隆</h2><pre><code class="language-bash"># 新建本地仓库
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="git-极简手册常用命令" data-depth="1"><a href="#git-极简手册常用命令">Git 极简手册(常用命令)</a><ol><li data-target-id="_1-初始化--克隆" data-depth="2"><a href="#_1-初始化--克隆">1. 初始化 / 克隆</a></li><li data-target-id="_2-基础操作" data-depth="2"><a href="#_2-基础操作">2. 基础操作</a></li><li data-target-id="_3-查看提交记录" data-depth="2"><a href="#_3-查看提交记录">3. 查看提交记录</a></li><li data-target-id="_4-同步远程仓库" data-depth="2"><a href="#_4-同步远程仓库">4. 同步远程仓库</a></li><li data-target-id="_5-分支最常用" data-depth="2"><a href="#_5-分支最常用">5. 分支(最常用)</a></li><li data-target-id="_6-撤销--回退" data-depth="2"><a href="#_6-撤销--回退">6. 撤销 / 回退</a></li><li data-target-id="_7-配置第一次用才需要" data-depth="2"><a href="#_7-配置第一次用才需要">7. 配置(第一次用才需要)</a></li><li data-target-id="超简工作流" data-depth="2"><a href="#超简工作流">超简工作流</a></li><li data-target-id="进阶使用" data-depth="2"><a href="#进阶使用">进阶使用</a><ol><li data-target-id="修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库" data-depth="3"><a href="#修改本地-git-仓库关联的远程仓库链接然后提交代码到新的远程仓库">修改本地 Git 仓库关联的远程仓库链接，然后提交代码到新的远程仓库</a></li><li data-target-id="报错处理-recv-failure-connection-was-reset" data-depth="3"><a href="#报错处理-recv-failure-connection-was-reset">报错处理: Recv failure: Connection was reset</a><ol><li data-target-id="解决方案-选-ssh-协议绕开-443-端口拦截使用-22-端口通常不会被拦截" data-depth="4"><a href="#解决方案-选-ssh-协议绕开-443-端口拦截使用-22-端口通常不会被拦截">解决方案: 选 SSH 协议，绕开 443 端口拦截(使用 22 端口，通常不会被拦截)</a></li></ol></li></ol></li></ol></li></ol></nav><div class="page-break" data-hidden=""></div><h1 id="git-极简手册常用命令">Git 极简手册(常用命令)</h1><h2 id="_1-初始化--克隆">1. 初始化 / 克隆</h2><pre><code class="language-bash"># 新建本地仓库
 git init
 
 # 克隆远程仓库
@@ -97,7 +97,31 @@ git commit -m &quot;修改了xxx功能/更新代码&quot;
 git push
 
 # 首次推送新仓库/分支不存在时，执行(main是默认分支,也可能是master)
-git push -u origin main</code></pre><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+git push -u origin main</code></pre><h3 id="报错处理-recv-failure-connection-was-reset">报错处理: Recv failure: Connection was reset</h3><pre><code class="language-shell">PS D:\Temp\QuarkdownBlog\output\blog&gt; git push
+fatal: unable to access &#39;https://github.com/xxx/xxx.git/&#39;: Recv failure: Connection was reset</code></pre><p>首先测试github的https端口是否正常:</p><pre><code class="language-shell"># 测试HTTPS端口是否可访问（更关键）
+Test-NetConnection github.com -Port 443
+# 结果如下
+PS D:\Temp\QuarkdownBlog\output\blog&gt; Test-NetConnection github.com -Port 443
+警告: TCP connect to (20.205.243.166 : 443) failed
+ComputerName           : github.com
+RemoteAddress          : 20.205.243.166
+RemotePort             : 443
+InterfaceAlias         : WLAN
+SourceAddress          : 192.168.1.205
+PingSucceeded          : True
+PingReplyDetails (RTT) : 66 ms
+TcpTestSucceeded       : False</code></pre><p>执行Test-NetConnection github.com -Port 443后, 结果显示PingSucceeded: True但TcpTestSucceeded: False,这说明你的电脑能 ping 通 GitHub 服务器，但 443 端口(HTTPS 协议核心端口)被拦截了 —— 这是导致git push报连接重置的核心原因(网络 / 防火墙限制了 HTTPS 访问 GitHub)</p><h4 id="解决方案-选-ssh-协议绕开-443-端口拦截使用-22-端口通常不会被拦截">解决方案: 选 SSH 协议，绕开 443 端口拦截(使用 22 端口，通常不会被拦截)</h4><p>在本地生成 SSH 密钥对,在powershell执行以下命令(一路按回车，生成 id_rsa 和 id_rsa.pub 两个文件):</p><pre><code class="language-shell"># 生成SSH密钥，一路按回车（无需设置密码）
+ssh-keygen -t rsa -b 4096 -C &quot;你的GitHub邮箱@xxx.com&quot;
+
+# 读取并复制公钥内容（Windows自动复制到剪贴板）
+Get-Content id_rsa.pub的文件路径 | Set-Clipboard</code></pre><p>登录github,点击头像,进入Settings &rarr; SSH and GPG keys &rarr; New SSH key,粘贴公钥内容,填写title,点击Add SSH key保存.</p><p>修改本地仓库的远程链接为 SSH 地址, 测试 SSH 连接并推送代码.</p><pre><code class="language-shell"># 先确认当前远程链接（可选）
+git remote -v
+# 替换为SSH地址（你的仓库SSH地址）
+git remote set-url origin git@github.com:xxx/xxx.git
+# 测试SSH能否连接GitHub（关键！成功会提示认证通过）
+ssh -T git@github.com
+# 测试成功后，执行push
+git push</code></pre><p>若ssh -T输出Hi qinguoming2! You&rsquo;ve successfully authenticated...，说明 SSH 配置成功;此时git push就能正常推送,不会再报连接重置错误.</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>
