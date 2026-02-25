@@ -17,6 +17,11 @@
     <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
     <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
     <script>capabilities.code = true;</script>
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" rel="stylesheet" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" defer="true" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script>capabilities.math = true;
+
+window.texMacros = {}</script>
     <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
 
 body {
@@ -37,23 +42,14 @@ body.quarkdown-slides.quarkdown-slides .reveal {
 p {
 }</style>
     <script>prepare(new PlainDocument());</script>
-<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="notepyvtk文件输出" data-depth="1"><a href="#notepyvtk文件输出">Note_Py_vtk文件输出</a></li><li data-target-id="_1-vtk-文件格式" data-depth="1"><a href="#_1-vtk-文件格式">1. vtk 文件格式</a><ol><li data-target-id="_11-dataset-format--定义几何拓扑数据和关系" data-depth="2"><a href="#_11-dataset-format--定义几何拓扑数据和关系">1.1 Dataset Format _ 定义几何/拓扑数据和关系</a><ol><li data-target-id="_12-unstructured-grid" data-depth="3"><a href="#_12-unstructured-grid">1.2 Unstructured Grid</a></li><li data-target-id="_13-dataset-attribute-format-mdash--定义附着在节点或者单元上的数据" data-depth="3"><a href="#_13-dataset-attribute-format-mdash--定义附着在节点或者单元上的数据">1.3 Dataset Attribute Format &mdash;- 定义附着在节点或者单元上的数据</a></li><li data-target-id="_14-example" data-depth="3"><a href="#_14-example">1.4 example</a></li></ol></li></ol></li><li data-target-id="_2使用python将网格和数据写入vtk文件" data-depth="1"><a href="#_2使用python将网格和数据写入vtk文件">2.使用python将网格和数据写入vtk文件</a></li></ol></nav>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="python-vtk文件输出" data-depth="1"><a href="#python-vtk文件输出">Python VTK文件输出</a><ol><li data-target-id="_1-vtk-文件格式" data-depth="2"><a href="#_1-vtk-文件格式">1. vtk 文件格式</a><ol><li data-target-id="_11-dataset-format--定义几何拓扑数据和关系" data-depth="3"><a href="#_11-dataset-format--定义几何拓扑数据和关系">1.1 Dataset Format _ 定义几何/拓扑数据和关系</a></li><li data-target-id="_12-unstructured-grid" data-depth="3"><a href="#_12-unstructured-grid">1.2 Unstructured Grid</a></li><li data-target-id="_13-dataset-attribute-format--定义附着在节点或者单元上的数据" data-depth="3"><a href="#_13-dataset-attribute-format--定义附着在节点或者单元上的数据">1.3 Dataset Attribute Format : 定义附着在节点或者单元上的数据</a></li><li data-target-id="_14-example" data-depth="3"><a href="#_14-example">1.4 example</a></li></ol></li><li data-target-id="_2使用python将网格和数据写入vtk文件" data-depth="2"><a href="#_2使用python将网格和数据写入vtk文件">2.使用python将网格和数据写入vtk文件</a></li></ol></li></ol></nav>
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="page-break" data-hidden=""></div><h1 id="notepyvtk文件输出">Note_Py_vtk文件输出</h1><div class="page-break" data-hidden=""></div><h1 id="_1-vtk-文件格式">1. vtk 文件格式</h1><p>根据官网进行总结</p><p>vtk文件组成:5个部分.</p><p>第一部分,第一行:表明文件版本.写&rdquo;# vtk DataFile Version 2.0&rdquo;就行</p><p>第二部分,第二行:表明标题(title).随便写.</p><p>第三部分,第三行:ASCII或者 BINARY</p><p>第四部分,开始定义dataset structure.这部分用于描述数据集的几何和拓扑结构.以关键字&ldquo;DATASET  type&rdquo;的一行开始.后续部分根据不同的dataset type,使用其他关键字/数据组合定义实际数据.</p><p>支持以下type: 
-       STRUCTURED_POINTS
-        STRUCTURED_GRID
-        UNSTRUCTURED_GRID
-        POLYDATA
-        STRUCTURED_POINTS
-        RECTILINEAR_GRID
-        FIELD
-关键字不区分大小写,可以用空格分隔.</p><p>第五部分,定义点数据或者实体数据等.称为:dataset attributes 如:
-POINT_DATA type
-&hellip;
+    <main><div class="page-break" data-hidden=""></div><h1 id="python-vtk文件输出">Python VTK文件输出</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><h2 id="_1-vtk-文件格式">1. vtk 文件格式</h2><blockquote><p>根据官网进行总结</p></blockquote><p>vtk文件组成:</p><ul><li>第一部分,第一行:表明文件版本.写&rdquo;# vtk DataFile Version 2.0&rdquo;就行</li><li>第二部分,第二行:表明标题(title).随便写.</li><li>第三部分,第三行:ASCII或者 BINARY</li><li>第四部分,开始定义dataset structure.</li><li>第五部分,定义点数据或者实体数据等</li></ul><p>第四部分用于描述数据集的几何和拓扑结构.以关键字&ldquo;DATASET  type&rdquo;的一行开始.后续部分根据不同的dataset type,使用其他关键字/数据组合定义实际数据. 支持以下type:</p><blockquote><p>关键字不区分大小写,可以用空格分隔.</p></blockquote><ul><li>STRUCTURED_GRID</li><li>STRUCTURED_POINTS</li><li>UNSTRUCTURED_GRID</li><li>POLYDATA</li><li>STRUCTURED_POINTS</li><li>RECTILINEAR_GRID</li><li>FIELD</li></ul><p>第五部分,定义点数据或者实体数据等,称为dataset attributes, 如:</p><pre><code class="language-shell">POINT_DATA type
+...
 CELL_DATA type
-&hellip;</p><p>注意:Indices are 0-offset. Thus the first point is point id 0.;<strong>Cell types and indices are of type int</strong>; The geometry/topology description must occur prior to the data attribute description.</p><h2 id="_11-dataset-format--定义几何拓扑数据和关系">1.1 Dataset Format _ 定义几何/拓扑数据和关系</h2><p>VTK支持5种数据集格式:structured points, structured grid, rectilinear grid, unstructured grid, and polygonal data.</p><p>这里只描述非结构化网格,其他不说,用不到.</p><h3 id="_12-unstructured-grid">1.2 Unstructured Grid</h3><p>非结构化网格数据集由任何可用的单元类型的任意组合组成(比如四六面体混合).非结构化网格由点、单元格和单元格类型定义.</p><p>CELLS keyword 需要两个参数:</p><ul><li>n : the number of cells</li><li>size : the size of the cell list. The cell list size is CELLS关键字下所有整数的个数 (i.e., sum of numPoints and connectivity indices over each cell).</li></ul><p>例如:60代表的是从第一行以下所有整数的个数</p><pre><code class="language-vtk">CELLS 11 60
+...</code></pre><p>注意:Indices are 0-offset. Thus the first point is point id 0.;<strong>Cell types and indices are of type int</strong>; The geometry/topology description must occur prior to the data attribute description.</p><h3 id="_11-dataset-format--定义几何拓扑数据和关系">1.1 Dataset Format _ 定义几何/拓扑数据和关系</h3><p>VTK支持5种数据集格式:</p><ul><li>structured points</li><li>structured grid</li><li>rectilinear grid</li><li>unstructured grid</li><li>polygonal data</li></ul><p>这里只描述非结构化网格,其他不说,用不到.</p><h3 id="_12-unstructured-grid">1.2 Unstructured Grid</h3><p>非结构化网格数据集由任何可用的单元类型的任意组合组成(比如四六面体混合).非结构化网格由点、单元格和单元格类型定义.</p><p>CELLS keyword 需要两个参数:</p><ul><li>n : the number of cells</li><li>size : the size of the cell list.</li></ul><blockquote><p>The cell list size is CELLS关键字下所有整数的个数 (i.e., sum of numPoints and connectivity indices over each cell).</p></blockquote><p>例如:60代表的是从第一行以下所有整数的个数</p><pre><code class="language-python">CELLS 11 60
 8 0 1 4 3 6 7 10 9
 8 1 2 4 5 7 8 10 11
 4 6 10 9 12
@@ -64,7 +60,7 @@ CELL_DATA type
 3 21 22 18
 3 22 19 18
 2 26 25
-1 24</code></pre><p>CELL_TYPES keyword需要一个参数: the number of cells n.这个参数值对应于CELLS的n参数.这个关键字的数据行,是指定每个单元格的单元类型的单个整数值</p><p>案例:定义非结构化网格的拓扑</p><pre><code class="language-py">DATASET UNSTRUCTURED_GRID
+1 24</code></pre><p>CELL_TYPES keyword需要一个参数: <span class="codespan-content"><code>the number of cells n</code></span> .这个参数值对应于CELLS的n参数.这个关键字的数据行,是指定每个单元格的单元类型的单个整数值</p><p>案例:定义非结构化网格的拓扑</p><pre><code class="language-shell">DATASET UNSTRUCTURED_GRID
 POINTS n dataType
 p0x p0y p0z
 p1x p1y p1z
@@ -83,38 +79,40 @@ type0
 type1
 type2
 …
-typen-1</code></pre><h3 id="_13-dataset-attribute-format-mdash--定义附着在节点或者单元上的数据">1.3 Dataset Attribute Format &mdash;- 定义附着在节点或者单元上的数据</h3><p>支持以下数据集属性:</p><ul><li>标量(一到四个分量)</li><li>向量</li><li>法线</li><li>纹理坐标(1D, 2D和3D)</li><li>张量</li><li>field data</li></ul><p>此外,可以使用RGBA颜色规范定义lookup table,与标量数据关联.</p><p>定义dataset Attribute 要给定一个独特的dataName,不能有空格.一个文件中可以包含多个相同类型的dataset Attribute. For example, two different scalar fields defined on the dataset points, pressure and temperature, can be contained in the same file.</p><h4 id="_131-scalars">1.3.1 Scalars.</h4><pre><code class="language-vtk">SCALARS dataName dataType numComp
+typen-1</code></pre><h3 id="_13-dataset-attribute-format--定义附着在节点或者单元上的数据">1.3 Dataset Attribute Format : 定义附着在节点或者单元上的数据</h3><p>支持以下数据集属性:</p><ul><li>标量(一到四个分量)</li><li>向量</li><li>法线</li><li>纹理坐标(1D, 2D和3D)</li><li>张量</li><li>field data</li></ul><p>此外,可以使用RGBA颜色规范定义lookup table,与标量数据关联.</p><p>定义dataset Attribute 要给定一个独特的dataName,不能有空格.一个文件中可以包含多个相同类型的dataset Attribute. For example, two different scalar fields defined on the dataset points, pressure and temperature, can be contained in the same file.</p><h4 id="_131-scalars">1.3.1 Scalars.</h4><pre><code class="language-shell">SCALARS dataName dataType numComp
 LOOKUP_TABLE tableName
 s0
 s1
 …
-sn-1</code></pre><p>标量定义包括lookup table的指定. lookup table 是可选的,如果不指定,vtk会使用默认表(tableName指定为default);numComp选项也是可选的,如果不给定,默认为1.参数范围:1~4</p><p>color scalars( 直接映射到颜色的无符号字符值 )的定义varies depending upon the number of values (nValues) per scalar.** If the file format is ASCII, the color scalars are defined using nValues float values between (0,1). **</p><pre><code class="language-vtk">COLOR_SCALARS dataName nValues
+sn-1</code></pre><p>标量定义包括lookup table的指定. lookup table 是可选的,如果不指定,vtk会使用默认表(tableName指定为default);numComp选项也是可选的,如果不给定,默认为1.参数范围:1~4</p><p>color scalars( 直接映射到颜色的无符号字符值 )的定义varies depending upon the number of values (nValues) per scalar. If the file format is ASCII, the color scalars are defined using nValues float values between (0,1).</p><pre><code class="language-shell">COLOR_SCALARS dataName nValues
 c00 c01 … c0(nValues-1)
 c10 c11 … c1(nValues-1)
 …
 c(n-1)0 c(n-1)1 … c(n-1)(nValues-1)
-</code></pre><h4 id="_132-lookup-table">1.3.2 Lookup Table.</h4><pre><code class="language-vtk">LOOKUP_TABLE tableName size
+</code></pre><h4 id="_132-lookup-table">1.3.2 Lookup Table.</h4><pre><code class="language-shell">LOOKUP_TABLE tableName size
 r0 g0 b0 a0
 r1 g1 b1 a1
 …
-rsize-1 gsize-1 bsize-1 asize-1</code></pre><p>tableName 是表的标识,不能有空格.每一行表示rgba数组. a表示透明度, a=0时颜色透明.如果文件是ASCII格式,每个值范围为(0-1的浮点数;</p><h4 id="_133-vectors">1.3.3 Vectors.</h4><pre><code class="language-vtk">VECTORS dataName dataType
+rsize-1 gsize-1 bsize-1 asize-1</code></pre><p>tableName 是表的标识,不能有空格.每一行表示rgba数组. a表示透明度, a=0时颜色透明.如果文件是ASCII格式,每个值范围为0-1的浮点数;</p><h4 id="_133-vectors">1.3.3 Vectors.</h4><pre><code class="language-shell">VECTORS dataName dataType
 v0x v0y v0z
 v1x v1y v1z
 …
-v(n-1)x v(n-1)y v(n-1)z</code></pre><h4 id="_134-normals">1.3.4 Normals.</h4><p>Normals are assumed normalized |n| = 1.</p><pre><code class="language-vtk">NORMALS dataName dataType
+v(n-1)x v(n-1)y v(n-1)z</code></pre><h4 id="_134-normals">1.3.4 Normals.</h4><p>Normals are assumed normalized <formula>|n| = 1</formula></p><pre><code class="language-shell">NORMALS dataName dataType
 n0x n0y n0z
 n1x n1y n1z
 …
-n(n-1)x n(n-1)y n(n-1)z</code></pre><h4 id="_135-tensors">1.3.5 Tensors.</h4><p>Currently only real-valued, symmetric tensors are supported.</p><p>TENSORS dataName dataType
+n(n-1)x n(n-1)y n(n-1)z</code></pre><h4 id="_135-tensors">1.3.5 Tensors.</h4><blockquote><p>Currently only real-valued, symmetric tensors are supported.</p></blockquote><pre><code class="language-shell">TENSORS dataName dataType
 t000 t001 t002
 t010 t011 t012
-t020 t021 t022</p><p>t100 t101 t102
+t020 t021 t022
+
+t100 t101 t102
 t110 t111 t112
 t120 t121 t122
 …
-tn &ndash; 100 tn &ndash; 101 tn &ndash; 102
-tn &ndash; 110 tn &ndash; 111 tn &ndash; 112
-tn &ndash; 120 tn &ndash; 121 tn &ndash; 122</p><h3 id="_14-example">1.4 example</h3><pre><code class="language-vtk"># vtk DataFile Version 2.0
+tn - 100 tn - 101 tn - 102
+tn - 110 tn - 111 tn - 112
+tn - 120 tn - 121 tn - 122</code></pre><h3 id="_14-example">1.4 example</h3><pre><code class="language-shell"># vtk DataFile Version 2.0
 Unstructured Grid Example
 ASCII
 DATASET UNSTRUCTURED_GRID
@@ -185,7 +183,7 @@ LOOKUP_TABLE CellColors 11
 1 .5 .5 1
 .5 1 .5 1
 .5 .5 .5 1
-1 .5 .4 1</code></pre><div class="page-break" data-hidden=""></div><h1 id="_2使用python将网格和数据写入vtk文件">2.使用python将网格和数据写入vtk文件</h1><pre><code class="language-python">def export_vtk(output_file:str,
+1 .5 .4 1</code></pre><h2 id="_2使用python将网格和数据写入vtk文件">2.使用python将网格和数据写入vtk文件</h2><pre><code class="language-python">def export_vtk(output_file:str,
                 nodes:np.ndarray,
                 element_Blocks:List[np.ndarray],
                 element_types:List[str],
@@ -305,7 +303,7 @@ LOOKUP_TABLE CellColors 11
                 for i in range(array.shape[0]):
                     f.write(SEP.join(map(str,array[i,:]))+&#39;\n&#39;)
     else:
-        pass</code></pre></main>
+        pass</code></pre><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>

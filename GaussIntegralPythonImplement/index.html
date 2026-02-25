@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="高斯积分的编程实现" data-depth="1"><a href="#高斯积分的编程实现">高斯积分的编程实现</a><ol><li data-target-id="二维高斯积分" data-depth="2"><a href="#二维高斯积分">二维高斯积分</a></li><li data-target-id="三维高斯积分" data-depth="2"><a href="#三维高斯积分">三维高斯积分</a></li><li data-target-id="验证" data-depth="2"><a href="#验证">验证</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="page-break" data-hidden=""></div><h1 id="高斯积分的编程实现">高斯积分的编程实现</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><h2 id="二维高斯积分">二维高斯积分</h2><pre><code class="language-python">
+def Integ2dGuassLegendre(f,lowLimit:List[float]=[-1,-1], 
+                            upLimit:List[float]=[1,1], 
+                            n:int=3)-&gt;float:
+    &quot;&quot;&quot;给定积分区域[lowLimit,upLimit]和高斯积分点个数n(&gt;=1),计算二维高斯-勒让德积分公式&quot;&quot;&quot;
+    a,b,c,d=lowLimit[0],upLimit[0],lowLimit[1],upLimit[1]
+    if n&lt;=0:
+        raise ValueError(&quot;高斯-勒让德积分时,n必须大于0&quot;)
+    if n==1:
+        return 4*f(0,0)
+    if a==-1 and b==1 and c==-1 and d==1:
+        # 标准型积分
+        #计算权重和积分点位置
+        x_is,w_is=legendre_gauss_points_and_weights(n)
+        y_js,w_js=legendre_gauss_points_and_weights(n)
+
+        return np.sum([w_is[ind_x]*w_js[ind_y]*f(xi,yj) for ind_x,xi in enumerate(x_is) for ind_y,yj in enumerate(y_js) ])
+    else:
+        # 非标准型积分,积分区域:[a,b]x[c,d]
+        xt1=lambda t1: 0.5*(b-a)*t1+0.5*(b+a)
+        yt2=lambda t2: 0.5*(d-c)*t2+0.5*(d+c)
+        
+        t1_is,w_is=legendre_gauss_points_and_weights(n)
+        t2_js,w_js=legendre_gauss_points_and_weights(n)
+        
+        return np.sum([w_is[ind_x]*w_js[ind_y]*f(xt1(t1i),yt2(t2j))*(b-a)*(d-c)*0.25 for ind_x,t1i in enumerate(t1_is) for ind_y,t2j in enumerate(t2_js) ])
+</code></pre><h2 id="三维高斯积分">三维高斯积分</h2><pre><code class="language-python">def Integ3dGuassLegendre(f,lowLimit:List[float]=[-1,-1,-1], 
+                            upLimit:List[float]=[1,1,1], 
+                            n:int=3)-&gt;float:
+    &quot;&quot;&quot;给定积分区域[lowLimit,upLimit]和高斯积分点个数n(&gt;=1),计算二维高斯-勒让德积分公式&quot;&quot;&quot;
+    a,b=lowLimit[0],upLimit[0]
+    c,d=lowLimit[1],upLimit[1]
+    g,h=lowLimit[2],upLimit[2]
+    if n&lt;=0:
+        raise ValueError(&quot;高斯-勒让德积分时,n必须大于0&quot;)
+    if n==1:
+        return 8*f(0,0)
+    if a==-1 and b==1 and c==-1 and d==1:
+        # 标准型积分
+        #计算权重和积分点位置
+        x_is,w_is=legendre_gauss_points_and_weights(n)
+        y_js,w_js=legendre_gauss_points_and_weights(n)
+        z_js,w_ks=legendre_gauss_points_and_weights(n)
+
+        return np.sum([w_is[ind_x]*w_js[ind_y]*w_ks[ind_z]*f(xi,yj,zk) for ind_x,xi in enumerate(x_is) for ind_y,yj in enumerate(y_js) for ind_z,zk in enumerate(z_js)])
+    else:
+        # 非标准型积分,积分区域:[a,b]x[c,d]x[g,h]
+        xt1=lambda t1: 0.5*(b-a)*t1+0.5*(b+a)
+        yt2=lambda t2: 0.5*(d-c)*t2+0.5*(d+c)
+        zt3=lambda t3: 0.5*(h-g)*t3+0.5*(h+g)
+        
+        t1_is,w_is=legendre_gauss_points_and_weights(n)
+        t2_js,w_js=legendre_gauss_points_and_weights(n)
+        t3_ks,w_ks=legendre_gauss_points_and_weights(n)
+        
+        return np.sum([w_is[ind_x]*w_js[ind_y]*w_ks[ind_z]*f(xt1(t1i),yt2(t2j),zt3(t3k))*(b-a)*(d-c)*(h-g)*0.125 for ind_x,t1i in enumerate(t1_is) for ind_y,t2j in enumerate(t2_js) for ind_z,t3k in enumerate(t3_ks)])</code></pre><h2 id="验证">验证</h2><pre><code class="language-python">from formu_lib import *
+import numpy as np
+from scipy.integrate import dblquad
+# 定义被积函数
+def integrand(x, y):
+    return np.exp(x*x+y*y)
+
+# 计算二重积分
+result, error = dblquad(integrand, -1, 1, lambda x: -1, lambda x: 1)
+print(&quot;numpy 二重积分结果:&quot;, result)
+ans1=Integ2dGuassLegendre(integrand,[-1, -1],[1, 1],n=5)
+print(f&quot;本地二重积分结果:{ans1}&quot;)
+
+from scipy.integrate import tplquad
+# 定义被积函数
+def integrand3(x, y, z):
+    return np.exp(x*x+y*y+z*z)
+
+# 计算三重积分
+result3, error = tplquad(integrand3, -1, 1, lambda x: -1, lambda x: 1, lambda x, y: -1, lambda x, y: 1)
+ans2=Integ3dGuassLegendre(integrand3,[-1,-1,-1],[1,1,1],n=5)
+
+print(&quot;numpy三重积分结果:&quot;, result3)
+print(f&quot;本地三重积分结果:{ans2}&quot;)</code></pre><p>输出:</p><ul><li>numpy 二重积分结果: 8.557400519221307</li><li>本地二重积分结果:8.557173227239266</li><li>numpy三重积分结果: 25.03299361973213</li><li>本地三重积分结果:25.03199627931168</li></ul><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
