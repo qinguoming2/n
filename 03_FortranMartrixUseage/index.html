@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="modern-fortran-数组操作" data-depth="1" data-location="1"><a href="#modern-fortran-数组操作">Modern Fortran 数组操作</a><ol><li data-target-id="数组声明和初始化" data-depth="2" data-location="1.1"><a href="#数组声明和初始化">数组声明和初始化</a><ol><li data-target-id="声明数组" data-depth="3" data-location="1.1.1"><a href="#声明数组">声明数组</a></li><li data-target-id="初始化数组" data-depth="3" data-location="1.1.2"><a href="#初始化数组">初始化数组</a></li></ol></li><li data-target-id="数组切片" data-depth="2" data-location="1.2"><a href="#数组切片">数组切片</a></li><li data-target-id="数组操作" data-depth="2" data-location="1.3"><a href="#数组操作">数组操作</a><ol><li data-target-id="逐元素操作" data-depth="3" data-location="1.3.1"><a href="#逐元素操作">逐元素操作</a></li><li data-target-id="标量与数组操作" data-depth="3" data-location="1.3.2"><a href="#标量与数组操作">标量与数组操作</a></li></ol></li><li data-target-id="数组函数" data-depth="2" data-location="1.4"><a href="#数组函数">数组函数</a><ol><li data-target-id="数组大小" data-depth="3" data-location="1.4.1"><a href="#数组大小">数组大小</a></li><li data-target-id="数组形状" data-depth="3" data-location="1.4.2"><a href="#数组形状">数组形状</a></li><li data-target-id="数组转置" data-depth="3" data-location="1.4.3"><a href="#数组转置">数组转置</a></li><li data-target-id="数组求和" data-depth="3" data-location="1.4.4"><a href="#数组求和">数组求和</a></li><li data-target-id="数组最大值和最小值" data-depth="3" data-location="1.4.5"><a href="#数组最大值和最小值">数组最大值和最小值</a></li></ol></li><li data-target-id="数组分配和释放" data-depth="2" data-location="1.5"><a href="#数组分配和释放">数组分配和释放</a><ol><li data-target-id="动态数组" data-depth="3" data-location="1.5.1"><a href="#动态数组">动态数组</a></li><li data-target-id="可选参数" data-depth="3" data-location="1.5.2"><a href="#可选参数">可选参数</a></li></ol></li><li data-target-id="_7-数组比较" data-depth="2" data-location="1.6"><a href="#_7-数组比较">7. 数组比较</a><ol><li data-target-id="元素比较" data-depth="3" data-location="1.6.1"><a href="#元素比较">元素比较</a></li></ol></li><li data-target-id="_8-数组排序" data-depth="2" data-location="1.7"><a href="#_8-数组排序">8. 数组排序</a></li><li data-target-id="_9-数组广播" data-depth="2" data-location="1.8"><a href="#_9-数组广播">9. 数组广播</a></li></ol></li><li data-target-id="modern-fortran-矩阵乘法" data-depth="1" data-location="2"><a href="#modern-fortran-矩阵乘法">Modern Fortran 矩阵乘法</a><ol><li data-target-id="逐元素乘法" data-depth="2" data-location="2.1"><a href="#逐元素乘法">逐元素乘法</a></li><li data-target-id="矩阵-矩阵乘法" data-depth="2" data-location="2.2"><a href="#矩阵-矩阵乘法">矩阵-矩阵乘法</a></li><li data-target-id="矩阵-向量乘法" data-depth="2" data-location="2.3"><a href="#矩阵-向量乘法">矩阵-向量乘法</a></li><li data-target-id="使用-blas-进行矩阵乘法" data-depth="2" data-location="2.4"><a href="#使用-blas-进行矩阵乘法">使用 BLAS 进行矩阵乘法</a><ol><li data-target-id="编译和运行" data-depth="3" data-location="2.4.1"><a href="#编译和运行">编译和运行</a></li></ol></li><li data-target-id="总结" data-depth="2" data-location="2.5"><a href="#总结">总结</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="modern-fortran-数组操作" data-depth="1" data-location="1"><a href="#modern-fortran-数组操作">Modern Fortran 数组操作</a><ol><li data-target-id="数组声明和初始化" data-depth="2" data-location="1.1"><a href="#数组声明和初始化">数组声明和初始化</a><ol><li data-target-id="声明数组" data-depth="3" data-location="1.1.1"><a href="#声明数组">声明数组</a></li><li data-target-id="初始化数组" data-depth="3" data-location="1.1.2"><a href="#初始化数组">初始化数组</a></li></ol></li><li data-target-id="数组切片" data-depth="2" data-location="1.2"><a href="#数组切片">数组切片</a></li><li data-target-id="数组操作" data-depth="2" data-location="1.3"><a href="#数组操作">数组操作</a><ol><li data-target-id="逐元素操作" data-depth="3" data-location="1.3.1"><a href="#逐元素操作">逐元素操作</a></li><li data-target-id="标量与数组操作" data-depth="3" data-location="1.3.2"><a href="#标量与数组操作">标量与数组操作</a></li></ol></li><li data-target-id="数组函数" data-depth="2" data-location="1.4"><a href="#数组函数">数组函数</a><ol><li data-target-id="数组大小" data-depth="3" data-location="1.4.1"><a href="#数组大小">数组大小</a></li><li data-target-id="数组形状" data-depth="3" data-location="1.4.2"><a href="#数组形状">数组形状</a></li><li data-target-id="数组转置" data-depth="3" data-location="1.4.3"><a href="#数组转置">数组转置</a></li><li data-target-id="数组求和" data-depth="3" data-location="1.4.4"><a href="#数组求和">数组求和</a></li><li data-target-id="数组最大值和最小值" data-depth="3" data-location="1.4.5"><a href="#数组最大值和最小值">数组最大值和最小值</a></li></ol></li><li data-target-id="数组分配和释放" data-depth="2" data-location="1.5"><a href="#数组分配和释放">数组分配和释放</a><ol><li data-target-id="动态数组" data-depth="3" data-location="1.5.1"><a href="#动态数组">动态数组</a></li><li data-target-id="可选参数" data-depth="3" data-location="1.5.2"><a href="#可选参数">可选参数</a></li></ol></li><li data-target-id="_7-数组比较" data-depth="2" data-location="1.6"><a href="#_7-数组比较">7. 数组比较</a><ol><li data-target-id="元素比较" data-depth="3" data-location="1.6.1"><a href="#元素比较">元素比较</a></li></ol></li><li data-target-id="_8-数组排序" data-depth="2" data-location="1.7"><a href="#_8-数组排序">8. 数组排序</a></li><li data-target-id="_9-数组广播" data-depth="2" data-location="1.8"><a href="#_9-数组广播">9. 数组广播</a></li></ol></li><li data-target-id="modern-fortran-矩阵乘法" data-depth="1" data-location="2"><a href="#modern-fortran-矩阵乘法">Modern Fortran 矩阵乘法</a><ol><li data-target-id="逐元素乘法" data-depth="2" data-location="2.1"><a href="#逐元素乘法">逐元素乘法</a></li><li data-target-id="矩阵-矩阵乘法" data-depth="2" data-location="2.2"><a href="#矩阵-矩阵乘法">矩阵-矩阵乘法</a></li><li data-target-id="矩阵-向量乘法" data-depth="2" data-location="2.3"><a href="#矩阵-向量乘法">矩阵-向量乘法</a></li><li data-target-id="使用-blas-进行矩阵乘法" data-depth="2" data-location="2.4"><a href="#使用-blas-进行矩阵乘法">使用 BLAS 进行矩阵乘法</a><ol><li data-target-id="编译和运行" data-depth="3" data-location="2.4.1"><a href="#编译和运行">编译和运行</a></li></ol></li><li data-target-id="总结" data-depth="2" data-location="2.5"><a href="#总结">总结</a></li></ol></li></ol></nav><p></p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="modern-fortran-数组操作" data-location="1">Modern Fortran 数组操作</h1><p>Fortran 2008 提供了丰富的数组操作功能，包括数组声明、初始化、切片、逐元素操作、标量与数组操作、数组函数、动态数组、数组构造器、比较、排序和广播等。这些功能使得数组处理更加简洁和高效。通过合理使用这些功能，可以大大简化代码并提高程序的性能。以下是一些常见的数组操作：</p><h2 id="数组声明和初始化" data-location="1.1">数组声明和初始化</h2><h3 id="声明数组" data-location="1.1.1">声明数组</h3><pre><code class="language-shell">real, dimension(5) :: x
+integer, dimension(3, 3) :: matrix</code></pre><h3 id="初始化数组" data-location="1.1.2">初始化数组</h3><ul><li>使用数组构造器：<span class="codespan-content"><code>reshape</code></span> 和 <span class="codespan-content"><code>spread</code></span></li></ul><pre><code class="language-shell">real, dimension(3, 4) :: matrix
+matrix = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [3, 4])
+print *, &quot;Matrix:&quot;
+print *, matrix</code></pre><pre><code class="language-shell">real, dimension(5) :: x
+real, dimension(5, 3) :: y
+x = [1.0, 2.0, 3.0, 4.0, 5.0]
+y = spread(x, 2, 3)
+print *, &quot;Spread array y:&quot;
+print *, y</code></pre><ul><li>使用 <span class="codespan-content"><code>data</code></span> 语句：<pre><code class="language-shell">data x /1.0, 2.0, 3.0, 4.0, 5.0/
+data matrix /1, 2, 3, 4, 5, 6, 7, 8, 9/</code></pre></li></ul><h2 id="数组切片" data-location="1.2">数组切片</h2><p>数组切片允许你访问数组的子集。</p><pre><code class="language-shell">real, dimension(10) :: x
+x = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+
+! 访问第 2 到第 5 个元素
+print *, x(2:5)  ! 输出: 2.0 3.0 4.0 5.0
+
+! 访问第 1 到第 10 个元素，步长为 2
+print *, x(1:10:2)  ! 输出: 1.0 3.0 5.0 7.0 9.0</code></pre><h2 id="数组操作" data-location="1.3">数组操作</h2><h3 id="逐元素操作" data-location="1.3.1">逐元素操作</h3><p>Fortran 支持对数组的逐元素操作，包括加法、减法、乘法和除法。</p><pre><code class="language-shell">real, dimension(5) :: a, b, c
+a = [1.0, 2.0, 3.0, 4.0, 5.0]
+b = [6.0, 7.0, 8.0, 9.0, 10.0]
+
+c = a + b  ! 逐元素加法
+c = a - b  ! 逐元素减法
+c = a * b  ! 逐元素乘法
+c = a / b  ! 逐元素除法</code></pre><h3 id="标量与数组操作" data-location="1.3.2">标量与数组操作</h3><p>标量可以与数组进行逐元素操作。</p><pre><code class="language-shell">real, dimension(5) :: x, y
+real :: scalar = 2.0
+x = [1.0, 2.0, 3.0, 4.0, 5.0]
+
+y = scalar * x  ! 标量乘法
+y = x / scalar  ! 标量除法</code></pre><h2 id="数组函数" data-location="1.4">数组函数</h2><p>Fortran 提供了许多内置的数组函数，用于执行常见的数组操作。</p><h3 id="数组大小" data-location="1.4.1">数组大小</h3><pre><code class="language-shell">real, dimension(3, 4) :: matrix
+integer :: size1, size2
+
+size1 = size(matrix, 1)  ! 第一维的大小
+size2 = size(matrix, 2)  ! 第二维的大小
+print *, &quot;Size of first dimension:&quot;, size1
+print *, &quot;Size of second dimension:&quot;, size2</code></pre><h3 id="数组形状" data-location="1.4.2">数组形状</h3><pre><code class="language-shell">real, dimension(3, 4) :: matrix
+integer, dimension(:), allocatable :: shape
+
+shape = shape(matrix)
+print *, &quot;Shape of matrix:&quot;, shape</code></pre><h3 id="数组转置" data-location="1.4.3">数组转置</h3><pre><code class="language-shell">real, dimension(3, 4) :: matrix
+real, dimension(4, 3) :: transposed
+
+matrix = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [3, 4])
+transposed = transpose(matrix)
+print *, &quot;Transposed matrix:&quot;
+print *, transposed</code></pre><h3 id="数组求和" data-location="1.4.4">数组求和</h3><pre><code class="language-shell">real, dimension(5) :: x
+x = [1.0, 2.0, 3.0, 4.0, 5.0]
+print *, &quot;Sum of x:&quot;, sum(x)</code></pre><h3 id="数组最大值和最小值" data-location="1.4.5">数组最大值和最小值</h3><pre><code class="language-shell">real, dimension(5) :: x
+x = [1.0, 2.0, 3.0, 4.0, 5.0]
+print *, &quot;Maximum value in x:&quot;, maxval(x)
+print *, &quot;Minimum value in x:&quot;, minval(x)</code></pre><h2 id="数组分配和释放" data-location="1.5">数组分配和释放</h2><h3 id="动态数组" data-location="1.5.1">动态数组</h3><pre><code class="language-shell">real, allocatable :: x(:)
+integer :: n
+
+n = 10
+allocate(x(n))
+x = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+print *, &quot;Dynamic array x:&quot;, x
+deallocate(x)</code></pre><h3 id="可选参数" data-location="1.5.2">可选参数</h3><pre><code class="language-shell">real, allocatable :: x(:)
+integer :: n
+
+n = 10
+allocate(x(n), stat=ierr)
+if (ierr /= 0) then
+    print *, &quot;Allocation failed&quot;
+else
+    x = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+    print *, &quot;Dynamic array x:&quot;, x
+end if
+deallocate(x)</code></pre><h2 id="_7-数组比较" data-location="1.6">7. 数组比较</h2><h3 id="元素比较" data-location="1.6.1">元素比较</h3><pre><code class="language-shell">real, dimension(5) :: a, b
+logical, dimension(5) :: comparison
+a = [1.0, 2.0, 3.0, 4.0, 5.0]
+b = [1.0, 2.0, 3.0, 4.0, 6.0]
+
+comparison = a == b
+print *, &quot;Comparison result:&quot;, comparison</code></pre><h2 id="_8-数组排序" data-location="1.7">8. 数组排序</h2><p>Fortran 2008 提供了 <span class="codespan-content"><code>sort</code></span> 函数，用于对数组进行排序。</p><pre><code class="language-shell">real, dimension(5) :: x
+x = [5.0, 3.0, 1.0, 4.0, 2.0]
+call sort(x)
+print *, &quot;Sorted array x:&quot;, x</code></pre><h2 id="_9-数组广播" data-location="1.8">9. 数组广播</h2><p>Fortran 支持数组广播，允许对不同形状的数组进行操作。</p><pre><code class="language-shell">real, dimension(3, 3) :: matrix
+real, dimension(3) :: vector
+real, dimension(3, 3) :: result
+
+matrix = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9], [3, 3])
+vector = [1.0, 2.0, 3.0]
+result = matrix + vector
+print *, &quot;Broadcasted result:&quot;
+print *, result</code></pre><div class="page-break" data-hidden=""></div><h1 id="modern-fortran-矩阵乘法" data-location="2">Modern Fortran 矩阵乘法</h1><p>Fortran 2008 中，矩阵和数组的乘法可以通过内置的数组操作和函数来实现。Fortran 提供了多种方式来执行矩阵乘法，包括逐元素乘法和矩阵-矩阵乘法。以下是一些常见的操作：</p><h2 id="逐元素乘法" data-location="2.1">逐元素乘法</h2><p>逐元素乘法是指两个矩阵或数组的对应元素相乘。这在 Fortran 中非常直观，可以直接使用 <span class="codespan-content"><code>*</code></span> 运算符。</p><pre><code class="language-shell">program elementwise_multiply
+    implicit none
+    real, dimension(2, 3) :: A, B, C
+
+    ! 初始化矩阵 A 和 B
+    A = reshape([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], [2, 3])
+    B = reshape([7.0, 8.0, 9.0, 10.0, 11.0, 12.0], [2, 3])
+
+    ! 逐元素乘法
+    C = A * B
+
+    ! 输出结果矩阵 C
+    print *, &quot;Elementwise multiplication result:&quot;
+    print *, C
+end program elementwise_multiply</code></pre><h2 id="矩阵-矩阵乘法" data-location="2.2">矩阵-矩阵乘法</h2><p>矩阵-矩阵乘法是指两个矩阵的线性代数乘法。Fortran 2008 提供了 <span class="codespan-content"><code>matmul</code></span> 内置函数来执行矩阵乘法。</p><pre><code class="language-shell">program matrix_multiply
+    implicit none
+    real, dimension(2, 3) :: A
+    real, dimension(3, 2) :: B
+    real, dimension(2, 2) :: C
+
+    ! 初始化矩阵 A 和 B
+    A = reshape([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], [2, 3])
+    B = reshape([7.0, 8.0, 9.0, 10.0, 11.0, 12.0], [3, 2])
+
+    ! 矩阵乘法
+    C = matmul(A, B)
+
+    ! 输出结果矩阵 C
+    print *, &quot;Matrix multiplication result:&quot;
+    print *, C
+end program matrix_multiply</code></pre><h2 id="矩阵-向量乘法" data-location="2.3">矩阵-向量乘法</h2><p>矩阵-向量乘法是指一个矩阵与一个向量的线性代数乘法。Fortran 2008 也支持这种操作。</p><pre><code class="language-shell">program matrix_vector_multiply
+    implicit none
+    real, dimension(2, 3) :: A
+    real, dimension(3) :: x
+    real, dimension(2) :: y
+
+    ! 初始化矩阵 A 和向量 x
+    A = reshape([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], [2, 3])
+    x = [7.0, 8.0, 9.0]
+
+    ! 矩阵-向量乘法
+    y = matmul(A, x)
+
+    ! 输出结果向量 y
+    print *, &quot;Matrix-vector multiplication result:&quot;
+    print *, y
+end program matrix_vector_multiply</code></pre><h2 id="使用-blas-进行矩阵乘法" data-location="2.4">使用 BLAS 进行矩阵乘法</h2><p>虽然 Fortran 2008 提供了 <span class="codespan-content"><code>matmul</code></span> 函数，但在某些情况下，使用 BLAS 库可以提供更高的性能。BLAS 提供了 <span class="codespan-content"><code>sgemm</code></span> 函数用于矩阵乘法。</p><pre><code class="language-shell">program blas_matrix_multiply
+    implicit none
+    integer, parameter :: m = 2, n = 3, k = 2
+    real, dimension(m, k) :: A
+    real, dimension(k, n) :: B
+    real, dimension(m, n) :: C
+
+    ! 初始化矩阵 A 和 B
+    A = reshape([1.0, 2.0, 3.0, 4.0], [m, k])
+    B = reshape([5.0, 6.0, 7.0, 8.0, 9.0, 10.0], [k, n])
+
+    ! 调用 BLAS 的 sgemm 函数
+    call sgemm(&#39;N&#39;, &#39;N&#39;, m, n, k, 1.0, A, m, B, k, 0.0, C, m)
+
+    ! 输出结果矩阵 C
+    print *, &quot;Matrix multiplication result using BLAS:&quot;
+    print *, C
+end program blas_matrix_multiply</code></pre><h3 id="编译和运行" data-location="2.4.1">编译和运行</h3><p>将上述代码保存为 <span class="codespan-content"><code>.f90</code></span> 文件，然后使用以下命令编译和运行：</p><pre><code class="language-shell">gfortran -o example example.f90
+./example</code></pre><p>如果使用 BLAS，需要链接 BLAS 库：</p><pre><code class="language-shell">gfortran -o example example.f90 $(pkg-config --libs blas)
+./example</code></pre><h2 id="总结" data-location="2.5">总结</h2><p>Fortran 2008 提供了多种方式来执行矩阵和数组的乘法：</p><ul><li>逐元素乘法：直接使用 <span class="codespan-content"><code>*</code></span> 运算符。</li><li>矩阵-矩阵乘法：使用 <span class="codespan-content"><code>matmul</code></span> 函数。</li><li>矩阵-向量乘法：使用 <span class="codespan-content"><code>matmul</code></span> 函数。</li><li>高性能矩阵乘法：使用 BLAS 库的 <span class="codespan-content"><code>sgemm</code></span> 函数。</li></ul><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

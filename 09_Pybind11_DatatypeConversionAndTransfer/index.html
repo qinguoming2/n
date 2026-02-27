@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="pybind11的数据类型与数据传递解决方案" data-depth="1"><a href="#pybind11的数据类型与数据传递解决方案">Pybind11的数据类型与数据传递解决方案</a><ol><li data-target-id="python和cpp之间直接转换的数据类型" data-depth="2"><a href="#python和cpp之间直接转换的数据类型">python和cpp之间直接转换的数据类型</a><ol><li data-target-id="_1-基本数据类型" data-depth="3"><a href="#_1-基本数据类型">1. 基本数据类型</a></li><li data-target-id="_2-标准库容器" data-depth="3"><a href="#_2-标准库容器">2. 标准库容器</a></li><li data-target-id="_3-第三方库与特殊类型" data-depth="3"><a href="#_3-第三方库与特殊类型">3. 第三方库与特殊类型</a></li><li data-target-id="_4-自定义类型" data-depth="3"><a href="#_4-自定义类型">4. 自定义类型</a></li><li data-target-id="_5-函数与回调" data-depth="3"><a href="#_5-函数与回调">5. 函数与回调</a></li><li data-target-id="_6-其他类型" data-depth="3"><a href="#_6-其他类型">6. 其他类型</a></li><li data-target-id="_7-注意事项" data-depth="3"><a href="#_7-注意事项">7. 注意事项</a></li><li data-target-id="_8-示例代码" data-depth="3"><a href="#_8-示例代码">8. 示例代码</a></li></ol></li><li data-target-id="scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案" data-depth="2"><a href="#scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案">scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案</a><ol><li data-target-id="_1-默认支持情况" data-depth="3"><a href="#_1-默认支持情况">1. 默认支持情况</a></li><li data-target-id="_2-手动转换方法" data-depth="3"><a href="#_2-手动转换方法">2. 手动转换方法</a></li><li data-target-id="_3-注意事项" data-depth="3"><a href="#_3-注意事项">3. 注意事项</a></li><li data-target-id="_4-第三方扩展库" data-depth="3"><a href="#_4-第三方扩展库">4. 第三方扩展库</a></li><li data-target-id="_5-示例代码完整流程" data-depth="3"><a href="#_5-示例代码完整流程">5. 示例代码(完整流程)</a></li><li data-target-id="总结" data-depth="3"><a href="#总结">总结</a></li></ol></li><li data-target-id="pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案" data-depth="2"><a href="#pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案">Pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案</a><ol><li data-target-id="_1-c函数实现" data-depth="3"><a href="#_1-c函数实现">1. C++函数实现</a></li><li data-target-id="_2-编译为python模块" data-depth="3"><a href="#_2-编译为python模块">2. 编译为Python模块</a></li><li data-target-id="_3-python端调用" data-depth="3"><a href="#_3-python端调用">3. Python端调用</a></li><li data-target-id="_4-关键点说明" data-depth="3"><a href="#_4-关键点说明">4. 关键点说明</a></li></ol></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="pybind11的数据类型与数据传递解决方案">Pybind11的数据类型与数据传递解决方案</h1><blockquote><p>Completed Time: 2025-05-23 10: 48</p></blockquote><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="pybind11的数据类型与数据传递解决方案" data-depth="1"><a href="#pybind11的数据类型与数据传递解决方案">Pybind11的数据类型与数据传递解决方案</a><ol><li data-target-id="python和cpp之间直接转换的数据类型" data-depth="2"><a href="#python和cpp之间直接转换的数据类型">python和cpp之间直接转换的数据类型</a><ol><li data-target-id="_1-基本数据类型" data-depth="3"><a href="#_1-基本数据类型">1. 基本数据类型</a></li><li data-target-id="_2-标准库容器" data-depth="3"><a href="#_2-标准库容器">2. 标准库容器</a></li><li data-target-id="_3-第三方库与特殊类型" data-depth="3"><a href="#_3-第三方库与特殊类型">3. 第三方库与特殊类型</a></li><li data-target-id="_4-自定义类型" data-depth="3"><a href="#_4-自定义类型">4. 自定义类型</a></li><li data-target-id="_5-函数与回调" data-depth="3"><a href="#_5-函数与回调">5. 函数与回调</a></li><li data-target-id="_6-其他类型" data-depth="3"><a href="#_6-其他类型">6. 其他类型</a></li><li data-target-id="_7-注意事项" data-depth="3"><a href="#_7-注意事项">7. 注意事项</a></li><li data-target-id="_8-示例代码" data-depth="3"><a href="#_8-示例代码">8. 示例代码</a></li></ol></li><li data-target-id="scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案" data-depth="2"><a href="#scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案">scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案</a><ol><li data-target-id="_1-默认支持情况" data-depth="3"><a href="#_1-默认支持情况">1. 默认支持情况</a></li><li data-target-id="_2-手动转换方法" data-depth="3"><a href="#_2-手动转换方法">2. 手动转换方法</a></li><li data-target-id="_3-注意事项" data-depth="3"><a href="#_3-注意事项">3. 注意事项</a></li><li data-target-id="_4-第三方扩展库" data-depth="3"><a href="#_4-第三方扩展库">4. 第三方扩展库</a></li><li data-target-id="_5-示例代码完整流程" data-depth="3"><a href="#_5-示例代码完整流程">5. 示例代码(完整流程)</a></li><li data-target-id="总结" data-depth="3"><a href="#总结">总结</a></li></ol></li><li data-target-id="pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案" data-depth="2"><a href="#pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案">Pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案</a><ol><li data-target-id="_1-c函数实现" data-depth="3"><a href="#_1-c函数实现">1. C++函数实现</a></li><li data-target-id="_2-编译为python模块" data-depth="3"><a href="#_2-编译为python模块">2. 编译为Python模块</a></li><li data-target-id="_3-python端调用" data-depth="3"><a href="#_3-python端调用">3. Python端调用</a></li><li data-target-id="_4-关键点说明" data-depth="3"><a href="#_4-关键点说明">4. 关键点说明</a></li></ol></li></ol></li></ol></nav><p></p><h2 id="python和cpp之间直接转换的数据类型">python和cpp之间直接转换的数据类型</h2><p>在pybind11中,Python和C++之间的数据类型转换非常灵活,支持多种常见类型的直接映射。以下是可直接转换的主要数据类型及其注意事项:</p><h3 id="_1-基本数据类型">1. 基本数据类型</h3><ul><li>自动转换(无需额外头文件):<ul><li>整型: <span class="codespan-content"><code>int</code></span> &larr;&rarr; <span class="codespan-content"><code>int</code></span>(Python 3无<span class="codespan-content"><code>long</code></span>,统一为<span class="codespan-content"><code>int</code></span>)。</li><li>浮点型: <span class="codespan-content"><code>float</code></span>/<span class="codespan-content"><code>double</code></span> &larr;&rarr; <span class="codespan-content"><code>float</code></span>。</li><li>布尔型: <span class="codespan-content"><code>bool</code></span> &larr;&rarr; <span class="codespan-content"><code>bool</code></span>(<span class="codespan-content"><code>True</code></span>/<span class="codespan-content"><code>False</code></span>)。</li><li>字符串:<ul><li>C++  &rarr;  Python: <span class="codespan-content"><code>std::string</code></span>、<span class="codespan-content"><code>const char*</code></span>  &rarr;  <span class="codespan-content"><code>str</code></span>。</li><li>Python  &rarr;  C++: <span class="codespan-content"><code>str</code></span>  &rarr;  <span class="codespan-content"><code>std::string</code></span>(自动编码处理)。</li></ul></li></ul></li></ul><h3 id="_2-标准库容器">2. 标准库容器</h3><p>需包含 <span class="codespan-content"><code>#include &lt;pybind11/stl.h&gt;</code></span>:</p><ul><li>序列容器:<ul><li><span class="codespan-content"><code>std::vector&lt;T&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>list</code></span>(元素类型<span class="codespan-content"><code>T</code></span>需可转换)。</li><li><span class="codespan-content"><code>std::array&lt;T, N&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>list</code></span>/<span class="codespan-content"><code>tuple</code></span>(固定长度)。</li><li><span class="codespan-content"><code>std::list&lt;T&gt;</code></span>、<span class="codespan-content"><code>std::deque&lt;T&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>list</code></span>。</li></ul></li><li>关联容器:<ul><li><span class="codespan-content"><code>std::map&lt;K, V&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>dict</code></span>(键值类型需可转换)。</li><li><span class="codespan-content"><code>std::set&lt;T&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>set</code></span>。</li></ul></li><li>元组: <span class="codespan-content"><code>std::tuple&lt;...&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>tuple</code></span>。</li><li>其他: <span class="codespan-content"><code>std::optional&lt;T&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>None</code></span>或对应类型。</li></ul><h3 id="_3-第三方库与特殊类型">3. 第三方库与特殊类型</h3><ul><li>NumPy数组(需包含 <span class="codespan-content"><code>#include &lt;pybind11/numpy.h&gt;</code></span>):<ul><li><span class="codespan-content"><code>pybind11::array_t&lt;T&gt;</code></span> &larr;&rarr; <span class="codespan-content"><code>numpy.ndarray</code></span>。</li><li>支持Eigen矩阵(需额外包含 <span class="codespan-content"><code>pybind11/eigen.h</code></span>)。</li></ul></li><li>缓冲区协议: 可直接访问内存(如<span class="codespan-content"><code>std::vector</code></span>的<span class="codespan-content"><code>.data()</code></span>)。</li><li>智能指针:<ul><li><span class="codespan-content"><code>std::shared_ptr&lt;T&gt;</code></span> &larr;&rarr; Python对象(自动管理引用计数)。</li><li><span class="codespan-content"><code>std::unique_ptr&lt;T&gt;</code></span> &larr;&rarr; Python对象(所有权转移)。</li></ul></li></ul><h3 id="_4-自定义类型">4. 自定义类型</h3><p>通过 <span class="codespan-content"><code>pybind11::class_</code></span> 绑定:</p><pre><code class="language-cpp">pybind11::class_&lt;MyClass&gt;(m, &quot;MyClass&quot;)
+    .def(pybind11::init&lt;&gt;())
+    .def_readwrite(&quot;data&quot;, &amp;MyClass::data)
+    .def(&quot;method&quot;, &amp;MyClass::method);</code></pre><ul><li>C++对象 &larr;&rarr; Python类实例。</li><li>支持继承、虚函数覆盖等高级特性。</li></ul><h3 id="_5-函数与回调">5. 函数与回调</h3><ul><li>C++函数  &rarr;  Python可调用对象: 自动包装。</li><li>Python函数  &rarr;  C++回调:<ul><li>使用 <span class="codespan-content"><code>pybind11::function</code></span> 类型。</li><li>或绑定到 <span class="codespan-content"><code>std::function</code></span>(需包含 <span class="codespan-content"><code>pybind11/functional.h</code></span>)。</li></ul></li></ul><h3 id="_6-其他类型">6. 其他类型</h3><ul><li>枚举: <span class="codespan-content"><code>enum</code></span> &larr;&rarr; Python <span class="codespan-content"><code>enum.Enum</code></span>(需显式导出)。</li><li>异常: C++异常  &rarr;  Python异常(通过 <span class="codespan-content"><code>pybind11::register_exception</code></span>)。</li><li>文件对象: Python文件类对象 &larr;&rarr; C++ <span class="codespan-content"><code>std::FILE*</code></span>(需手动处理)。</li></ul><h3 id="_7-注意事项">7. 注意事项</h3><ol><li>自动转换限制:<ul><li>嵌套容器(如 <span class="codespan-content"><code>std::vector&lt;std::map&lt;int, string&gt;&gt;</code></span>)需确保所有层级类型可转换。</li><li>非标准类型(如自定义结构体)需显式绑定。</li></ul></li><li>性能优化:<ul><li>避免频繁转换大型容器,考虑使用 <span class="codespan-content"><code>pybind11::buffer</code></span> 或内存视图。</li><li>使用 <span class="codespan-content"><code>std::move</code></span> 避免不必要拷贝。</li></ul></li><li>头文件依赖:<ul><li>标准容器转换需 <span class="codespan-content"><code>#include &lt;pybind11/stl.h&gt;</code></span>。</li><li>Eigen/NumPy支持需额外头文件。</li></ul></li></ol><h3 id="_8-示例代码">8. 示例代码</h3><pre><code class="language-cpp">#include &lt;pybind11/pybind11.h&gt;
+#include &lt;pybind11/stl.h&gt;
+namespace py = pybind11;
+
+// 绑定函数示例
+int add(int a, int b) { return a + b; }
+
+// 自定义类
+struct MyClass { int value; };
+PYBIND11_MODULE(example, m) {
+    m.def(&quot;add&quot;, &amp;add);
+    py::class_&lt;MyClass&gt;(m, &quot;MyClass&quot;)
+        .def(py::init&lt;&gt;())
+        .def_readwrite(&quot;value&quot;, &amp;MyClass::value);
+}</code></pre><p>在Python中可直接使用:</p><pre><code class="language-python">import example
+obj = example.MyClass()
+obj.value = 42
+print(example.add(1, 2))  # 输出 3</code></pre><h2 id="scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案">scipy与eigen之间的稀疏矩阵数据类型的自动转换解决方案</h2><p>在pybind11中,NumPy/SciPy的稀疏矩阵类型与Eigen的稀疏矩阵类型之间默认不支持自动转换,但可以通过手动提取数据并构造对应格式的矩阵实现互通。以下是具体分析和解决方案:</p><h3 id="_1-默认支持情况">1. 默认支持情况</h3><ul><li>pybind11官方库:<ul><li>仅支持密集矩阵的自动转换(如<span class="codespan-content"><code>Eigen::MatrixXd</code></span> &larr;&rarr; <span class="codespan-content"><code>numpy.ndarray</code></span>),需包含<span class="codespan-content"><code>pybind11/eigen.h</code></span>。</li><li>稀疏矩阵的转换需要手动处理,因存储格式复杂(如CSR/CSC涉及数据、行、列索引等)。</li></ul></li><li>SciPy稀疏矩阵:<ul><li>SciPy的稀疏矩阵(如<span class="codespan-content"><code>csr_matrix</code></span>/<span class="codespan-content"><code>csc_matrix</code></span>)并非NumPy原生类型,需通过<span class="codespan-content"><code>scipy.sparse</code></span>模块操作。</li></ul></li></ul><h3 id="_2-手动转换方法">2. 手动转换方法</h3><h4 id="_1-scipy稀疏矩阵-rarr-eigen稀疏矩阵">(1) SciPy稀疏矩阵  &rarr;  Eigen稀疏矩阵</h4><p>假设Python传递一个<span class="codespan-content"><code>scipy.sparse.csr_matrix</code></span>到C++,需提取其数据、行索引、列指针,并在C++端构造<span class="codespan-content"><code>Eigen::SparseMatrix</code></span>:</p><p>Python端:</p><pre><code class="language-python">import scipy.sparse as sp
+# 创建一个CSR格式稀疏矩阵
+csr_mat = sp.csr_matrix([[1, 0, 2], [0, 3, 0]])
+indices = csr_mat.indices
+indptr = csr_mat.indptr
+data = csr_mat.data
+shape = csr_mat.shape
+# 将数据传递给C++函数
+cpp_module.process_sparse(data, indices, indptr, shape)</code></pre><p>C++端(绑定代码):</p><pre><code class="language-cpp">#include &lt;Eigen/Sparse&gt;
+#include &lt;pybind11/pybind11.h&gt;
+#include &lt;pybind11/eigen.h&gt;
+#include &lt;pybind11/numpy.h&gt;
+namespace py = pybind11;
+void process_sparse(
+    py::array_t&lt;double&gt; data,
+    py::array_t&lt;int&gt; indices,
+    py::array_t&lt;int&gt; indptr,
+    std::pair&lt;size_t, size_t&gt; shape
+) {
+    // 映射为Eigen稀疏矩阵(CSR格式)
+    Eigen::Map&lt;const Eigen::SparseMatrix&lt;double&gt;&gt; eigen_sparse(
+        shape.first, shape.second,
+        indptr.size() - 1,  // 非零元素数
+        data.data(), indices.data(), indptr.data()
+    );
+    // 使用eigen_sparse进行计算...
+}
+
+PYBIND11_MODULE(example, m) {
+    m.def(&quot;process_sparse&quot;, &amp;process_sparse);
+}</code></pre><h4 id="_2-eigen稀疏矩阵-rarr-scipy稀疏矩阵">(2) Eigen稀疏矩阵  &rarr;  SciPy稀疏矩阵</h4><p>在C++端构造<span class="codespan-content"><code>Eigen::SparseMatrix</code></span>后,返回其数据、索引和指针数组,Python端用它们重建<span class="codespan-content"><code>csr_matrix</code></span>:</p><p>C++端:</p><pre><code class="language-cpp">py::dict get_sparse_data(const Eigen::SparseMatrix&lt;double&gt;&amp; mat) {
+    mat.makeCompressed();  // 确保压缩格式
+    return py::dict(
+        &quot;data&quot;_a = py::array_t&lt;double&gt;(mat.nonZeros(), mat.valuePtr()),
+        &quot;indices&quot;_a = py::array_t&lt;int&gt;(mat.nonZeros(), mat.innerIndexPtr()),
+        &quot;indptr&quot;_a = py::array_t&lt;int&gt;(mat.outerSize() + 1, mat.outerIndexPtr()),
+        &quot;shape&quot;_a = std::make_pair(mat.rows(), mat.cols())
+    );
+}</code></pre><p>Python端:</p><pre><code class="language-python">import scipy.sparse as sp
+
+data_dict = cpp_module.get_sparse_data()
+csr_mat = sp.csr_matrix(
+    (data_dict[&quot;data&quot;], data_dict[&quot;indices&quot;], data_dict[&quot;indptr&quot;]),
+    shape=data_dict[&quot;shape&quot;]
+)</code></pre><h3 id="_3-注意事项">3. 注意事项</h3><ul><li>存储格式一致性:<ul><li>Eigen默认使用压缩列存储(CSC),而SciPy的<span class="codespan-content"><code>csr_matrix</code></span>是压缩行存储(CSR),需注意格式匹配。</li><li>若格式不匹配,需手动转置或转换(如通过Eigen的<span class="codespan-content"><code>.transpose()</code></span>或SciPy的<span class="codespan-content"><code>.tocsr()</code></span>/<span class="codespan-content"><code>.tocsc()</code></span>)。</li></ul></li><li>内存管理:<ul><li>直接映射原始指针(如<span class="codespan-content"><code>Eigen::Map</code></span>)可避免数据拷贝,但需确保Python端数据生命周期足够长。</li><li>对于大矩阵,推荐传递只读(<span class="codespan-content"><code>const</code></span>)视图或拷贝数据。</li></ul></li></ul><h3 id="_4-第三方扩展库">4. 第三方扩展库</h3><ul><li><span class="codespan-content"><code>pybind11_eigen</code></span>:<ul><li>提供更丰富的Eigen类型支持,但对稀疏矩阵仍无自动转换。</li></ul></li><li>自定义封装工具:<ul><li>可编写通用转换函数模板,支持多种稀疏格式(如CSR/CSC/COO)。</li></ul></li></ul><h3 id="_5-示例代码完整流程">5. 示例代码(完整流程)</h3><p>C++绑定模块:</p><pre><code class="language-cpp">#include &lt;Eigen/Sparse&gt;
+#include &lt;pybind11/pybind11.h&gt;
+#include &lt;pybind11/eigen.h&gt;
+#include &lt;pybind11/numpy.h&gt;
+namespace py = pybind11;
+// 处理SciPy CSR矩阵的C++函数
+void process_sparse(
+    py::array_t&lt;double&gt; data,
+    py::array_t&lt;int&gt; indices,
+    py::array_t&lt;int&gt; indptr,
+    std::pair&lt;size_t, size_t&gt; shape
+) {
+    Eigen::Map&lt;const Eigen::SparseMatrix&lt;double&gt;&gt; mat(
+        shape.first, shape.second,
+        data.size(),  // 非零元素数
+        data.data(), indices.data(), indptr.data()
+    );
+    // 执行稀疏矩阵运算...
+}
+
+// 返回Eigen稀疏矩阵数据的函数
+py::dict get_eigen_sparse() {
+    Eigen::SparseMatrix&lt;double&gt; mat(2, 3);
+    mat.insert(0, 0) = 1;
+    mat.insert(0, 2) = 2;
+    mat.insert(1, 1) = 3;
+    mat.makeCompressed();
+    
+    return py::dict(
+        &quot;data&quot;_a = py::array_t&lt;double&gt;(mat.nonZeros(), mat.valuePtr()),
+        &quot;indices&quot;_a = py::array_t&lt;int&gt;(mat.nonZeros(), mat.innerIndexPtr()),
+        &quot;indptr&quot;_a = py::array_t&lt;int&gt;(mat.outerSize() + 1, mat.outerIndexPtr()),
+        &quot;shape&quot;_a = std::make_pair(mat.rows(), mat.cols())
+    );
+}
+
+PYBIND11_MODULE(sparse_utils, m) {
+    m.def(&quot;process_sparse&quot;, &amp;process_sparse);
+    m.def(&quot;get_eigen_sparse&quot;, &amp;get_eigen_sparse);
+}</code></pre><p>Python端使用:</p><pre><code class="language-python">import numpy as np
+import scipy.sparse as sp
+from sparse_utils import process_sparse, get_eigen_sparse
+# 将SciPy稀疏矩阵传递给C++
+csr_mat = sp.csr_matrix([[1, 0, 2], [0, 3, 0]])
+process_sparse(csr_mat.data, csr_mat.indices, csr_mat.indptr, csr_mat.shape)
+# 从C++获取Eigen稀疏矩阵并转为SciPy格式
+data_dict = get_eigen_sparse()
+eigen_csr = sp.csr_matrix(
+    (data_dict[&quot;data&quot;], data_dict[&quot;indices&quot;], data_dict[&quot;indptr&quot;]),
+    shape=data_dict[&quot;shape&quot;]
+)</code></pre><h3 id="总结">总结</h3><ul><li>默认不支持自动转换,需手动提取稀疏矩阵的数据、索引和指针数组。</li><li>格式兼容性是关键,需统一使用CSR或CSC格式以避免额外转换。</li><li>通过合理封装,可实现高效、无拷贝的稀疏矩阵交互。</li></ul><p>要实现一个C++函数,该函数接受一个Eigen的CSC格式稀疏矩阵,将其值加倍,然后返回加倍后的稀疏矩阵,并通过pybind11与SciPy的<span class="codespan-content"><code>csc_matrix</code></span>交互,我们需要以下步骤:</p><h2 id="pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案">Pybind11中csc稀疏矩阵在python和eigen库之间的数据传递解决方案</h2><h3 id="_1-c函数实现">1. C++函数实现</h3><h4 id="功能函数-doublesparsematrixcpp">功能函数 (<span class="codespan-content"><code>double_sparse_matrix.cpp</code></span>)</h4><pre><code class="language-cpp">#include &lt;Eigen/Sparse&gt;
+#include &lt;pybind11/pybind11.h&gt;
+#include &lt;pybind11/eigen.h&gt;
+#include &lt;pybind11/numpy.h&gt;
+
+namespace py = pybind11;
+
+// 通用转换函数: SciPy CSC矩阵 &lt;--&gt; Eigen SparseMatrix
+template &lt;typename Scalar&gt;
+Eigen::SparseMatrix&lt;Scalar&gt; scipy_csc_to_eigen(
+    py::array_t&lt;Scalar&gt; data,
+    py::array_t&lt;int&gt; indices,
+    py::array_t&lt;int&gt; indptr,
+    int rows,
+    int cols
+) {
+    // 确保输入是CSC格式
+    Eigen::Map&lt;const Eigen::SparseMatrix&lt;Scalar&gt;&gt; eigen_sparse(
+        rows, cols,
+        data.size(),  // 非零元素数
+        data.data(), indices.data(), indptr.data()
+    );
+    return eigen_sparse;
+}
+
+template &lt;typename Scalar&gt;
+py::dict eigen_to_scipy_csc(const Eigen::SparseMatrix&lt;Scalar&gt;&amp; mat) {
+    // 确保矩阵是压缩列存储(CSC)格式
+    Eigen::SparseMatrix&lt;Scalar&gt; csc_mat = mat;
+    csc_mat.makeCompressed();
+
+    return py::dict(
+        &quot;data&quot;_a = py::array_t&lt;Scalar&gt;(
+            {csc_mat.nonZeros()},  // Shape
+            {sizeof(Scalar)},     // Stride
+            csc_mat.valuePtr()     // 数据指针
+        ),
+        &quot;indices&quot;_a = py::array_t&lt;int&gt;(
+            {csc_mat.nonZeros()},
+            {sizeof(int)},
+            csc_mat.innerIndexPtr()
+        ),
+        &quot;indptr&quot;_a = py::array_t&lt;int&gt;(
+            {csc_mat.outerSize() + 1},
+            {sizeof(int)},
+            csc_mat.outerIndexPtr()
+        ),
+        &quot;shape&quot;_a = py::make_tuple(csc_mat.rows(), csc_mat.cols())
+    );
+}
+
+// 主函数: 将稀疏矩阵的值加倍
+template &lt;typename Scalar&gt;
+py::dict double_sparse_matrix(
+    py::array_t&lt;Scalar&gt; data,
+    py::array_t&lt;int&gt; indices,
+    py::array_t&lt;int&gt; indptr,
+    int rows,
+    int cols
+) {
+    // 将SciPy CSC矩阵转为Eigen格式
+    Eigen::SparseMatrix&lt;Scalar&gt; sm = scipy_csc_to_eigen&lt;Scalar&gt;(
+        data, indices, indptr, rows, cols
+    );
+
+    // 加倍所有非零元素
+    sm.coeffs() *= 2;
+
+    // 转回SciPy CSC格式
+    return eigen_to_scipy_csc(sm);
+}
+
+// 绑定到Python
+PYBIND11_MODULE(sparse_ops, m) {
+    m.def(&quot;double_sparse_matrix&quot;, &amp;double_sparse_matrix&lt;double&gt;,
+        py::arg(&quot;data&quot;), py::arg(&quot;indices&quot;), py::arg(&quot;indptr&quot;),
+        py::arg(&quot;rows&quot;), py::arg(&quot;cols&quot;),
+        &quot;Double the values of a CSC sparse matrix.&quot;
+    );
+}</code></pre><h3 id="_2-编译为python模块">2. 编译为Python模块</h3><h4 id="setuppy-配置"><span class="codespan-content"><code>setup.py</code></span> 配置</h4><pre><code class="language-python">from setuptools import setup, Extension
+import pybind11
+import os
+
+# 编译配置
+ext_module = Extension(
+    &#39;sparse_ops&#39;,
+    sources=[&#39;double_sparse_matrix.cpp&#39;],
+    include_dirs=[
+        pybind11.get_include(),
+        pybind11.get_include(True),  # Eigen路径需手动指定或通过环境变量
+        &#39;/usr/include/eigen3&#39;        # 替换为你的Eigen路径
+    ],
+    language=&#39;c++&#39;,
+    extra_compile_args=[&#39;-std=c++11&#39;],
+)
+
+setup(
+    name=&#39;sparse_ops&#39;,
+    ext_modules=[ext_module],
+)</code></pre><p>运行编译命令:</p><pre><code class="language-bash">python setup.py build_ext --inplace</code></pre><h3 id="_3-python端调用">3. Python端调用</h3><h4 id="测试脚本-testsparseopspy">测试脚本 (<span class="codespan-content"><code>test_sparse_ops.py</code></span>)</h4><pre><code class="language-python">import scipy.sparse as sp
+import numpy as np
+from sparse_ops import double_sparse_matrix
+
+# 创建一个SciPy CSC稀疏矩阵
+csc_mat = sp.csc_matrix([[1, 0, 3], [0, 4, 0], [5, 0, 6]], dtype=np.float64)
+
+# 提取CSC矩阵的数据、索引和指针
+data = csc_mat.data
+indices = csc_mat.indices
+indptr = csc_mat.indptr
+rows, cols = csc_mat.shape
+
+# 调用C++函数
+result = double_sparse_matrix(data, indices, indptr, rows, cols)
+
+# 重建SciPy CSC矩阵
+doubled_csc = sp.csc_matrix(
+    (result[&quot;data&quot;], result[&quot;indices&quot;], result[&quot;indptr&quot;]),
+    shape=result[&quot;shape&quot;]
+)
+
+print(&quot;Original matrix:\n&quot;, csc_mat.toarray())
+print(&quot;Doubled matrix:\n&quot;, doubled_csc.toarray())</code></pre><p>输出:</p><pre><code>Original matrix:
+ [[1 0 3]
+ [0 4 0]
+ [5 0 6]]
+Doubled matrix:
+ [[ 2  0  6]
+ [ 0  8  0]
+ [10  0 12]]</code></pre><h3 id="_4-关键点说明">4. 关键点说明</h3><ol><li><p>格式一致性:</p><ul><li>强制使用CSC格式,避免格式混淆(Eigen默认压缩列存储,与SciPy的<span class="codespan-content"><code>csc_matrix</code></span>一致)。</li><li>通过<span class="codespan-content"><code>makeCompressed()</code></span>确保矩阵数据是压缩的。</li></ul></li><li><p>内存零拷贝:</p><ul><li>使用<span class="codespan-content"><code>Eigen::Map</code></span>直接映射SciPy的原始数据指针,避免拷贝。</li><li>Python端的<span class="codespan-content"><code>numpy.ndarray</code></span>和C++的<span class="codespan-content"><code>Eigen::SparseMatrix</code></span>共享内存。</li></ul></li><li><p>通用模板:</p><ul><li>支持任意标量类型(如<span class="codespan-content"><code>float</code></span>/<span class="codespan-content"><code>double</code></span>),通过模板参数<span class="codespan-content"><code>Scalar</code></span>实现。</li></ul></li><li><p>异常处理:</p><ul><li>可添加<span class="codespan-content"><code>try-catch</code></span>块捕获非法输入(如非CSC格式数据)。</li></ul></li></ol><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

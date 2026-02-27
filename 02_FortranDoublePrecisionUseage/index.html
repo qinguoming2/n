@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="fortran-双精度浮点数编程" data-depth="1"><a href="#fortran-双精度浮点数编程">Fortran 双精度浮点数编程</a><ol><li data-target-id="fortran-双精度浮点数使用手册" data-depth="2"><a href="#fortran-双精度浮点数使用手册">Fortran 双精度浮点数使用手册</a><ol><li data-target-id="_1-双精度类型声明" data-depth="3"><a href="#_1-双精度类型声明">1. 双精度类型声明</a></li><li data-target-id="_2-双精度整数int64使用规范" data-depth="3"><a href="#_2-双精度整数int64使用规范">2. 双精度整数(int64)使用规范</a></li><li data-target-id="_3-双精度常量赋值" data-depth="3"><a href="#_3-双精度常量赋值">3. 双精度常量赋值</a></li><li data-target-id="_4-双精度数组初始化" data-depth="3"><a href="#_4-双精度数组初始化">4. 双精度数组初始化</a></li><li data-target-id="_5-数值计算精度保护" data-depth="3"><a href="#_5-数值计算精度保护">5. 数值计算精度保护</a></li><li data-target-id="_6-文件读写规范" data-depth="3"><a href="#_6-文件读写规范">6. 文件读写规范</a></li><li data-target-id="_7-外部库接口" data-depth="3"><a href="#_7-外部库接口">7. 外部库接口</a></li><li data-target-id="_8-混合精度转换" data-depth="3"><a href="#_8-混合精度转换">8. 混合精度转换</a></li><li data-target-id="_9-调试与验证" data-depth="3"><a href="#_9-调试与验证">9. 调试与验证</a></li></ol></li><li data-target-id="双精度整数特殊规范" data-depth="2"><a href="#双精度整数特殊规范">双精度整数特殊规范</a></li><li data-target-id="fortran-双精度编程手册补充说明" data-depth="2"><a href="#fortran-双精度编程手册补充说明">Fortran 双精度编程手册补充说明</a><ol><li data-target-id="_1-双精度整数int64作为数组索引" data-depth="3"><a href="#_1-双精度整数int64作为数组索引">1. 双精度整数(int64)作为数组索引</a></li><li data-target-id="_2-双精度整数int64作为循环变量" data-depth="3"><a href="#_2-双精度整数int64作为循环变量">2. 双精度整数(int64)作为循环变量</a></li><li data-target-id="_3-兼容性对照表" data-depth="3"><a href="#_3-兼容性对照表">3. 兼容性对照表</a></li><li data-target-id="_4-最佳实践总结" data-depth="3"><a href="#_4-最佳实践总结">4. 最佳实践总结</a></li><li data-target-id="_5-完整示例-安全的大数组操作" data-depth="3"><a href="#_5-完整示例-安全的大数组操作">5. 完整示例: 安全的大数组操作</a></li></ol></li><li data-target-id="fortran-双精度浮点数整数文本文件读取规范" data-depth="2"><a href="#fortran-双精度浮点数整数文本文件读取规范">Fortran 双精度浮点数/整数文本文件读取规范</a><ol><li data-target-id="一基础读取方法" data-depth="3"><a href="#一基础读取方法">一、基础读取方法</a></li><li data-target-id="二浮点数读取专项" data-depth="3"><a href="#二浮点数读取专项">二、浮点数读取专项</a></li><li data-target-id="三双精度整数读取专项" data-depth="3"><a href="#三双精度整数读取专项">三、双精度整数读取专项</a></li><li data-target-id="四文件结构处理" data-depth="3"><a href="#四文件结构处理">四、文件结构处理</a></li><li data-target-id="五错误处理规范" data-depth="3"><a href="#五错误处理规范">五、错误处理规范</a></li><li data-target-id="六性能优化" data-depth="3"><a href="#六性能优化">六、性能优化</a></li><li data-target-id="七特殊格式处理" data-depth="3"><a href="#七特殊格式处理">七、特殊格式处理</a></li><li data-target-id="八跨平台一致性" data-depth="3"><a href="#八跨平台一致性">八、跨平台一致性</a></li><li data-target-id="九完整示例" data-depth="3"><a href="#九完整示例">九、完整示例</a></li><li data-target-id="十关键注意事项总结" data-depth="3"><a href="#十关键注意事项总结">十、关键注意事项总结</a></li></ol></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="fortran-双精度浮点数编程" data-depth="1"><a href="#fortran-双精度浮点数编程">Fortran 双精度浮点数编程</a><ol><li data-target-id="fortran-双精度浮点数使用手册" data-depth="2"><a href="#fortran-双精度浮点数使用手册">Fortran 双精度浮点数使用手册</a><ol><li data-target-id="_1-双精度类型声明" data-depth="3"><a href="#_1-双精度类型声明">1. 双精度类型声明</a></li><li data-target-id="_2-双精度整数int64使用规范" data-depth="3"><a href="#_2-双精度整数int64使用规范">2. 双精度整数(int64)使用规范</a></li><li data-target-id="_3-双精度常量赋值" data-depth="3"><a href="#_3-双精度常量赋值">3. 双精度常量赋值</a></li><li data-target-id="_4-双精度数组初始化" data-depth="3"><a href="#_4-双精度数组初始化">4. 双精度数组初始化</a></li><li data-target-id="_5-数值计算精度保护" data-depth="3"><a href="#_5-数值计算精度保护">5. 数值计算精度保护</a></li><li data-target-id="_6-文件读写规范" data-depth="3"><a href="#_6-文件读写规范">6. 文件读写规范</a></li><li data-target-id="_7-外部库接口" data-depth="3"><a href="#_7-外部库接口">7. 外部库接口</a></li><li data-target-id="_8-混合精度转换" data-depth="3"><a href="#_8-混合精度转换">8. 混合精度转换</a></li><li data-target-id="_9-调试与验证" data-depth="3"><a href="#_9-调试与验证">9. 调试与验证</a></li></ol></li><li data-target-id="双精度整数特殊规范" data-depth="2"><a href="#双精度整数特殊规范">双精度整数特殊规范</a></li><li data-target-id="fortran-双精度编程手册补充说明" data-depth="2"><a href="#fortran-双精度编程手册补充说明">Fortran 双精度编程手册补充说明</a><ol><li data-target-id="_1-双精度整数int64作为数组索引" data-depth="3"><a href="#_1-双精度整数int64作为数组索引">1. 双精度整数(int64)作为数组索引</a></li><li data-target-id="_2-双精度整数int64作为循环变量" data-depth="3"><a href="#_2-双精度整数int64作为循环变量">2. 双精度整数(int64)作为循环变量</a></li><li data-target-id="_3-兼容性对照表" data-depth="3"><a href="#_3-兼容性对照表">3. 兼容性对照表</a></li><li data-target-id="_4-最佳实践总结" data-depth="3"><a href="#_4-最佳实践总结">4. 最佳实践总结</a></li><li data-target-id="_5-完整示例-安全的大数组操作" data-depth="3"><a href="#_5-完整示例-安全的大数组操作">5. 完整示例: 安全的大数组操作</a></li></ol></li><li data-target-id="fortran-双精度浮点数整数文本文件读取规范" data-depth="2"><a href="#fortran-双精度浮点数整数文本文件读取规范">Fortran 双精度浮点数/整数文本文件读取规范</a><ol><li data-target-id="一基础读取方法" data-depth="3"><a href="#一基础读取方法">一、基础读取方法</a></li><li data-target-id="二浮点数读取专项" data-depth="3"><a href="#二浮点数读取专项">二、浮点数读取专项</a></li><li data-target-id="三双精度整数读取专项" data-depth="3"><a href="#三双精度整数读取专项">三、双精度整数读取专项</a></li><li data-target-id="四文件结构处理" data-depth="3"><a href="#四文件结构处理">四、文件结构处理</a></li><li data-target-id="五错误处理规范" data-depth="3"><a href="#五错误处理规范">五、错误处理规范</a></li><li data-target-id="六性能优化" data-depth="3"><a href="#六性能优化">六、性能优化</a></li><li data-target-id="七特殊格式处理" data-depth="3"><a href="#七特殊格式处理">七、特殊格式处理</a></li><li data-target-id="八跨平台一致性" data-depth="3"><a href="#八跨平台一致性">八、跨平台一致性</a></li><li data-target-id="九完整示例" data-depth="3"><a href="#九完整示例">九、完整示例</a></li><li data-target-id="十关键注意事项总结" data-depth="3"><a href="#十关键注意事项总结">十、关键注意事项总结</a></li></ol></li></ol></li></ol></nav><div class="page-break" data-hidden=""></div><h1 id="fortran-双精度浮点数编程">Fortran 双精度浮点数编程</h1><blockquote><p>GPT整理</p></blockquote><h2 id="fortran-双精度浮点数使用手册">Fortran 双精度浮点数使用手册</h2><h3 id="_1-双精度类型声明">1. 双精度类型声明</h3><p>使用 “64 位浮点(双精度)”,标准做法是:</p><ol><li>用内置的 <span class="codespan-content"><code>real(kind=8)</code></span>(最常用但并非普适写法);</li><li>更现代、可移植的办法: 用 <span class="codespan-content"><code>iso_fortran_env</code></span> 或 <span class="codespan-content"><code>selected_real_kind</code></span> 明确指定精度。</li></ol><p>下面给出两种推荐写法:</p><ol><li>现代可移植写法(推荐)</li></ol><pre><code class="language-shell">use, intrinsic :: iso_fortran_env, only: real64   ! 引入 real64 常量
+real(real64) :: x, y(100)                         ! 明确声明 64-bit 浮点
+x = 1.23_real64          ! 推荐: _real64 后缀</code></pre><ul><li><span class="codespan-content"><code>real64</code></span> 是 <span class="codespan-content"><code>iso_fortran_env</code></span> 里的常量,保证在任何编译器上都得到 64 位 IEEE 754 双精度。</li></ul><ol start="2"><li>动态查询写法(完全标准)</li></ol><pre><code class="language-shell">integer, parameter :: dp = selected_real_kind(15, 307)  ! 15 位有效数字,10^307 范围
+real(dp) :: z
+z=1.0_dp
+real(dp) :: scalar_var
+real(dp), allocatable :: matrix(:,:)</code></pre><ul><li><span class="codespan-content"><code>selected_real_kind(p=15, r=307)</code></span> 返回满足精度要求的 kind 值,跨平台最安全。</li></ul><p>编译示例(gfortran)</p><pre><code class="language-shell">gfortran -o test test.f90</code></pre><p>总结:</p><ul><li>最简洁、现代: <span class="codespan-content"><code>use iso_fortran_env, only: real64</code></span> → <span class="codespan-content"><code>real(real64)</code></span></li><li>最通用: <span class="codespan-content"><code>selected_real_kind(15,307)</code></span> → 自定义 kind 参数</li></ul><blockquote><p>避免直接用 <span class="codespan-content"><code>real*8</code></span> 或 <span class="codespan-content"><code>double precision</code></span>,它们不是标准语法或已被视为过时。</p></blockquote><pre><code class="language-shell">! 方式1: SELECTED_REAL_KIND (传统方法)
+integer, parameter :: dp = SELECTED_REAL_KIND(15, 307)  ! 15位有效数字,10^307范围
+real(dp) :: float_var
+
+! 方式2: iso_fortran_env (现代标准)
+use iso_fortran_env, only: real64, int64
+real(real64) :: double_float    ! 等价于 real(dp)
+integer(int64) :: large_int     ! 8字节整数(-2^63 ~ 2^63-1)</code></pre><h3 id="_2-双精度整数int64使用规范">2. 双精度整数(int64)使用规范</h3><blockquote><p>说明: 处理大整数时需显式声明<span class="codespan-content"><code>int64</code></span>,避免溢出</p></blockquote><pre><code class="language-shell">use iso_fortran_env, only: int64
+integer(int64) :: big_num, result
+big_num = 1234567890123456789_int64  ! 必须加 _int64 后缀
+result = big_num * 10_int64          ! 正确: 全int64计算
+! 危险: 隐式转换为默认整数(可能4字节)
+result = big_num * 10                ! 可能溢出！</code></pre><h3 id="_3-双精度常量赋值">3. 双精度常量赋值</h3><blockquote><p>说明: 浮点数用 <span class="codespan-content"><code>_dp</code></span> 或 <span class="codespan-content"><code>_real64</code></span>,整数用 <span class="codespan-content"><code>_int64</code></span> 后缀</p></blockquote><pre><code class="language-shell">real(dp) :: a = 0.12345678901234567890_dp  ! 20位小数
+integer(int64) :: b = 9223372036854775807_int64  ! 最大int64值
+! 错误示范: 
+real(dp) :: c = 3.1415926535  ! 实际为单精度常量
+integer(int64) :: d = 1e18    ! 编译错误: 需显式_int64</code></pre><h3 id="_4-双精度数组初始化">4. 双精度数组初始化</h3><blockquote><p>说明: 数组构造器需对所有元素标记精度后缀</p></blockquote><pre><code class="language-shell">! 浮点数组
+real(dp) :: arr1(3) = [1.0_dp, 2.0_dp, 3.0_dp]  
+! 整数数组
+integer(int64) :: arr2(2) = [10000000000_int64, -9999999999_int64]  
+! 混合类型禁止: 
+real(dp) :: arr3(2) = [1.0, 2.0_dp]  ! 错误: 1.0是单精度</code></pre><h3 id="_5-数值计算精度保护">5. 数值计算精度保护</h3><p>说明: 混合计算时需显式转换,避免中间结果精度损失</p><pre><code class="language-shell">! 浮点案例
+real(dp) :: x = 1.0e20_dp, y = 1.0_dp
+print *, x + y - x  ! 正确: 输出 1.0
+print *, x + 1.0 - x ! 错误: 输出 0.0(1.0是单精度)
+
+! 整数案例
+integer(int64) :: i = 1e15_int64
+integer :: j = 1000
+print *, i + int(j, int64)  ! 正确: 提升j到int64
+print *, i + j              ! 危险: 可能溢出</code></pre><h3 id="_6-文件读写规范">6. 文件读写规范</h3><p>说明: 文本文件需匹配精度,二进制文件需对齐字节</p><pre><code class="language-shell">! 文本读取(双精度浮点)
+real(dp) :: data
+open(10, file=&#39;data.txt&#39;)
+read(10, &#39;(F25.16)&#39;) data  ! 必须指定足够宽度
+close(10)
+
+! 二进制写入(双精度整数)
+integer(int64) :: buffer(100)
+open(20, file=&#39;int64.bin&#39;, form=&#39;unformatted&#39;, access=&#39;stream&#39;)
+write(20) buffer  ! 按8字节/元素存储
+close(20)</code></pre><h3 id="_7-外部库接口">7. 外部库接口</h3><p>说明: 调用BLAS/LAPACK时区分单/双精度函数</p><pre><code class="language-shell">! 双精度BLAS
+real(dp) :: A(100,100), B(100,100), C(100,100)
+call dgemm(&#39;N&#39;,&#39;N&#39;, 100, 100, 100, 1.0_dp, A, 100, B, 100, 0.0_dp, C, 100)
+
+! 双精度整数FFT库(假设接口)
+integer(int64) :: n = 1024_int64
+call fftw_plan(n)  ! 需确保库支持int64</code></pre><h3 id="_8-混合精度转换">8. 混合精度转换</h3><p>说明: 用 <span class="codespan-content"><code>real(x, kind)</code></span> 和 <span class="codespan-content"><code>int(x, kind)</code></span> 安全转换</p><pre><code class="language-shell">real(4) :: single = 1.23456789e0
+integer :: i32 = 2147483647  ! 最大32位整数
+
+! 提升到双精度
+real(dp) :: double = real(single, dp)  ! 保留更多位数
+integer(int64) :: i64 = int(i32, int64) * 2  ! 避免溢出
+
+! 危险操作: 
+integer(int64) :: bad = i32 * 2  ! 可能先按32位计算再转换</code></pre><h3 id="_9-调试与验证">9. 调试与验证</h3><p>说明: 输出时显式控制格式,验证范围</p><pre><code class="language-shell">! 浮点验证
+real(dp) :: val = 1.0_dp/3.0_dp
+print &#39;(F30.20)&#39;, val  ! 输出: 0.33333333333333331483
+
+! 整数范围检查
+integer(int64) :: k = 9223372036854775807_int64
+if (k == huge(0_int64)) print *, &quot;达到int64最大值&quot;
+
+! 精度断言
+real(dp), parameter :: PI = 3.14159265358979323846_dp
+if (abs(PI - acos(-1.0_dp)) &gt; 1e-15_dp) error stop &quot;PI精度不足&quot;</code></pre><h2 id="双精度整数特殊规范">双精度整数特殊规范</h2><table><thead><tr><th>场景</th><th>正确做法</th><th>错误案例</th></tr></thead><tbody><tr><td>常量赋值</td><td><span class="codespan-content"><code>x = 1234567890123456789_int64</code></span></td><td><span class="codespan-content"><code>x = 1234567890123456789</code></span></td></tr><tr><td>文件存储</td><td><span class="codespan-content"><code>write(20) int64_array</code></span></td><td><span class="codespan-content"><code>write(20,*) int64_array</code></span></td></tr><tr><td>跨平台移植</td><td>使用<span class="codespan-content"><code>iso_fortran_env</code></span>的<span class="codespan-content"><code>int64</code></span></td><td>使用<span class="codespan-content"><code>integer(8)</code></span>(非标准)</td></tr><tr><td>数组索引</td><td>仅限<span class="codespan-content"><code>integer</code></span>(不能直接<span class="codespan-content"><code>int64</code></span>)</td><td><span class="codespan-content"><code>do i=1_int64, n</code></span></td></tr></tbody></table><blockquote><p>新增最佳实践:</p><ol><li><p>优先使用 <span class="codespan-content"><code>iso_fortran_env</code></span> 的 <span class="codespan-content"><code>real64</code></span> 和 <span class="codespan-content"><code>int64</code></span></p></li><li><p>所有大整数常量必须加 <span class="codespan-content"><code>_int64</code></span> 后缀</p></li><li><p>混合精度计算时,用 <span class="codespan-content"><code>int(x, int64)</code></span> 显式提升</p></li><li><p>避免用 <span class="codespan-content"><code>int64</code></span> 作为循环变量(编译器可能不支持)</p></li></ol></blockquote><p>完整示例: 双精度整数运算</p><pre><code class="language-shell">program int64_demo
+  use iso_fortran_env, only: int64
+  implicit none
+  integer(int64) :: a, b
+  a = 1234567890123456789_int64
+  b = a * 100_int64  ! 正确
+  print *, &quot;结果=&quot;, b
+  ! 验证范围
+  if (b &lt; 0) error stop &quot;检测到溢出！&quot;
+end program</code></pre><h2 id="fortran-双精度编程手册补充说明">Fortran 双精度编程手册补充说明</h2><p>双精度整数(<span class="codespan-content"><code>int64</code></span>)作为数组索引和循环条件的规范</p><h3 id="_1-双精度整数int64作为数组索引">1. 双精度整数(<span class="codespan-content"><code>int64</code></span>)作为数组索引</h3><p>规则:</p><ul><li>标准Fortran不允许: 数组索引必须为默认整数(通常为<span class="codespan-content"><code>integer(4)</code></span>),直接使用<span class="codespan-content"><code>integer(int64)</code></span>会导致编译错误。</li><li>变通方案: 若需处理超大数组(&gt;2³¹-1个元素),必须使用默认整数循环分段访问,或调用支持<span class="codespan-content"><code>int64</code></span>索引的特殊库(如自定义内存管理器)。</li></ul><pre><code class="language-shell">use iso_fortran_env, only: int64
+integer(int64) :: i64 = 10000000000_int64
+real(dp) :: huge_array(10000000000_int64)  ! 允许声明大数组(若编译器支持)
+
+! 错误: 直接使用int64索引
+huge_array(i64) = 1.0_dp  ! 编译错误: 索引必须为默认整数
+
+! 正确: 分段访问(假设每段≤2³¹-1)
+integer :: i
+do i = 1, size(huge_array, kind=kind(i))  ! 显式转换为默认整数
+  huge_array(i) = real(i, dp)
+end do</code></pre><p>例外情况:</p><ul><li>某些编译器扩展(如Intel Fortran)可能支持<span class="codespan-content"><code>int64</code></span>索引,但代码将失去可移植性。</li><li>若需处理超大规模数据,建议使用分布式数组库(如Coarray、MPI派生类型)。</li></ul><h3 id="_2-双精度整数int64作为循环变量">2. 双精度整数(<span class="codespan-content"><code>int64</code></span>)作为循环变量</h3><p>规则:</p><ul><li>标准Fortran不允许: 循环变量必须为默认整数(<span class="codespan-content"><code>integer</code></span>),使用<span class="codespan-content"><code>integer(int64)</code></span>会触发编译错误。</li><li>变通方案: 将<span class="codespan-content"><code>int64</code></span>循环拆分为嵌套的默认整数循环,或通过条件判断手动控制。</li></ul><pre><code class="language-shell">integer(int64) :: start = 1_int64, end = 10000000000_int64
+integer :: chunk_size = 1000000000  ! 每段10亿次
+integer :: i, chunk
+
+! 错误: 直接使用int64循环
+do i64 = start, end  ! 编译错误: 循环变量必须为默认整数
+end do
+
+! 正确: 分段循环
+do chunk = 1, (end - start + 1) / chunk_size + 1
+  do i = 1, min(chunk_size, int(end - (start + (chunk-1)*chunk_size) + 1))
+    ! 实际索引计算
+    integer(int64) :: true_index = start + (chunk-1)*chunk_size + int(i, int64) - 1
+    print *, &quot;Processing index=&quot;, true_index
+  end do
+end do</code></pre><p>性能提示:</p><ul><li>嵌套循环可能影响性能,建议在内部循环中使用默认整数进行密集计算。</li><li>若循环次数可能超过<span class="codespan-content"><code>2³¹-1</code></span>,必须在代码中添加溢出检查:</li></ul><pre><code class="language-shell">  if (end &gt; huge(0)) error stop &quot;循环次数超过默认整数范围！&quot;</code></pre><h3 id="_3-兼容性对照表">3. 兼容性对照表</h3><table><thead><tr><th>操作</th><th>是否允许</th><th>说明</th></tr></thead><tbody><tr><td>声明大数组尺寸</td><td>✓</td><td>如<span class="codespan-content"><code>real(dp) :: arr(10000000000_int64)</code></span>(依赖编译器支持)</td></tr><tr><td>直接作为数组索引</td><td>✗</td><td>需转换为默认整数</td></tr><tr><td>作为循环变量</td><td>✗</td><td>需拆分为默认整数循环</td></tr><tr><td>与<span class="codespan-content"><code>size()</code></span>/<span class="codespan-content"><code>shape()</code></span>合用</td><td>✗</td><td>这些函数返回默认整数,需用<span class="codespan-content"><code>int(size(arr), int64)</code></span>显式转换</td></tr><tr><td>在<span class="codespan-content"><code>WHERE</code></span>/<span class="codespan-content"><code>FORALL</code></span>中使用</td><td>✗</td><td>内部实现依赖默认整数</td></tr></tbody></table><h3 id="_4-最佳实践总结">4. 最佳实践总结</h3><ol><li><p>数组索引:</p><ul><li>始终使用默认整数(<span class="codespan-content"><code>integer</code></span>)作为索引。</li><li>若数组尺寸可能超过<span class="codespan-content"><code>2³¹-1</code></span>,需通过分段或外部库(如HDF5的<span class="codespan-content"><code>hsize_t</code></span>)处理。</li></ul></li><li><p>循环控制:</p><ul><li>循环变量必须为默认整数。</li><li>对<span class="codespan-content"><code>int64</code></span>范围循环,手动拆分为多段默认整数循环,并验证分段逻辑正确性。</li></ul></li><li><p>编译器扩展:</p><ul><li>若必须使用<span class="codespan-content"><code>int64</code></span>索引/循环,需添加条件编译指令:</li></ul></li></ol><pre><code class="language-shell">#ifdef INT64_INDEX_SUPPORT
+  integer(int64) :: i
+  do i = 1, huge_array_size
+    huge_array(i) = 0.0_dp
+  end do
+#else
+  ! 标准兼容代码
+#endif</code></pre><ol start="4"><li>错误检查:<ul><li>所有涉及<span class="codespan-content"><code>int64</code></span>到默认整数的转换需添加范围验证:</li></ul></li></ol><pre><code class="language-shell">if (i64 &gt; huge(0)) error stop &quot;int64值超过默认整数范围&quot;
+i_default = int(i64)  ! 安全转换</code></pre><h3 id="_5-完整示例-安全的大数组操作">5. 完整示例: 安全的大数组操作</h3><pre><code class="language-shell">program big_array_example
+  use iso_fortran_env, only: int64, real64
+  implicit none
+  integer, parameter :: dp = real64
+  integer(int64), parameter :: N = 5000000000_int64  ! 50亿元素
+  integer, parameter :: chunk_size = 1000000000      ! 每段10亿
+  real(dp), allocatable :: data(:)
+  integer :: i, chunk
+  integer(int64) :: global_index
+
+  ! 分配大数组(需编译器支持)
+  allocate(data(N))  ! 可能失败,需检查stat=)
+
+  ! 分段初始化
+  do chunk = 1, (N - 1) / chunk_size + 1
+    do i = 1, min(chunk_size, int(N - (chunk-1)*chunk_size))
+      global_index = (chunk-1)*chunk_size + int(i, int64)
+      data(global_index) = sqrt(real(global_index, dp))  ! 注意: 索引仍为默认整数
+    end do
+  end do
+
+  ! 验证最后一个元素
+  if (data(N) /= sqrt(real(N, dp))) error stop &quot;初始化错误&quot;
+  print *, &quot;大数组操作成功完成&quot;
+end program</code></pre><p>关键点:</p><ul><li>即使数组总尺寸为<span class="codespan-content"><code>int64</code></span>,实际索引操作仍需默认整数。</li><li>分段循环中需小心处理边界条件(如最后一段可能不满<span class="codespan-content"><code>chunk_size</code></span>)。</li><li>内存分配可能失败,需添加<span class="codespan-content"><code>stat=</code></span>参数检查。</li></ul><h2 id="fortran-双精度浮点数整数文本文件读取规范">Fortran 双精度浮点数/整数文本文件读取规范</h2><h3 id="一基础读取方法">一、基础读取方法</h3><ol><li>列表定向读取(自由格式)</li></ol><pre><code class="language-shell">real(dp) :: x
+integer(int64) :: n
+open(10, file=&#39;data.txt&#39;)
+read(10, *) x, n  ! 自动识别文本数字
+close(10)</code></pre><p>注意: 要求文本数据用空格/逗号分隔,如:</p><pre><code>3.141592653589793 100000000000</code></pre><ol start="2"><li>格式化读取(精确控制)</li></ol><pre><code class="language-shell">read(10, &#39;(F20.15,I20)&#39;) x, n  ! F20.15表示20字符宽15位小数</code></pre><h3 id="二浮点数读取专项">二、浮点数读取专项</h3><ol><li>科学计数法处理</li></ol><pre><code class="language-shell">read(10, &#39;(E25.16E3)&#39;) x  ! 读取如&quot;1.2345678901234567E-100&quot;</code></pre><p>必须匹配: 指数符号必须与格式描述符一致(E/e/D/d)</p><ol start="2"><li>精度保护技巧</li></ol><pre><code class="language-shell">character(256) :: buffer
+read(10, &#39;(A)&#39;) buffer  ! 先读入字符串
+read(buffer, &#39;(F30.20)&#39;) x  ! 二次解析确保精度</code></pre><ol start="3"><li>非数值检测</li></ol><pre><code class="language-shell">read(10, *, iostat=ierr) x
+if (ierr /= 0) then
+  backspace(10)
+  read(10, &#39;(A)&#39;) buffer
+  if (index(buffer,&#39;NaN&#39;) &gt; 0) x = 0.0_dp
+endif</code></pre><h3 id="三双精度整数读取专项">三、双精度整数读取专项</h3><ol><li>大整数安全读取</li></ol><pre><code class="language-shell">character(30) :: int_str
+read(10, &#39;(A)&#39;) int_str
+read(int_str, &#39;(I20)&#39;) n  ! 显式指定宽度
+
+! 范围检查
+if (abs(n) &gt; huge(0_int64)/2) error stop &quot;整数溢出&quot;</code></pre><ol start="2"><li>混合数据行处理</li></ol><pre><code class="language-shell">! 处理如 &quot;Value=3.14E5, Count=1000000&quot; 的文本
+read(10, &#39;(A)&#39;) line
+read(line(index(line,&#39;=&#39;)+1:index(line,&#39;,&#39;)-1), *) x
+read(line(index(line,&#39;Count=&#39;)+6:), *) n</code></pre><h3 id="四文件结构处理">四、文件结构处理</h3><ol><li>跳过注释行</li></ol><pre><code class="language-shell">do
+  read(10, &#39;(A)&#39;) line
+  if (line(1:1) /= &#39;#&#39; .and. len_trim(line) &gt; 0) exit
+end do
+backspace(10)</code></pre><ol start="2"><li>处理表头</li></ol><pre><code class="language-shell">read(10, &#39;(A)&#39;) header
+! 提取列信息(如&quot;X[double],Y[long]&quot;)
+pos = index(header, &#39;X&#39;)
+if (pos &gt; 0) read(header(pos+8:), &#39;(A)&#39;) fmt_str  ! 提取格式字符串</code></pre><h3 id="五错误处理规范">五、错误处理规范</h3><ol><li>综合错误检查</li></ol><pre><code class="language-shell">open(10, file=&#39;data.txt&#39;, iostat=ierr, iomsg=errmsg)
+if (ierr /= 0) error stop trim(errmsg)
+
+do i = 1, n_lines
+  read(10, *, iostat=ierr) x, n
+  if (ierr &gt; 0) then
+    print *, &quot;第&quot;,i,&quot;行格式错误&quot;
+    cycle
+  elseif (ierr &lt; 0) then
+    print *, &quot;文件意外结束&quot;
+    exit
+  endif
+end do</code></pre><ol start="2"><li>数据验证</li></ol><pre><code class="language-shell">if (x &gt; huge(x)*0.9_dp) then
+  print *, &quot;警告: 接近浮点溢出&quot;
+  x = huge(x)*0.9_dp
+endif</code></pre><h3 id="六性能优化">六、性能优化</h3><ol><li>批量读取</li></ol><pre><code class="language-shell">real(dp) :: data(1000)
+read(10, *, iostat=ierr) data  ! 一次性读取数组</code></pre><ol start="2"><li>内存映射文件(编译器扩展)</li></ol><pre><code class="language-shell">! Intel Fortran示例
+use ifport
+real(dp), pointer :: mmap_data(:)
+integer :: fd
+fd = open(&#39;data.bin&#39;, O_RDONLY)
+call mmap(mmap_data, len=8000, prot=PROT_READ, fd=fd)</code></pre><h3 id="七特殊格式处理">七、特殊格式处理</h3><ol><li>CSV文件读取</li></ol><pre><code class="language-shell">do
+  read(10, &#39;(A)&#39;) line
+  pos = index(line, &#39;,&#39;)
+  read(line(:pos-1), *) x
+  read(line(pos+1:), *) n
+end do</code></pre><ol start="2"><li>固定列宽数据</li></ol><pre><code class="language-shell">! 读取如: 
+! &quot; 3.141592653589793 100000000000&quot;
+read(10, &#39;(F20.15,1X,I12)&#39;) x, n</code></pre><h3 id="八跨平台一致性">八、跨平台一致性</h3><ol><li>行尾符处理</li></ol><pre><code class="language-shell">open(10, file=&#39;data.txt&#39;, form=&#39;formatted&#39;, &amp;
+     convert=&#39;BIG_ENDIAN&#39;)  ! 处理不同OS换行符</code></pre><ol start="2"><li>字符集转换</li></ol><pre><code class="language-shell">! 处理UTF-8文件
+character(256) :: buffer
+open(10, file=&#39;data.txt&#39;, encoding=&#39;UTF-8&#39;)
+read(10, &#39;(A)&#39;) buffer</code></pre><h3 id="九完整示例">九、完整示例</h3><pre><code class="language-shell">subroutine read_scientific_data(filename, data_array)
+  use iso_fortran_env, only: dp=&gt;real64, int64
+  character(len=*), intent(in) :: filename
+  real(dp), intent(out) :: data_array(:,:)
+  integer :: unit, ierr, i, nlines
+  character(512) :: buffer, errmsg
+
+  ! 获取行数
+  open(newunit=unit, file=filename, iostat=ierr, iomsg=errmsg)
+  if (ierr /= 0) error stop trim(errmsg)
+  nlines = 0
+  do
+    read(unit, &#39;(A)&#39;, iostat=ierr) buffer
+    if (ierr /= 0) exit
+    if (buffer(1:1) == &#39;#&#39;) cycle  ! 跳过注释
+    if (len_trim(buffer) == 0) cycle  ! 跳过空行
+    nlines = nlines + 1
+  end do
+
+  ! 实际读取
+  rewind(unit)
+  i = 1
+  do while (i &lt;= nlines .and. i &lt;= size(data_array,1))
+    read(unit, &#39;(A)&#39;) buffer
+    if (buffer(1:1) == &#39;#&#39;) cycle
+    
+    ! 安全解析
+    read(buffer, *, iostat=ierr) data_array(i,1), data_array(i,2)
+    if (ierr /= 0) then
+      print *, &quot;解析失败,行 &quot;, i, &quot; 内容: &quot;, trim(buffer)
+      data_array(i,:) = 0.0_dp
+    end if
+
+    ! 精度验证
+    if (abs(data_array(i,1)) &gt; 1e100_dp) then
+      print *, &quot;警告: 极大值出现在行 &quot;, i
+    end if
+
+    i = i + 1
+  end do
+  close(unit)
+end subroutine</code></pre><h3 id="十关键注意事项总结">十、关键注意事项总结</h3><ol><li><p>精度保护:</p><ul><li>避免隐式单精度转换(如<span class="codespan-content"><code>1.0</code></span>要写<span class="codespan-content"><code>1.0_dp</code></span>)</li><li>科学计数法使用<span class="codespan-content"><code>E25.16E3</code></span>格式描述符</li></ul></li><li><p>错误处理:</p><ul><li>必须检查<span class="codespan-content"><code>iostat</code></span>和文件打开状态</li><li>大整数需验证范围<span class="codespan-content"><code>[ -2^63, 2^63-1 ]</code></span></li></ul></li><li><p>性能权衡:</p><ul><li>小文件适合逐行读取</li><li>大文件考虑二进制格式或内存映射</li></ul></li><li><p>数据验证:</p><ul><li>检查NaN/Inf(<span class="codespan-content"><code>ieee_is_nan(x)</code></span>)</li><li>数值范围合理性验证</li></ul></li><li><p>编码规范:</p><ul><li>统一使用<span class="codespan-content"><code>_dp</code></span>和<span class="codespan-content"><code>_int64</code></span>后缀</li><li>显式声明所有I/O格式</li></ul></li><li><p>特殊场景:</p><ul><li>CSV需处理引号和转义符</li><li>混合数据行需要字符串解析</li></ul></li></ol><p>通过严格遵循这些规范,可确保从文本文件读取双精度数据时的精度安全和程序健壮性。</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

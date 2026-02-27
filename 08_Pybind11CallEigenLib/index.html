@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="python调用和编译eigen库函数" data-depth="1"><a href="#python调用和编译eigen库函数">Python调用和编译Eigen库函数</a><ol><li data-target-id="准备" data-depth="2"><a href="#准备">准备</a></li><li data-target-id="_1-编写cpp代码" data-depth="2"><a href="#_1-编写cpp代码">1. 编写cpp代码</a></li><li data-target-id="_2-编写setuppy文件" data-depth="2"><a href="#_2-编写setuppy文件">2. 编写setup.py文件</a></li><li data-target-id="_3-编译" data-depth="2"><a href="#_3-编译">3. 编译</a></li><li data-target-id="_4-测试" data-depth="2"><a href="#_4-测试">4. 测试</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="python调用和编译eigen库函数">Python调用和编译Eigen库函数</h1><p>资料:</p><ul><li><a href="https://pybind11.readthedocs.io/en/stable/advanced/cast/eigen.html">https://pybind11.readthedocs.io/en/stable/advanced/cast/eigen.html</a></li><li><a href="https://www.cnblogs.com/hyl2018/p/14089299.html">https://www.cnblogs.com/hyl2018/p/14089299.html</a></li><li><a href="https://www.yingnd.com/python/105835.html">https://www.yingnd.com/python/105835.html</a></li></ul><h2 id="准备">准备</h2><ol><li>安装vs2022,选择C++桌面开发;</li><li>下载<a href="https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip">Eigen源码</a></li><li>安装python3.10+, numpy, pybind11;</li></ol><h2 id="_1-编写cpp代码">1. 编写cpp代码</h2><p>在<span class="codespan-content"><code>solve_KUF.cpp</code></span>中:</p><pre><code class="language-cpp">#include &lt;pybind11/pybind11.h&gt;
+#include &lt;pybind11/eigen.h&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;stdexcept&gt;
+namespace py = pybind11;
+Eigen::VectorXd solveKUF(const Eigen::MatrixXd&amp; A, const Eigen::VectorXd&amp; B) {
+    // 输入验证
+    if (A.rows() != A.cols()) {
+        throw std::invalid_argument(&quot;Matrix A must be square&quot;);
+    }
+    if (A.rows() != B.rows()) {
+        throw std::invalid_argument(&quot;Matrix A and Vector B must have same number of rows&quot;);
+    }
+
+    // 转换为稀疏矩阵
+    Eigen::SparseMatrix&lt;double&gt; sparseA = A.sparseView();
+
+    // 使用BiCGSTAB求解器
+    Eigen::BiCGSTAB&lt;Eigen::SparseMatrix&lt;double&gt;&gt; solver;
+    solver.compute(sparseA);
+
+    if (solver.info() != Eigen::Success) {
+        throw std::runtime_error(&quot;Matrix decomposition failed&quot;);
+    }
+
+    Eigen::VectorXd X = solver.solve(B);
+
+    if (solver.info() != Eigen::Success) {
+        throw std::runtime_error(&quot;Solving failed&quot;);
+    }
+    return X;
+}
+
+// Pybind11模块定义
+PYBIND11_MODULE(solve_KUF, m) {
+    m.doc() = &quot;Python module for solving sparse linear system AX=B using Eigen&quot;;
+
+    m.def(&quot;solveKUF&quot;, &amp;solveKUF,
+          py::arg(&quot;A&quot;), py::arg(&quot;B&quot;),
+          &quot;Solve the linear system AX=B for sparse matrix A and vector B\n&quot;
+          &quot;Args:\n&quot;
+          &quot;    A: NxN numpy array (sparse matrix in dense format)\n&quot;
+          &quot;    B: Nx1 numpy array\n&quot;
+          &quot;Returns:\n&quot;
+          &quot;    Solution vector X as numpy array&quot;);
+}</code></pre><blockquote><p>pybind11支持numpy数组和eigen MatixXd之间的自动转换.</p></blockquote><h2 id="_2-编写setuppy文件">2. 编写setup.py文件</h2><p>在<span class="codespan-content"><code>setup.py</code></span>中:</p><pre><code class="language-python">from setuptools import setup, Extension
+import pybind11
+
+# 定义扩展模块
+ext_modules =Extension(
+        &#39;solve_KUF&#39;,
+        sources=[&#39;solve_KUF.cpp&#39;],
+        include_dirs=[pybind11.get_include(),
+                      &#39;L:\\EF2D\\includes\\eigen-3.4.0&#39;],  # 添加Eigen和pybind11头文件路径
+        language=&#39;c++&#39;,
+        extra_compile_args=[&#39;--std=c++17&#39;, &#39;--O3&#39;]  # 优化标志
+
+    )
+
+setup(
+    name=&#39;solve_KUF&#39;,
+    version=&#39;0.1&#39;,
+    ext_modules=[ext_modules],
+)</code></pre><h2 id="_3-编译">3. 编译</h2><p>在目录中执行命令, 如果出现<span class="codespan-content"><code>build文件夹</code></span>和<span class="codespan-content"><code>solve_KUF.cp310-win_amd64.pyd</code></span>, 说明编译成功</p><pre><code class="language-shell">python.exe路径 setup.py build_ext --inplace</code></pre><h2 id="_4-测试">4. 测试</h2><pre><code class="language-python">import numpy as np
+import solve_KUF
+# 创建一个稀疏矩阵的密集表示
+N = 5
+A = np.zeros((N, N))
+np.fill_diagonal(A, 2.0)  # 对角线为2
+A[0, 1] = 1.0
+A[1, 0] = 1.0
+
+# 创建右侧向量
+B = np.random.rand(N)
+
+# 求解AX=B
+X = solve_KUF.solveKUF(A, B)
+
+print(&quot;A:\n&quot;, A)
+print(&quot;\nB:\n&quot;, B)
+print(&quot;\nSolution X:\n&quot;, X)
+print(&quot;\nA @ X (should equal B):\n&quot;, A @ X)</code></pre><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" rel="stylesheet" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" defer="true" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script>capabilities.math = true;
+
+window.texMacros = {}</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="矩阵正定性及对称性的判定" data-depth="1"><a href="#矩阵正定性及对称性的判定">矩阵正定性及对称性的判定</a><ol><li data-target-id="python稀疏矩阵" data-depth="2"><a href="#python稀疏矩阵">Python稀疏矩阵</a><ol><li data-target-id="_1-判断稀疏矩阵的对称性" data-depth="3"><a href="#_1-判断稀疏矩阵的对称性">1. 判断稀疏矩阵的对称性</a></li><li data-target-id="_2-判断稀疏矩阵的正定性" data-depth="3"><a href="#_2-判断稀疏矩阵的正定性">2. 判断稀疏矩阵的正定性</a></li></ol></li><li data-target-id="eigen稀疏矩阵" data-depth="2"><a href="#eigen稀疏矩阵">Eigen稀疏矩阵</a><ol><li data-target-id="_1-判断-csc-稀疏矩阵的对称性" data-depth="3"><a href="#_1-判断-csc-稀疏矩阵的对称性">1. 判断 CSC 稀疏矩阵的对称性</a></li><li data-target-id="_2-判断-csc-稀疏矩阵的正定性" data-depth="3"><a href="#_2-判断-csc-稀疏矩阵的正定性">2. 判断 CSC 稀疏矩阵的正定性</a></li></ol></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="矩阵正定性及对称性的判定">矩阵正定性及对称性的判定</h1><p>Cholesky分解可以用来判断一个矩阵是否是对称正定的,但并不能单独用来判断矩阵是否对称.具体原因如下:</p><ol><li><p>Cholesky分解的前提条件</p><ul><li><p>Cholesky分解要求矩阵必须是对称正定的(对于实矩阵)或Hermitian正定的(对于复矩阵).</p></li><li><p>如果矩阵能够成功进行Cholesky分解,那么它一定是对称(或Hermitian)且正定的.</p></li></ul></li><li><p>判断对称性的局限性</p><ul><li><p>Cholesky分解本身并不能直接判断矩阵是否对称,因为:</p><ul><li><p>如果矩阵不对称,Cholesky分解会直接失败(例如,在数值计算中抛出错误).</p></li><li><p>但失败的原因可能是矩阵不对称,也可能是矩阵不正定.因此,仅凭Cholesky分解无法区分这两种情况.</p></li></ul></li><li><p>要明确判断矩阵是否对称,需要直接检查矩阵是否满足 <formula>A = A^T</formula> (实矩阵)或 <formula>A = A^H</formula> (复矩阵).</p></li></ul></li></ol><p>因此,最好先检查对称性,再验证正定性:在尝试Cholesky分解前,应先通过定义检查矩阵是否对称(例如计算 <formula>\|A - A^T\|</formula>  是否接近零).如果矩阵对称,再通过Cholesky分解或其他方法(如特征值检查)验证正定性.</p><pre><code class="language-python">import numpy as np
+def is_symmetric(A, tol=1e-8):
+    return np.allclose(A, A.T, atol=tol)
+
+def is_positive_definite(A):
+    try:
+        np.linalg.cholesky(A)
+        return True
+    except np.linalg.LinAlgError:
+        return False
+
+# 测试矩阵
+A = np.array([[4, 1, 1], [1, 2, 1], [1, 1, 3]])  # 对称正定
+B = np.array([[1, 2], [3, 4]])                   # 不对称
+
+print(&quot;A是对称的:&quot;, is_symmetric(A))  # 输出 True
+print(&quot;A是正定的:&quot;, is_positive_definite(A))  # 输出 True
+print(&quot;B是对称的:&quot;, is_symmetric(B))  # 输出 False</code></pre><ul><li>总结</li></ul><ul><li><p>Cholesky分解可以间接推断对称性,但仅适用于正定矩阵.对于非正定矩阵,分解失败无法确定是否对称.</p></li><li><p>直接检查 <formula>A = A^T</formula>是判断对称性的可靠方法.</p></li></ul><h2 id="python稀疏矩阵">Python稀疏矩阵</h2><p>在 Python 中,稀疏矩阵(如 <span class="codespan-content"><code>scipy.sparse</code></span> 格式)的对称性和正定性判断需要特殊处理,因为直接使用 <span class="codespan-content"><code>A == A.T</code></span> 或 <span class="codespan-content"><code>np.linalg.cholesky</code></span> 可能会遇到效率或兼容性问题.</p><h3 id="_1-判断稀疏矩阵的对称性">1. 判断稀疏矩阵的对称性</h3><p>由于稀疏矩阵通常以压缩格式存储(如 <span class="codespan-content"><code>CSR</code></span>、<span class="codespan-content"><code>CSC</code></span>),直接比较 <span class="codespan-content"><code>A == A.T</code></span> 可能不高效.推荐方法是计算 <span class="codespan-content"><code>(A - A.T)</code></span> 的范数,检查 <span class="codespan-content"><code>A - A.T</code></span> 的 Frobenius 范数是否接近 0</p><pre><code class="language-python">import numpy as np
+from scipy.sparse import csr_matrix
+from scipy.sparse.linalg import norm
+
+def is_symmetric_sparse(A, tol=1e-8):
+    if not (A.shape[0] == A.shape[1]):  # 非方阵一定不对称
+        return False
+    return norm(A - A.T, &#39;fro&#39;) &lt; tol  # Frobenius 范数
+
+# 示例
+A = csr_matrix([[4, 1, 0], [1, 2, 1], [0, 1, 3]])  # 对称
+B = csr_matrix([[1, 2], [3, 4]])                   # 不对称
+
+print(&quot;A 对称:&quot;, is_symmetric_sparse(A))  # True
+print(&quot;B 对称:&quot;, is_symmetric_sparse(B))  # False</code></pre><p>对于小矩阵,可以逐元素比较</p><pre><code class="language-python">def is_symmetric_sparse_elementwise(A, tol=1e-8):
+    if not (A.shape[0] == A.shape[1]):
+        return False
+    return (A != A.T).nnz == 0  # 非零元素位置是否相同
+
+print(&quot;A 对称:&quot;, is_symmetric_sparse_elementwise(A))  # True</code></pre><h3 id="_2-判断稀疏矩阵的正定性">2. 判断稀疏矩阵的正定性</h3><p>Cholesky 分解要求矩阵 对称正定,但 <span class="codespan-content"><code>scipy.sparse</code></span> 没有内置的稀疏 Cholesky 分解.</p><ul><li>方法1是转换为稠密矩阵,仅适用于小矩阵;缺点是大稀疏矩阵会占用大量内存.</li></ul><pre><code class="language-python">from scipy.linalg import cholesky
+
+def is_positive_definite_sparse_dense(A):
+    try:
+        cholesky(A.toarray())  # 转为稠密矩阵
+        return True
+    except np.linalg.LinAlgError:
+        return False
+
+print(&quot;A 正定:&quot;, is_positive_definite_sparse_dense(A))  # True</code></pre><ul><li>更好的方法是 <span class="codespan-content"><code>scipy.sparse.linalg</code></span> 的迭代方法</li></ul><p>检查矩阵是否对称(见上文),然后计算最小特征值是否 &gt; 0:</p><pre><code class="language-python">from scipy.sparse.linalg import eigsh
+
+def is_positive_definite_sparse(A, tol=1e-8):
+    if not is_symmetric_sparse(A, tol):
+        return False
+    # 计算最小特征值(使用 shift-invert 模式加速)
+    min_eig = eigsh(A, k=1, which=&#39;SA&#39;, return_eigenvectors=False)[0]
+    return min_eig &gt; tol
+
+print(&quot;A 正定:&quot;, is_positive_definite_sparse(A))  # True</code></pre><ul><li>完整代码</li></ul><pre><code class="language-python">import numpy as np
+from scipy.sparse import csr_matrix
+from scipy.sparse.linalg import norm, eigsh
+
+def is_symmetric_sparse(A, tol=1e-8):
+    if not (A.shape[0] == A.shape[1]):
+        return False
+    return norm(A - A.T, &#39;fro&#39;) &lt; tol
+
+def is_positive_definite_sparse(A, tol=1e-8):
+    if not is_symmetric_sparse(A, tol):
+        return False
+    min_eig = eigsh(A, k=1, which=&#39;SA&#39;, return_eigenvectors=False)[0]
+    return min_eig &gt; tol
+
+# 测试
+A = csr_matrix([[4, 1, 0], [1, 2, 1], [0, 1, 3]])  # 对称正定
+B = csr_matrix([[1, 2], [2, 1]])                   # 对称但不正定
+C = csr_matrix([[1, 2], [3, 4]])                   # 不对称
+
+print(&quot;A 对称:&quot;, is_symmetric_sparse(A))  # True
+print(&quot;A 正定:&quot;, is_positive_definite_sparse(A))  # True
+print(&quot;B 对称:&quot;, is_symmetric_sparse(B))  # True
+print(&quot;B 正定:&quot;, is_positive_definite_sparse(B))  # False
+print(&quot;C 对称:&quot;, is_symmetric_sparse(C))  # False</code></pre><table><thead><tr><th>任务</th><th>推荐方法</th></tr></thead><tbody><tr><td>判断对称性</td><td><span class="codespan-content"><code>norm(A - A.T, &#39;fro&#39;) &lt; tol</code></span> 或 <span class="codespan-content"><code>(A != A.T).nnz == 0</code></span></td></tr><tr><td>判断正定性</td><td>先检查对称性,再用 <span class="codespan-content"><code>eigsh(A, which=&#39;SA&#39;)</code></span> 计算最小特征值是否 &gt; 0</td></tr><tr><td>小矩阵</td><td>转为稠密矩阵后用 <span class="codespan-content"><code>np.linalg.cholesky</code></span></td></tr></tbody></table><p>对于 大规模稀疏矩阵,推荐使用 特征值方法(<span class="codespan-content"><code>eigsh</code></span>) 避免内存问题.</p><ul><li><p>eigsh 适合大规模稀疏矩阵(如 1000x1000 以上).</p></li><li><p>cholesky 适合小矩阵(如 100x100 以下).</p></li></ul><h2 id="eigen稀疏矩阵">Eigen稀疏矩阵</h2><p>在 C++ 中使用 Eigen 库 判断 CSC(Compressed Sparse Column)稀疏矩阵 的对称性和正定性,可以结合 特征值计算 和 Cholesky 分解.</p><h3 id="_1-判断-csc-稀疏矩阵的对称性">1. 判断 CSC 稀疏矩阵的对称性</h3><p>Eigen 的 <span class="codespan-content"><code>SparseMatrix</code></span> 默认是 列优先(CSC),我们可以通过比较 <span class="codespan-content"><code>A</code></span> 和 <span class="codespan-content"><code>A.transpose()</code></span> 来判断对称性.</p><h4 id="方法计算-a---at-的范数">方法:计算 <span class="codespan-content"><code>A - A^T</code></span> 的范数</h4><ul><li><p><span class="codespan-content"><code>A.norm()</code></span> 计算 Frobenius 范数(所有元素的平方和开根号).</p></li><li><p><span class="codespan-content"><code>A.makeCompressed()</code></span> 确保矩阵是 CSC 格式.</p></li></ul><pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace Eigen;
+
+bool isSymmetric(const SparseMatrix&lt;double&gt;&amp; A, double tol = 1e-8) {
+    if (A.rows() != A.cols()) return false;  // 非方阵不对称    
+    SparseMatrix&lt;double&gt; AT = A.transpose();
+    SparseMatrix&lt;double&gt; diff = A - AT;
+    
+    // 计算 Frobenius 范数
+    double norm = diff.norm();
+    return norm &lt; tol;
+}
+
+int main() {
+    // 示例:对称 CSC 矩阵
+    SparseMatrix&lt;double&gt; A(3, 3);
+    A.insert(0, 0) = 4; A.insert(0, 1) = 1;
+    A.insert(1, 0) = 1; A.insert(1, 1) = 2; A.insert(1, 2) = 1;
+    A.insert(2, 1) = 1; A.insert(2, 2) = 3;
+    A.makeCompressed();  // 转换为 CSC 格式
+
+    std::cout &lt;&lt; &quot;A 是否对称: &quot; &lt;&lt; isSymmetric(A) &lt;&lt; std::endl;  // 输出 1 (true)
+    
+    // 示例:不对称矩阵
+    SparseMatrix&lt;double&gt; B(2, 2);
+    B.insert(0, 0) = 1; B.insert(0, 1) = 2;
+    B.insert(1, 0) = 3; B.insert(1, 1) = 4;
+    B.makeCompressed();
+
+    std::cout &lt;&lt; &quot;B 是否对称: &quot; &lt;&lt; isSymmetric(B) &lt;&lt; std::endl;  // 输出 0 (false)
+    return 0;
+}</code></pre><h3 id="_2-判断-csc-稀疏矩阵的正定性">2. 判断 CSC 稀疏矩阵的正定性</h3><p>正定性要求:</p><ol><li><p>矩阵对称(Hermitian).</p></li><li><p>所有特征值 &gt; 0.</p></li></ol><h4 id="方法-1使用-cholesky-分解适用于小矩阵">方法 1:使用 Cholesky 分解(适用于小矩阵)</h4><ul><li><p><span class="codespan-content"><code>SimplicialLLT</code></span> 是 Eigen 提供的 稀疏 Cholesky 分解,适用于 小规模稀疏矩阵.</p></li><li><p>如果分解失败(<span class="codespan-content"><code>info() != Success</code></span>),则矩阵不正定.</p></li></ul><pre><code class="language-cpp">#include &lt;Eigen/Cholesky&gt;
+bool isPositiveDefinite(const SparseMatrix&lt;double&gt;&amp; A, double tol = 1e-8) {
+    if (!isSymmetric(A, tol)) return false;  // 先检查对称性
+    
+    SimplicialLLT&lt;SparseMatrix&lt;double&gt;&gt; llt(A);
+    if (llt.info() == Success) {
+        return true;  // Cholesky 分解成功,说明正定
+    } else {
+        return false;
+    }
+}
+int main() {
+    SparseMatrix&lt;double&gt; A(3, 3);  // 正定矩阵
+    A.insert(0, 0) = 4; A.insert(0, 1) = 1;
+    A.insert(1, 0) = 1; A.insert(1, 1) = 2; A.insert(1, 2) = 1;
+    A.insert(2, 1) = 1; A.insert(2, 2) = 3;
+    A.makeCompressed();
+
+    std::cout &lt;&lt; &quot;A 是否正定: &quot; &lt;&lt; isPositiveDefinite(A) &lt;&lt; std::endl;  // 1 (true)
+
+    SparseMatrix&lt;double&gt; B(2, 2);  // 不正定
+    B.insert(0, 0) = 1; B.insert(0, 1) = 2;
+    B.insert(1, 0) = 2; B.insert(1, 1) = 1;
+    B.makeCompressed();
+
+    std::cout &lt;&lt; &quot;B 是否正定: &quot; &lt;&lt; isPositiveDefinite(B) &lt;&lt; std::endl;  // 0 (false)
+    return 0;
+}</code></pre><h4 id="方法-2计算最小特征值适用于大矩阵">方法 2:计算最小特征值(适用于大矩阵)</h4><ul><li><p><span class="codespan-content"><code>SelfAdjointEigenSolver</code></span> 适用于 对称矩阵,计算所有特征值.</p></li><li><p>大矩阵优化:如果矩阵很大,可以用 <span class="codespan-content"><code>ArpackSupport</code></span> 或 <span class="codespan-content"><code>Spectra</code></span> 计算部分特征值(如最小特征值).</p></li></ul><pre><code class="language-cpp">#include &lt;Eigen/Eigenvalues&gt;
+bool isPositiveDefiniteEigenvalues(const SparseMatrix&lt;double&gt;&amp; A, double tol = 1e-8) {
+    if (!isSymmetric(A, tol)) return false;
+
+    // 计算最小特征值(使用 ARPACK 或 Spectra)
+    SelfAdjointEigenSolver&lt;SparseMatrix&lt;double&gt;&gt; eigensolver(A);
+    if (eigensolver.info() != Success) {
+        std::cerr &lt;&lt; &quot;特征值计算失败!&quot; &lt;&lt; std::endl;
+        return false;
+    }
+    double min_eig = eigensolver.eigenvalues().minCoeff();
+    return min_eig &gt; tol;
+}
+int main() {
+    SparseMatrix&lt;double&gt; A(3, 3);  // 正定矩阵
+    A.insert(0, 0) = 4; A.insert(0, 1) = 1;
+    A.insert(1, 0) = 1; A.insert(1, 1) = 2; A.insert(1, 2) = 1;
+    A.insert(2, 1) = 1; A.insert(2, 2) = 3;
+    A.makeCompressed();
+
+    std::cout &lt;&lt; &quot;A 是否正定 (特征值法): &quot; &lt;&lt; isPositiveDefiniteEigenvalues(A) &lt;&lt; std::endl;  // 1 (true)
+    
+    return 0;
+}</code></pre><ul><li>完整代码</li></ul><pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;Eigen/Cholesky&gt;
+#include &lt;Eigen/Eigenvalues&gt;
+
+using namespace Eigen;
+
+bool isSymmetric(const SparseMatrix&lt;double&gt;&amp; A, double tol = 1e-8) {
+    if (A.rows() != A.cols()) return false;
+    SparseMatrix&lt;double&gt; diff = A - A.transpose();
+    return diff.norm() &lt; tol;
+}
+
+bool isPositiveDefinite(const SparseMatrix&lt;double&gt;&amp; A, double tol = 1e-8) {
+    if (!isSymmetric(A, tol)) return false;
+    
+    // 方法 1: Cholesky 分解(小矩阵)
+    SimplicialLLT&lt;SparseMatrix&lt;double&gt;&gt; llt(A);
+    if (llt.info() == Success) return true;
+    
+    // 方法 2: 计算最小特征值(大矩阵)
+    SelfAdjointEigenSolver&lt;SparseMatrix&lt;double&gt;&gt; eigensolver(A);
+    if (eigensolver.info() != Success) return false;
+    return eigensolver.eigenvalues().minCoeff() &gt; tol;
+}
+
+int main() {
+    SparseMatrix&lt;double&gt; A(3, 3);  // 对称正定
+    A.insert(0, 0) = 4; A.insert(0, 1) = 1;
+    A.insert(1, 0) = 1; A.insert(1, 1) = 2; A.insert(1, 2) = 1;
+    A.insert(2, 1) = 1; A.insert(2, 2) = 3;
+    A.makeCompressed();
+
+    std::cout &lt;&lt; &quot;A 是否对称: &quot; &lt;&lt; isSymmetric(A) &lt;&lt; std::endl;  // 1 (true)
+    std::cout &lt;&lt; &quot;A 是否正定: &quot; &lt;&lt; isPositiveDefinite(A) &lt;&lt; std::endl;  // 1 (true)
+
+    return 0;
+}</code></pre><table><thead><tr><th>任务</th><th>推荐方法</th></tr></thead><tbody><tr><td>判断对称性</td><td>计算 <span class="codespan-content"><code>A - Aᵀ</code></span> 的范数是否接近 0</td></tr><tr><td>判断正定性</td><td>1. 小矩阵:<span class="codespan-content"><code>SimplicialLLT</code></span>(Cholesky 分解)&lt;br&gt;2. 大矩阵:计算最小特征值</td></tr><tr><td>适用库</td><td>Eigen (<span class="codespan-content"><code>SparseMatrix</code></span>, <span class="codespan-content"><code>SimplicialLLT</code></span>, <span class="codespan-content"><code>SelfAdjointEigenSolver</code></span>)</td></tr></tbody></table><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
