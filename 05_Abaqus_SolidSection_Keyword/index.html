@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="abaqus-solidsection关键字" data-depth="1" data-location="1"><a href="#abaqus-solidsection关键字">Abaqus SolidSection关键字</a><ol><li data-target-id="介绍" data-depth="2" data-location="1.1"><a href="#介绍">介绍</a><ol><li data-target-id="一个简单例子" data-depth="3" data-location="1.1.1"><a href="#一个简单例子">一个简单例子</a></li></ol></li><li data-target-id="data-lines" data-depth="2" data-location="1.2"><a href="#data-lines">data lines</a><ol><li data-target-id="format-1" data-depth="3" data-location="1.2.1"><a href="#format-1">format 1</a></li><li data-target-id="format-2" data-depth="3" data-location="1.2.2"><a href="#format-2">format 2</a></li></ol></li><li data-target-id="参数说明" data-depth="2" data-location="1.3"><a href="#参数说明">参数说明</a><ol><li data-target-id="必要的参数" data-depth="3" data-location="1.3.1"><a href="#必要的参数">必要的参数</a></li><li data-target-id="可选的参数" data-depth="3" data-location="1.3.2"><a href="#可选的参数">可选的参数</a></li><li data-target-id="定义各向异性材料必须的参数" data-depth="3" data-location="1.3.3"><a href="#定义各向异性材料必须的参数">定义各向异性材料必须的参数</a></li></ol></li><li data-target-id="inp文件模板" data-depth="2" data-location="1.4"><a href="#inp文件模板">Inp文件模板</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="abaqus-solidsection关键字" data-depth="1" data-location="1"><a href="#abaqus-solidsection关键字">Abaqus SolidSection关键字</a><ol><li data-target-id="介绍" data-depth="2" data-location="1.1"><a href="#介绍">介绍</a><ol><li data-target-id="一个简单例子" data-depth="3" data-location="1.1.1"><a href="#一个简单例子">一个简单例子</a></li></ol></li><li data-target-id="data-lines" data-depth="2" data-location="1.2"><a href="#data-lines">data lines</a><ol><li data-target-id="format-1" data-depth="3" data-location="1.2.1"><a href="#format-1">format 1</a></li><li data-target-id="format-2" data-depth="3" data-location="1.2.2"><a href="#format-2">format 2</a></li></ol></li><li data-target-id="参数说明" data-depth="2" data-location="1.3"><a href="#参数说明">参数说明</a><ol><li data-target-id="必要的参数" data-depth="3" data-location="1.3.1"><a href="#必要的参数">必要的参数</a></li><li data-target-id="可选的参数" data-depth="3" data-location="1.3.2"><a href="#可选的参数">可选的参数</a></li><li data-target-id="定义各向异性材料必须的参数" data-depth="3" data-location="1.3.3"><a href="#定义各向异性材料必须的参数">定义各向异性材料必须的参数</a></li></ol></li><li data-target-id="inp文件模板" data-depth="2" data-location="1.4"><a href="#inp文件模板">Inp文件模板</a></li></ol></li></ol></nav><p></p><div class="page-break" data-hidden=""></div><h1 id="abaqus-solidsection关键字" data-location="1">Abaqus SolidSection关键字</h1><blockquote><p><a href="https://www.cnblogs.com/aksoam/p/18366925">https://www.cnblogs.com/aksoam/p/18366925</a></p></blockquote><h2 id="介绍" data-location="1.1">介绍</h2><p><span class="codespan-content"><code>*solid section</code></span> 用来定义单元的材料属性,材料方向等信息,适用于: solid (continuum) elements; infinite elements; acoustic finite and infinite elements; particle elements; truss elements.</p><p>这个关键字的属性:</p><ul><li>Type : Model data;</li><li>Level : Part,Part instance;</li><li>Abaqus/CAE : Property module</li></ul><h3 id="一个简单例子" data-location="1.1.1">一个简单例子</h3><figure><img src="media/2026433-20240819100518315-1799699057@375436125.png" alt="img" /></figure><pre><code class="language-shell">** Section: Section-1
+*Solid Section, elset=Set-3, composite, orientation=Ori-1, layup=lam
+0.5, 1, Gr/Epoxy, 0., p1
+0.05, 1, pvdf2, 0., pv1
+0.5, 1, Gr/Epoxy, 90., p2
+0.5, 1, Gr/Epoxy, 90., p3
+0.5, 1, Gr/Epoxy, 90., p4
+0.05, 1, pvdf2, 90., pv2
+0.5, 1, Gr/Epoxy, 0., p5</code></pre><h2 id="data-lines" data-location="1.2">data lines</h2><h3 id="format-1" data-location="1.2.1">format 1</h3><blockquote><p>define homogeneous solid elements, infinite elements, acoustic elements, particle, or truss elements</p></blockquote><p>First (and only) line:</p><ol><li>Enter any attribute values required. The default for the first attribute is 1.0.</li></ol><h3 id="format-2" data-location="1.2.2">format 2</h3><blockquote><p>define a composite solid</p></blockquote><p>First line:</p><ol><li>layer thickness(可以是单元相对厚度). 各层的thickness在求解时会自动调整,使所有layer thickness 之和==堆叠方向上的单元长度.</li><li>Number of integration points , layer厚度上的积分点个数,<strong>必须是奇数,默认值1.0</strong></li><li>layer material name, 各层的材料名称.</li><li>layer orientation, 各层的材料方向 , 可以是orien angle,也可以引用一个orientation, 或者一个orien distribution</li><li>ply name,指定ply的名称,如果没有指定,则会自动生成ply名称.</li></ol><p>重复first line, 直到所有层都定义完毕.如果<span class="codespan-content"><code>SYMMETRIC</code></span>参数出现,则只需要定义从底层到中面的层ply.</p><h2 id="参数说明" data-location="1.3">参数说明</h2><h3 id="必要的参数" data-location="1.3.1">必要的参数</h3><ul><li><span class="codespan-content"><code>elset</code></span> : string, 单元集的名称, 例如： <span class="codespan-content"><code>elset=Set-3</code></span></li><li><span class="codespan-content"><code>composite</code></span> : none, 该参数只能用于只有位移自由度的三维brick solid elements type.如果单元属于<strong>多层材料</strong>,则必须包含此参数.这个参数只对Abaqus/Standard analyses有效</li><li><span class="codespan-content"><code>material</code></span> : string, 材料名称, 例如： <span class="codespan-content"><code>material=cfrp</code></span></li></ul><blockquote><p>The composute 和material参数不能同时出现,如果单元是均质材料就使用material,是多层材料就使用composite.</p></blockquote><ul><li><span class="codespan-content"><code>ref node</code></span> : 该参数仅适用于<strong>广义平面应变单元和声学无限单元</strong>;对于所有其他元素类型,它将被忽略.将此参数<strong>设置为参考节点的节点号或包含参考节点的节点集的名称</strong>.如果选择了节点集的名称,则该<strong>节点集必须只包含一个节点</strong>, 例如： <span class="codespan-content"><code>ref node=node_set-1</code></span> or <span class="codespan-content"><code>ref node=Node-1</code></span></li></ul><h3 id="可选的参数" data-location="1.3.2">可选的参数</h3><ul><li><span class="codespan-content"><code>CONTROLS</code></span></li></ul><p>这个参数用来指定SECTION SONTROLS.具体参见帮助文档</p><p>The SECTION CONTROLS option can be used to select the hourglass control and order of accuracy of the formulation for two- and three-dimensional solid elements and to select the kinematic formulation for 8-node brick elements.</p><ul><li><span class="codespan-content"><code>LAYUP</code></span></li></ul><p>这个参数需要和<span class="codespan-content"><code>composite</code></span>参数一起使用,Set this parameter equal to the name of a <strong>composite layup</strong></p><ul><li><span class="codespan-content"><code>ORDER</code></span></li></ul><p>此参数只能用于Abaqus/Explicit中的声学无限单元.定义用于解析声场在无限方向上的变化的九阶多项式的个数,默认<span class="codespan-content"><code>ORDER=10</code></span></p><ul><li><span class="codespan-content"><code>STACK DIRECTION</code></span></li></ul><p>此参数仅适用于Abaqus/Standard分析.只用于composite element.定义堆叠方向,默认<span class="codespan-content"><code>STACK DIRECTION=3</code></span></p><ul><li><span class="codespan-content"><code>SYMMETRIC</code></span></li></ul><p>需要和<span class="codespan-content"><code>composite</code></span>参数一起使用,如果设置为<span class="codespan-content"><code>SYMMETRIC</code></span>,则只需要定义从底层到中面的层ply.</p><p>This parameter <strong>cannot be used</strong> if spatially varying orientation angles are defined on any composite layer using distributions</p><h3 id="定义各向异性材料必须的参数" data-location="1.3.3">定义各向异性材料必须的参数</h3><blockquote><p>对于isotropic ,是可选的</p></blockquote><ul><li><span class="codespan-content"><code>orientation</code></span> : string, 材料方向,这个参数用来定义单元局部材料坐标., 例如： <span class="codespan-content"><code>orientation=Ori-1</code></span></li></ul><p>For a composite solid ,orientation 选项+ orientation angle 一起定义了laminate 中ply的材料方向</p><p>此外,也可以直接在data line中引用orientation 来定义layer 方向.此时<span class="codespan-content"><code>orientation</code></span>参数指定的材料方向将被忽略,其他layer如果没指定angle,或引用orienation,则会使用<span class="codespan-content"><code>orientaion</code></span>参数作为该layer的方向.<strong>即默认为0度</strong></p><pre><code class="language-shell">*Orientation, name=Ori-1
+          1.,           0.,           0.,           0.,           1.,           0.
+1, 0.
+*Orientation, name=Ori-2
+          0., 0.161320529915925, 0.986902065368011,           0., 0.986902065368011, -0.161320529915925
+1, 0.
+** Section: Section-1
+*Solid Section, elset=Set-3, composite, orientation=Ori-1, layup=lam
+0.5, 1, Gr/Epoxy, Ori-2, p1
+0.05, 1, pvdf2, 0., pv1
+0.5, 1, Gr/Epoxy, 90., p2
+0.5, 1, Gr/Epoxy, 90., p3
+0.5, 1, Gr/Epoxy, 90., p4
+0.05, 1, pvdf2, 90., pv2
+0.5, 1, Gr/Epoxy, 0., p5</code></pre><p>在dat文件中会warning:</p><pre><code class="language-shell"> ***WARNING: A SECTION ORIENTATION AND LAYER ORIENTATION HAS BEEN SPECIFIED. 
+             THE SECTION ORIENTATION WILL BE IGNORED.
+ LINE IMAGE: 0.5, 1, GR/EPOXY, ASSEMBLY_PART-1-1_ORI-2, P1</code></pre><h2 id="inp文件模板" data-location="1.4">Inp文件模板</h2><pre><code class="language-shell">*Heading
+** Job name: Job-1 Model name: Model-1
+** Generated by: Abaqus/CAE 2020
+*Preprint, echo=NO, model=NO, history=NO, contact=NO
+**
+** PARTS
+**
+*Part, name=Part-1
+*Node
+      1,          10.,  0.425000012,    2.5999999
+      2,          10.,  -4.57499981,    2.5999999
+      3,          10.,  0.425000012,           0.
+      4,          10.,  -4.57499981,           0.
+      5,          7.5,  0.425000012,    2.5999999
+      6,          7.5,  -4.57499981,    2.5999999
+      7,          7.5,  0.425000012,           0.
+      8,          7.5,  -4.57499981,           0.
+      9,           5.,  0.425000012,    2.5999999
+     10,           5.,  -4.57499981,    2.5999999
+     11,           5.,  0.425000012,           0.
+     12,           5.,  -4.57499981,           0.
+     13,          2.5,  0.425000012,    2.5999999
+     14,          2.5,  -4.57499981,    2.5999999
+     15,          2.5,  0.425000012,           0.
+     16,          2.5,  -4.57499981,           0.
+     17,           0.,  0.425000012,    2.5999999
+     18,           0.,  -4.57499981,    2.5999999
+     19,           0.,  0.425000012,           0.
+     20,           0.,  -4.57499981,           0.
+*Element, type=CSS8
+1,  7,  8,  4,  3,  5,  6,  2,  1
+2, 11, 12,  8,  7,  9, 10,  6,  5
+3, 15, 16, 12, 11, 13, 14, 10,  9
+4, 19, 20, 16, 15, 17, 18, 14, 13
+*Nset, nset=&quot;Edge Seeds-1&quot;, generate
+  1,  20,   1
+*Elset, elset=&quot;Edge Seeds-1&quot;, generate
+ 1,  4,  1
+*Nset, nset=Set-3, generate
+  1,  20,   1
+*Elset, elset=Set-3, generate
+ 1,  4,  1
+*Orientation, name=Ori-1
+          1.,           0.,           0.,           0.,           1.,           0.
+1, 0.
+*Orientation, name=Ori-2
+          0., 0.161320529915925, 0.986902065368011,           0., 0.986902065368011, -0.161320529915925
+1, 0.
+** Section: Section-1
+*Solid Section, elset=Set-3, composite, orientation=Ori-1, layup=lam
+0.5, 1, Gr/Epoxy, Ori-2, p1
+0.05, 1, pvdf2, 0., pv1
+0.5, 1, Gr/Epoxy, 90., p2
+0.5, 1, Gr/Epoxy, 90., p3
+0.5, 1, Gr/Epoxy, 90., p4
+0.05, 1, pvdf2, 90., pv2
+0.5, 1, Gr/Epoxy, 0., p5
+*End Part
+**  
+**
+** ASSEMBLY
+**
+*Assembly, name=Assembly
+**  
+*Instance, name=Part-1-1, part=Part-1
+*End Instance
+**  
+*Nset, nset=Set-2, instance=Part-1-1
+  3,  4,  7,  8, 11, 12, 15, 16, 19, 20
+*Elset, elset=Set-2, instance=Part-1-1, generate
+ 1,  4,  1
+*Nset, nset=Set-fix, instance=Part-1-1, generate
+ 17,  20,   1
+*Elset, elset=Set-fix, instance=Part-1-1
+ 4,
+*End Assembly
+** 
+** MATERIALS
+** 
+** si-mm,Gr/Epoxy
+*Material, name=Gr/Epoxy
+*Density
+ 1.578e-09,
+*Elastic, type=ENGINEERING CONSTANTS
+132400.,10800.,10800.,  0.24,  0.24,  0.49, 5600., 5600.
+ 3600.,
+** si-mm
+*Material, name=pvdf2
+*Density
+ 1.8e-09,
+*Dielectric
+ 228.568,
+*Elastic
+10000., 0.3
+*Piezoelectric, type=E
+0.,       0.,       0.,       0.,       0.,       0.,       0.,       0.
+       0.,       0.,       0.,       0., -1.8e-11,       0.,    3e-11,       0.
+       0.,       0.
+** 
+** BOUNDARY CONDITIONS
+** 
+** Name: BC-2 Type: Electric potential
+*Boundary
+Set-2, 9, 9
+** ----------------------------------------------------------------
+** 
+** STEP: Step-1
+** 
+*Step, name=Step-1, nlgeom=NO, perturbation
+*Frequency, eigensolver=Lanczos, sim, acoustic coupling=on, normalization=mass
+15, , , , , 
+** 
+** BOUNDARY CONDITIONS
+** 
+** Name: BC-1 Type: Displacement/Rotation
+*Boundary
+Set-fix, 1, 1
+Set-fix, 2, 2
+Set-fix, 3, 3
+Set-fix, 4, 4
+Set-fix, 5, 5
+Set-fix, 6, 6
+** 
+** OUTPUT REQUESTS
+** 
+*Restart, write, frequency=0
+** 
+** FIELD OUTPUT: F-Output-1
+** 
+*Output, field
+*Node Output
+EPOT, U
+*Element Output, directions=YES
+1, 2, 3, 4, 5, 6, 7
+E, ELEDEN, ELEN, ENER, EVOL, S
+*End Step</code></pre><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

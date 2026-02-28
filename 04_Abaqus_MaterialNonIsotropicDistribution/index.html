@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="abaqus材料非均匀分布定义" data-depth="1"><a href="#abaqus材料非均匀分布定义">Abaqus材料非均匀分布定义</a><ol><li data-target-id="方法一" data-depth="2"><a href="#方法一">方法一</a></li><li data-target-id="方法二" data-depth="2"><a href="#方法二">方法二</a></li><li data-target-id="结果对比" data-depth="2"><a href="#结果对比">结果对比</a></li><li data-target-id="资料" data-depth="2"><a href="#资料">资料</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="abaqus材料非均匀分布定义">Abaqus材料非均匀分布定义</h1><blockquote><p><a href="https://www.cnblogs.com/aksoam/p/17600445.html">https://www.cnblogs.com/aksoam/p/17600445.html</a></p></blockquote><p>设想一种情况:在有限元分析中,一个区域或者整个网格中,每个单元的材料行为都是单独的。这时在ABAQUS中应该如何设置?</p><p>两种办法：</p><ul><li>给每个单元创建一个集合,然后一一赋予SECTION.</li><li>使用*Distribution关键字,实现空间分布的材料行为,再将SECTION属性赋予给单元。这一种方法好处是,减少后处理的压力,没有那么多的SET和SECTION</li></ul><p>两种方法对比：</p><ul><li>第一种方法可以在CAE界面中手动设置,也可以用Python脚本自动设置,但是一旦单元数量过多,就会导致CAE界面卡顿,且Python速度也不是很快。电脑性能不行的话,后处理压力比较大,因为有很多的Set,Section.</li><li>第二种方法,不支持CAE,只能修改INP文件实现。优点是后处理软件压力小点,没有那么多set</li></ul><p>下面以下面的四个实体单元为例子,分别使用两种方法,<strong>直接编写INP文件,命令行中提交计算,进行静态分析</strong></p><figure><img src="media/2026433-20230802131919385-1460819133@-1629625155.png" alt="img" /></figure><h2 id="方法一">方法一</h2><pre><code class="language-shell">*Heading
+*Preprint, echo=NO, model=NO, history=NO, contact=NO
+*Part, name=FourElem
+*Node
+      1,         -25.,       -11.25,          10.
+      2,         -25.,       -0.625,          10.
+      3,         -25.,          10.,          10.
+      4,         -25.,       -11.25,           0.
+      5,         -25.,       -0.625,           0.
+      6,         -25.,          10.,           0.
+      7,        -12.5,       -11.25,          10.
+      8,        -12.5,       -0.625,          10.
+      9,        -12.5,          10.,          10.
+     10,        -12.5,       -11.25,           0.
+     11,        -12.5,       -0.625,           0.
+     12,        -12.5,          10.,           0.
+     13,           0.,       -11.25,          10.
+     14,           0.,       -0.625,          10.
+     15,           0.,          10.,          10.
+     16,           0.,       -11.25,           0.
+     17,           0.,       -0.625,           0.
+     18,           0.,          10.,           0.
+*Element, type=C3D8R
+1,  7,  8, 11, 10,  1,  2,  5,  4
+2,  8,  9, 12, 11,  2,  3,  6,  5
+3, 13, 14, 17, 16,  7,  8, 11, 10
+4, 14, 15, 18, 17,  8,  9, 12, 11
+*Elset, elset=E1
+1
+*Elset,elset=E2
+2
+*Elset,elset=E3
+3
+*Elset,elset=E4
+4
+Gobal orien
+*Orientation, name=Ori-1
+1., 0., 0., 0., 1., 0.
+1, 0.
+Section Assign
+*Solid Section,Elset=E1,Material=M1,Orientation=Ori-1
+*Solid Section,Elset=E2,Material=M2,Orientation=Ori-1
+*Solid Section,Elset=E3,Material=M3,Orientation=Ori-1
+*Solid Section,Elset=E4,Material=M4,Orientation=Ori-1
+*End Part
+*Assembly, name=Assembly
+*Instance, name=FourElem-1, part=FourElem
+*End Instance
+*Nset, nset=Set-1, instance=FourElem-1, generate
+ 13,  18,   1
+*Elset, elset=Set-1, instance=FourElem-1
+ 3, 4
+*Elset, elset=_Surf-1_S2, internal, instance=FourElem-1
+ 1, 2
+*Surface, type=ELEMENT, name=Surf-1
+_Surf-1_S2, S2
+*End Assembly
+*Material,Name=M1
+*Elastic,TYPE=ANISOTROPIC
+8929.4608,1526.5216,8923.6134,3635.3632,3476.3026,120679.2644,8.3944,7.7689,
+439.6758,3701.6801,-145.4016,-135.4002,-7614.9276,-29.5989,4212.6626,-122.1556,
+-112.4105,-6361.0837,-24.5995,433.279,4055.9163
+*Material,Name=M2
+*Elastic,TYPE=ANISOTROPIC
+17550.0133,13611.2277,25852.2543,13021.7401,17628.6822,24242.5311,9788.8481,13699.1544,
+13033.5732,14762.1216,-9538.4395,-13349.2807,-12699.5968,-10779.3782,14203.3879,-11372.6959,
+-15914.7528,-15140.8525,-12851.6274,12522.8552,18629.8078
+*Material,Name=M3
+*Elastic,TYPE=ANISOTROPIC
+8929.8392,1529.3591,8928.7933,3642.9557,3613.164,120481.7162,9.95,9.8574,
+517.3742,3702.3839,-147.4303,-146.0569,-7669.087,-35.2767,4222.4903,-143.1982,
+-141.2357,-7414.3551,-34.4302,509.844,4193.1319
+*Material,Name=M4
+*Elastic,TYPE=ANISOTROPIC
+9058.1198,1940.0409,10089.9165,5393.1754,11874.9043,98667.1446,203.4878,541.258,
+4678.4804,3943.7999,639.8814,1702.0259,14711.8024,766.6464,6110.7723,1221.6736,
+3249.5219,28087.9378,1463.6933,4602.6886,12487.
+ 
+*Step, name=Step-1, nlgeom=YES
+*Static
+0.1, 1., 1e-05, 0.2
+ 
+*Boundary
+Set-1, ENCASTRE
+ 
+*Dsload
+Surf-1, P, 1.
+ 
+*Restart, write, frequency=0
+ 
+*Output, field
+*Node Output
+U, 
+*Element Output, directions=YES
+S, 
+ 
+*Output, history, variable=PRESELECT
+*End Step</code></pre><h2 id="方法二">方法二</h2><pre><code class="language-shell">*Heading
+JOB:DistributionAnisotropicMaterial_FourELEM
+*Preprint, echo=NO, model=NO, history=NO, contact=NO
+*Part, name=FourElem
+*Node
+      1,         -25.,       -11.25,          10.
+      2,         -25.,       -0.625,          10.
+      3,         -25.,          10.,          10.
+      4,         -25.,       -11.25,           0.
+      5,         -25.,       -0.625,           0.
+      6,         -25.,          10.,           0.
+      7,        -12.5,       -11.25,          10.
+      8,        -12.5,       -0.625,          10.
+      9,        -12.5,          10.,          10.
+     10,        -12.5,       -11.25,           0.
+     11,        -12.5,       -0.625,           0.
+     12,        -12.5,          10.,           0.
+     13,           0.,       -11.25,          10.
+     14,           0.,       -0.625,          10.
+     15,           0.,          10.,          10.
+     16,           0.,       -11.25,           0.
+     17,           0.,       -0.625,           0.
+     18,           0.,          10.,           0.
+*Element, type=C3D8R
+1,  7,  8, 11, 10,  1,  2,  5,  4
+2,  8,  9, 12, 11,  2,  3,  6,  5
+3, 13, 14, 17, 16,  7,  8, 11, 10
+4, 14, 15, 18, 17,  8,  9, 12, 11
+*Elset, elset=E1
+1,2,3,4
+*Orientation, name=Ori-1
+1., 0., 0., 0., 1., 0.
+1, 0.
+*Solid Section,Elset=E1,Material=M1,Orientation=Ori-1
+*End Part
+*Assembly, name=Assembly
+*Instance, name=FourElem-1, part=FourElem
+*Distribution,Name=dist1,LOCATION=ELEMENT,TABLE=tab1
+ ,8929.4608,1526.5216,8923.6134,3635.3632,3476.3026,120679.2644,8.3944
+7.7689,439.6758,3701.6801,-145.4016,-135.4002,-7614.9276,-29.5989,4212.6626
+-122.1556,-112.4105,-6361.0837,-24.5995,433.279,4055.9163
+1,8929.4608,1526.5216,8923.6134,3635.3632,3476.3026,120679.2644,8.3944
+7.7689,439.6758,3701.6801,-145.4016,-135.4002,-7614.9276,-29.5989,4212.6626
+-122.1556,-112.4105,-6361.0837,-24.5995,433.279,4055.9163
+2,17550.0133,13611.2277,25852.2543,13021.7401,17628.6822,24242.5311,9788.8481
+13699.1544,13033.5732,14762.1216,-9538.4395,-13349.2807,-12699.5968,-10779.3782,14203.3879
+-11372.6959,-15914.7528,-15140.8525,-12851.6274,12522.8552,18629.8078
+3,8929.8392,1529.3591,8928.7933,3642.9557,3613.164,120481.7162,9.95,
+9.8574,517.3742,3702.3839,-147.4303,-146.0569,-7669.087,-35.2767,4222.4903
+-143.1982,-141.2357,-7414.3551,-34.4302,509.844,4193.1319
+4,9058.1198,1940.0409,10089.9165,5393.1754,11874.9043,98667.1446,203.4878,
+541.258,4678.4804,3943.7999,639.8814,1702.0259,14711.8024,766.6464,6110.7723,
+1221.6736,3249.5219,28087.9378,1463.6933,4602.6886,12487.
+*End Instance
+*Nset, nset=Set-1, instance=FourElem-1, generate
+ 13,  18,   1
+*Elset, elset=Set-1, instance=FourElem-1
+ 3, 4
+*Elset, elset=_Surf-1_S2, internal, instance=FourElem-1
+ 1, 2
+*Surface, type=ELEMENT, name=Surf-1
+_Surf-1_S2, S2
+*End Assembly
+*Distribution Table,Name=tab1
+MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS
+MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS, MODULUS
+MODULUS , MODULUS , MODULUS , MODULUS , MODULUS , MODULUS 
+*Material,Name=M1
+*Elastic,TYPE=ANISOTROPIC
+FourElem-1.dist1
+*Step, name=Step-1, nlgeom=YES
+*Static
+0.1, 1., 1e-05, 0.2
+
+*Boundary
+Set-1, ENCASTRE
+*Dsload
+Surf-1, P, 1.
+*Restart, write, frequency=0
+*Output, field
+*Node Output
+U, 
+*Element Output, directions=YES
+S, 
+ 
+*Output, history, variable=PRESELECT
+*End Step</code></pre><h2 id="结果对比">结果对比</h2><p>结果一致</p><figure><img src="media/2026433-20230802132938739-1520345514@602791266.png" alt="img" /></figure><h2 id="资料">资料</h2><ul><li><a href="http://130.149.89.49:2080/v2016/books/usb/default.htm">2.8.1 Distribution definition</a></li><li><a href="http://130.149.89.49:2080/v2016/books/key/default.htm">*ELASTIC</a></li><li><a href="http://130.149.89.49:2080/v2016/books/key/ch18abk23.html">*SOLID SECTION</a></li><li><a href="http://130.149.89.49:2080/v2016/books/key/default.htm">*SOLID SECTION</a></li><li><a href="http://130.149.89.49:2080/v2016/books/key/default.htm">*DISTRIBUTION TABLE</a></li><li><a href="http://130.149.89.49:2080/v2016/books/usb/default.htm">1.2.1 Input syntax rules</a></li></ul><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

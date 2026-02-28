@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="fortran2008数组操作-4-随机矩阵" data-depth="1"><a href="#fortran2008数组操作-4-随机矩阵">fortran2008数组操作-4-随机矩阵</a><ol><li data-target-id="_1-使用内置随机数生成器" data-depth="2"><a href="#_1-使用内置随机数生成器">1. 使用内置随机数生成器</a><ol><li data-target-id="基本方法" data-depth="3"><a href="#基本方法">基本方法</a></li><li data-target-id="指定范围的随机矩阵" data-depth="3"><a href="#指定范围的随机矩阵">指定范围的随机矩阵</a></li></ol></li><li data-target-id="_2-整数随机矩阵" data-depth="2"><a href="#_2-整数随机矩阵">2. 整数随机矩阵</a></li><li data-target-id="_3-正态分布随机矩阵" data-depth="2"><a href="#_3-正态分布随机矩阵">3. 正态分布随机矩阵</a><ol><li data-target-id="使用-box-muller-变换" data-depth="3"><a href="#使用-box-muller-变换">使用 Box-Muller 变换</a></li></ol></li><li data-target-id="_4-使用外部库生成随机矩阵" data-depth="2"><a href="#_4-使用外部库生成随机矩阵">4. 使用外部库生成随机矩阵</a><ol><li data-target-id="_41-使用-lapack-的随机矩阵生成器" data-depth="3"><a href="#_41-使用-lapack-的随机矩阵生成器">4.1 使用 LAPACK 的随机矩阵生成器</a></li><li data-target-id="_42-使用-randomnumber-的高性能版本" data-depth="3"><a href="#_42-使用-randomnumber-的高性能版本">4.2 使用 RANDOM_NUMBER 的高性能版本</a></li></ol></li><li data-target-id="_5-特殊类型随机矩阵" data-depth="2"><a href="#_5-特殊类型随机矩阵">5. 特殊类型随机矩阵</a><ol><li data-target-id="_51-对称随机矩阵" data-depth="3"><a href="#_51-对称随机矩阵">5.1 对称随机矩阵</a></li><li data-target-id="_52-稀疏随机矩阵" data-depth="3"><a href="#_52-稀疏随机矩阵">5.2 稀疏随机矩阵</a></li></ol></li><li data-target-id="_6-随机数种子控制" data-depth="2"><a href="#_6-随机数种子控制">6. 随机数种子控制</a><ol><li data-target-id="_61-固定种子可重复结果" data-depth="3"><a href="#_61-固定种子可重复结果">6.1 固定种子(可重复结果)</a></li><li data-target-id="_62-基于时间的随机种子" data-depth="3"><a href="#_62-基于时间的随机种子">6.2 基于时间的随机种子</a></li></ol></li><li data-target-id="_7-性能优化建议" data-depth="2"><a href="#_7-性能优化建议">7. 性能优化建议</a></li><li data-target-id="_8-注意事项" data-depth="2"><a href="#_8-注意事项">8. 注意事项</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="fortran2008数组操作-4-随机矩阵">fortran2008数组操作-4-随机矩阵</h1><p>在 Fortran 中定义随机矩阵有多种方式，以下是几种常用的方法:</p><h2 id="_1-使用内置随机数生成器">1. 使用内置随机数生成器</h2><h3 id="基本方法">基本方法</h3><pre><code class="language-shell">program random_matrix
+    implicit none
+    integer, parameter :: n = 3
+    real :: A(n,n)
+    integer :: i, j
+    
+    ! 初始化随机数种子
+    call random_seed()
+    
+    ! 生成随机矩阵
+    call random_number(A)
+    
+    ! 输出矩阵
+    do i = 1, n
+        print &#39;(3F10.4)&#39;, A(i,:)
+    end do
+end program random_matrix</code></pre><h3 id="指定范围的随机矩阵">指定范围的随机矩阵</h3><pre><code class="language-shell">program ranged_random_matrix
+    implicit none
+    integer, parameter :: n = 3, m = 4
+    real :: A(n,m)
+    real :: min_val = -1.0, max_val = 1.0
+    
+    call random_seed()
+    call random_number(A)  ! 生成[0,1)区间的随机数
+    A = min_val + (max_val - min_val) * A  ! 映射到[min_val, max_val)
+    
+    print *, &quot;Random matrix in [&quot;, min_val, &quot;,&quot;, max_val, &quot;):&quot;
+    do i = 1, n
+        print &#39;(4F10.4)&#39;, A(i,:)
+    end do
+end program</code></pre><h2 id="_2-整数随机矩阵">2. 整数随机矩阵</h2><pre><code class="language-shell">program integer_random_matrix
+    implicit none
+    integer, parameter :: n = 5
+    integer :: A(n,n)
+    integer :: min_int = 0, max_int = 100
+    
+    call random_seed()
+    do i = 1, n
+        do j = 1, n
+            call random_int(min_int, max_int, A(i,j))
+        end do
+    end do
+    
+    print *, &quot;Integer random matrix:&quot;
+    do i = 1, n
+        print &#39;(5I5)&#39;, A(i,:)
+    end do
+    
+contains
+    subroutine random_int(lower, upper, result)
+        integer, intent(in) :: lower, upper
+        integer, intent(out) :: result
+        real :: r
+        
+        call random_number(r)
+        result = lower + floor((upper - lower + 1) * r)
+    end subroutine
+end program</code></pre><h2 id="_3-正态分布随机矩阵">3. 正态分布随机矩阵</h2><h3 id="使用-box-muller-变换">使用 Box-Muller 变换</h3><pre><code class="language-shell">program normal_random_matrix
+    implicit none
+    integer, parameter :: n = 3
+    real :: A(n,n)
+    real :: mean = 0.0, stddev = 1.0
+    
+    call random_seed()
+    do i = 1, n
+        do j = 1, n
+            A(i,j) = normal_random(mean, stddev)
+        end do
+    end do
+    
+    print *, &quot;Normal random matrix:&quot;
+    do i = 1, n
+        print &#39;(3F10.4)&#39;, A(i,:)
+    end do
+    
+contains
+    function normal_random(mean, stddev) result(r)
+        real, intent(in) :: mean, stddev
+        real :: r
+        real :: u1, u2, pi = 4.0 * atan(1.0)
+        
+        call random_number(u1)
+        call random_number(u2)
+        r = mean + stddev * sqrt(-2.0 * log(u1)) * cos(2.0 * pi * u2)
+    end function
+end program</code></pre><h2 id="_4-使用外部库生成随机矩阵">4. 使用外部库生成随机矩阵</h2><h3 id="_41-使用-lapack-的随机矩阵生成器">4.1 使用 LAPACK 的随机矩阵生成器</h3><pre><code class="language-shell">program lapack_random_matrix
+    use, intrinsic :: iso_fortran_env, only: dp =&gt; real64
+    implicit none
+    integer, parameter :: n = 4
+    real(dp) :: A(n,n)
+    integer :: seed(4) = [42, 17, 89, 23]  ! 自定义种子
+    
+    ! 使用LAPACK的随机数生成器
+    call dlarnv(3, seed, n*n, A)  ! 3表示均匀分布
+    
+    print *, &quot;LAPACK random matrix:&quot;
+    do i = 1, n
+        print &#39;(4F10.4)&#39;, A(i,:)
+    end do
+end program</code></pre><h3 id="_42-使用-randomnumber-的高性能版本">4.2 使用 RANDOM_NUMBER 的高性能版本</h3><pre><code class="language-shell">program parallel_random_matrix
+    use omp_lib
+    implicit none
+    integer, parameter :: n = 1000
+    real :: A(n,n)
+    integer :: i, j
+    
+    ! 并行生成随机矩阵
+    !$omp parallel do private(i,j)
+    do j = 1, n
+        do i = 1, n
+            call random_number(A(i,j))
+        end do
+    end do
+    !$omp end parallel do
+    
+    print *, &quot;Generated 1000x1000 random matrix&quot;
+end program</code></pre><h2 id="_5-特殊类型随机矩阵">5. 特殊类型随机矩阵</h2><h3 id="_51-对称随机矩阵">5.1 对称随机矩阵</h3><pre><code class="language-shell">program symmetric_random_matrix
+    implicit none
+    integer, parameter :: n = 4
+    real :: A(n,n)
+    integer :: i, j
+    
+    call random_seed()
+    do i = 1, n
+        do j = i, n  ! 只生成上三角部分
+            call random_number(A(i,j))
+            if (i /= j) A(j,i) = A(i,j)  ! 对称赋值
+        end do
+    end do
+    
+    print *, &quot;Symmetric random matrix:&quot;
+    do i = 1, n
+        print &#39;(4F10.4)&#39;, A(i,:)
+    end do
+end program</code></pre><h3 id="_52-稀疏随机矩阵">5.2 稀疏随机矩阵</h3><pre><code class="language-shell">program sparse_random_matrix
+    implicit none
+    integer, parameter :: n = 5, sparsity = 0.3  ! 30%非零元素
+    real :: A(n,n) = 0.0
+    integer :: i, j
+    real :: r
+    
+    call random_seed()
+    do i = 1, n
+        do j = 1, n
+            call random_number(r)
+            if (r &lt; sparsity) call random_number(A(i,j))
+        end do
+    end do
+    
+    print *, &quot;Sparse random matrix:&quot;
+    do i = 1, n
+        print &#39;(5F10.4)&#39;, A(i,:)
+    end do
+end program</code></pre><h2 id="_6-随机数种子控制">6. 随机数种子控制</h2><h3 id="_61-固定种子可重复结果">6.1 固定种子(可重复结果)</h3><pre><code class="language-shell">program fixed_seed_random
+    implicit none
+    integer, parameter :: n = 3
+    real :: A(n,n)
+    integer :: seed_size, clock
+    integer, allocatable :: seed(:)
+    
+    ! 获取系统默认种子大小
+    call random_seed(size=seed_size)
+    allocate(seed(seed_size))
+    
+    ! 设置固定种子
+    seed = 42  ! 可以是任意固定值
+    call random_seed(put=seed)
+    
+    call random_number(A)
+    
+    print *, &quot;Fixed seed random matrix:&quot;
+    do i = 1, n
+        print &#39;(3F10.4)&#39;, A(i,:)
+    end do
+    
+    deallocate(seed)
+end program</code></pre><h3 id="_62-基于时间的随机种子">6.2 基于时间的随机种子</h3><pre><code class="language-shell">program time_seed_random
+    implicit none
+    integer, parameter :: n = 3
+    real :: A(n,n)
+    integer :: seed_size, clock
+    integer, allocatable :: seed(:)
+    
+    ! 获取系统时间作为种子
+    call system_clock(count=clock)
+    call random_seed(size=seed_size)
+    allocate(seed(seed_size))
+    seed = clock + 37 * [(i, i=0, seed_size-1)]
+    call random_seed(put=seed)
+    
+    call random_number(A)
+    
+    print *, &quot;Time-seeded random matrix:&quot;
+    do i = 1, n
+        print &#39;(3F10.4)&#39;, A(i,:)
+    end do
+    
+    deallocate(seed)
+end program</code></pre><h2 id="_7-性能优化建议">7. 性能优化建议</h2><ol><li><strong>大矩阵生成</strong>:对于大矩阵,考虑按列生成(Fortran是列优先存储)</li><li><strong>并行生成</strong>:使用OpenMP并行化随机数生成</li><li><strong>向量化</strong>:使用数组操作代替循环</li><li><strong>批处理</strong>:一次性生成所有随机数比逐个生成更高效</li></ol><h2 id="_8-注意事项">8. 注意事项</h2><ol><li><strong>随机数质量</strong>:内置<span class="codespan-content"><code>random_number</code></span>不适合加密等高质量随机需求</li><li><strong>并行安全</strong>:某些随机数生成器在并行环境下需要特别处理</li><li><strong>可重复性</strong>:调试时可使用固定种子</li><li><strong>分布特性</strong>:<span class="codespan-content"><code>random_number</code></span>生成均匀分布，其他分布需要转换</li></ol><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>

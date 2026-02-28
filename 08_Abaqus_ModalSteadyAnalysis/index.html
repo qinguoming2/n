@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" rel="stylesheet" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" defer="true" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script>capabilities.math = true;
+
+window.texMacros = {}</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="abaqus模态稳态分析原理" data-depth="1"><a href="#abaqus模态稳态分析原理">Abaqus模态稳态分析原理</a><ol><li data-target-id="总括" data-depth="2"><a href="#总括">总括</a></li><li data-target-id="_1-谐响应分析的目的" data-depth="2"><a href="#_1-谐响应分析的目的">1. 谐响应分析的目的</a></li><li data-target-id="_2-abaqus的求解原理" data-depth="2"><a href="#_2-abaqus的求解原理">2. ABAQUS的求解原理</a><ol><li data-target-id="_21-特征值提取" data-depth="3"><a href="#_21-特征值提取">2.1 特征值提取</a></li><li data-target-id="_22-模态叠加" data-depth="3"><a href="#_22-模态叠加">2.2 模态叠加</a></li></ol></li><li data-target-id="参考资料" data-depth="2"><a href="#参考资料">参考资料</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="abaqus模态稳态分析原理" data-depth="1"><a href="#abaqus模态稳态分析原理">Abaqus模态稳态分析原理</a><ol><li data-target-id="总括" data-depth="2"><a href="#总括">总括</a></li><li data-target-id="_1-谐响应分析的目的" data-depth="2"><a href="#_1-谐响应分析的目的">1. 谐响应分析的目的</a></li><li data-target-id="_2-abaqus的求解原理" data-depth="2"><a href="#_2-abaqus的求解原理">2. ABAQUS的求解原理</a><ol><li data-target-id="_21-特征值提取" data-depth="3"><a href="#_21-特征值提取">2.1 特征值提取</a></li><li data-target-id="_22-模态叠加" data-depth="3"><a href="#_22-模态叠加">2.2 模态叠加</a></li></ol></li><li data-target-id="参考资料" data-depth="2"><a href="#参考资料">参考资料</a></li></ol></li></ol></nav><p></p><div class="page-break" data-hidden=""></div><h1 id="abaqus模态稳态分析原理">Abaqus模态稳态分析原理</h1><h2 id="总括">总括</h2><p>基于模态的谐响应分析, 可以通过扫频的方式求解频率范围内结构的线性稳态响应情况。阻尼是和频率相关的, 但模态叠加法只需要知道n个模态阻尼即可推广到其他频率范围(原因详见文内公式)。</p><h2 id="_1-谐响应分析的目的">1. 谐响应分析的目的</h2><p>用来求解结构在连续谐波激励下的线性响应.求解稳态动力学响应有三种方法: subspace, direct, modal。base modal的方法是利用前一个分析步提取出来的一系列模态特征计算稳态解。</p><h2 id="_2-abaqus的求解原理">2. ABAQUS的求解原理</h2><h3 id="_21-特征值提取">2.1 特征值提取</h3><p>对于一个具有N个自由度的多自由度系统, 可用N个独立的广义坐标描述系统的运动状态:</p><formula data-block="">a^{N\times1}=\{a_1, a_2, a_3, ..., a_N\}^{T}</formula><p>对于N自由度的系统, 一定可以找到N个固有频率 <formula>w_{\alpha}</formula> 以及相对应的振型 <formula>\phi_{\alpha}^{N\times1}</formula> , <formula>\alpha=1...n</formula> , n是提取的模态的数目。<formula>\phi^{N}</formula> 左边的矩阵是 <formula>M\times N</formula> 的, 等号右边是0, 所以 <formula>\phi^{N}</formula> 是 <formula>N\times 1</formula> 的。</p><blockquote><p>所谓振型按我的理解就是共振时, 结构的一个形状。用数学方式表示就是一个特定的解向量 <formula>\phi_{\alpha}^{N}</formula></p></blockquote><p>将 <formula>\phi_{\alpha}^{N\times 1}</formula> 组装成 Nxn 矩阵 <formula>\Phi</formula> , 其中每一列都包含一个特征模态。</p><figure><img src="media/2026433-20221226124746290-1818943053@751875604.png" alt="SSD_p1.png" /></figure><h3 id="_22-模态叠加">2.2 模态叠加</h3><p>有阻尼的结构动力学方程: 
+<img src="media/2026433-20221226124747850-1410505717@187205868.png" alt="SSD_p2.png" /></p><p>模态叠加用矩阵形式写为</p><formula data-block="">u^{N\times1}=\Phi^{N\times n} q^{n\times 1}</formula><p>列矢量 <formula>q</formula> ——模态自由度(待求)
+在运动方程中插入模态叠加表达式, 代入动力学方程:</p><formula data-block="">M\Phi \ddot{q}+C\Phi \dot{q}+K\Phi q=f(t)^{N \times1}</formula><p>左乘 <formula>\Phi^{T}</formula> 后得到:</p><formula data-block="">\Phi^{T}M\Phi \ddot{q}+\Phi^{T}C\Phi \dot{q}+\Phi^{T}K\Phi q=\Phi^{T}f(t)^{N\times 1}</formula><p>此时, 原方程组现已从求解 N 个变量简化为 n 个变量, 右侧 <formula>\Phi^{T}f(t)^{N\times 1}</formula> 为模态载荷, <strong>是外载荷在每个特征模态上的投影</strong>。</p><formula data-block="">\Phi^{N\times n}=[\phi_1, \phi_2, \phi_3, ..., \phi_n]</formula><formula data-block="">\Phi^{T}=[\phi_1^T, \phi_2^T, \phi_3^T, ..., \phi_n^T]</formula><formula data-block="">f(t)^{N\times 1}=
+\begin{bmatrix}
+f(t)_1 \\
+f(t)_2 \\
+f(t)_3 \\
+....\\
+f(t)_N
+\end{bmatrix}</formula><formula data-block="">\Phi^{T}f(t)^{N\times 1} =
+\begin{bmatrix}
+\phi_1f(t)_1\\
+\phi_2f(t)_2\\
+\phi_3f(t)_3\\
+...\\
+\phi_nf(t)_n\\
+\end{bmatrix}</formula><p>上式经过一系列变换后, 可以得到投影到mode- <formula>\alpha</formula> 上的方程(1):</p><formula data-block="">\ddot{q}_{\alpha}+c_{\alpha}\dot{q}_{\alpha}+\omega_{\alpha}^2q_{\alpha}=\frac{1}{m_{\alpha}}(f_{1\alpha}+if_{2\alpha})exp(i\Omega t)</formula><p>其中:</p><ul><li><formula>q_{\alpha}</formula> : <formula>mode \  \alpha</formula> 下的广义坐标幅值</li><li><formula>c_{\alpha}</formula> : <formula>与mode \ \alpha</formula> 有关的阻尼(模态阻尼)`</li><li><formula>\omega_{\alpha}</formula> : <formula>mode \ \alpha</formula> 下的无阻尼固有频率</li><li><formula>m_{\alpha}</formula>: 广义质量, <formula>m_{\alpha}=\Phi_{\alpha}^{N}M^{N\times M}\Phi_{\alpha}^{M} \ \ (no \ sum\ over\ \alpha)</formula></li><li><formula>(f_{1\alpha}+if_{2\alpha})e^{i\Omega t}</formula> :是和 <formula>mode\ \alpha</formula> 有关的激励</li></ul><h4 id="_221-激励项">2.2.1 激励项</h4><p>激励被 <formula>frequency (\Omega)</formula> , 节点等效力实、虚部 <formula>(F_{1}^{N}, F_{2}^N)</formula> 定义。投影到 <formula>mode\ \alpha</formula> 上:</p><formula data-block="">f_{1\alpha}+if_{2\alpha}=\phi_{\alpha}^N(F_{1}^{N}+iF_{2}^N)\\
+N——模型自由度数</formula><p>载荷向量是根据其实部 <formula>F_{1}^{N}</formula> 和虚部 <formula>F_{2}^{N}</formula> 编写的, 这是Abaqus/Standard 中定义载荷的方式.如果偶用幅值 <formula>F_{0}^N</formula> 和相位 <formula>\Phi</formula> 表示, 则有</p><formula data-block="">F^N=F_1^N+iF_2^N=F_{0}^{N}exp[i(\Omega t+\Phi)]</formula><p>其中:</p><formula data-block="">F_1^N=F_0^Ncos(\Phi) \ \ \ \\ F_2^N=F_0^Nsin(\Phi)</formula><h4 id="_222-阻尼项">2.2.2 阻尼项</h4><ul><li>直接模态阻尼:  <formula>c_\alpha=2\zeta_{\alpha}\omega_{\alpha}</formula> 
+其中: <formula>\zeta_{\alpha}是mode \ \alpha下的临界阻尼分(模态阻尼比)</formula></li><li>Structure Damp: 提供了与模态振幅成比例的阻尼力。
+ <formula>c_{\alpha}\dot{q}_{\alpha}=i s_{\alpha}\omega_{\alpha}^2 q_{\alpha}</formula> 
+其中: <formula>s_{\alpha}是mode \ \alpha 的结构阻尼系数(模态损耗因子)</formula></li><li>瑞利阻尼: 定义为 <formula>c_{\alpha}=\beta_{\alpha}+\gamma_{\alpha}\omega_{\alpha}^2</formula> 
+其中,  <formula>\beta_{\alpha}、\gamma_{\alpha}</formula> 是瑞利阻尼系数, 具体求法见Document.
+瑞利阻尼系数可以用来再现:</li></ul><formula data-block="">\zeta_{\alpha}=\frac{\beta_{\alpha}}{2\omega_{\alpha}}+\frac{\gamma_{\alpha}\omega_{\alpha}}{2}</formula><p>将阻尼项代入方程(1):</p><formula data-block="">\ddot{q}_{\alpha}+2\zeta_{\alpha}\omega_{\alpha}\dot{q}_{\alpha}+(\beta_{\alpha}+\gamma_{\alpha}\omega_{\alpha}^2)\dot{q}_{\alpha}+i s_{\alpha}\omega_{\alpha}^2 \dot{q}_{\alpha}+\omega_{\alpha}^2q_{\alpha}=\frac{1}{m_{\alpha}}(f_{1\alpha}+if_{2\alpha})exp(i\Omega t)</formula><p>方程的解为:</p><formula data-block="">\dot{q}_{\alpha}=H_{0\alpha}*f_{0 \alpha}* exp(i(\Omega t+\Phi_{\alpha}))</formula><p>方程中有三个阻尼项对应于, ABAQUS/CAE中只定义一个, 其他的就是0.</p><p>其中:</p><formula data-block="">f_{0\alpha}=\sqrt{f_{1\alpha}^2+f_{2\alpha}^2}是投影载荷矢量的振幅</formula><formula data-block="">H_{0\alpha}(\Omega)是mode\ \alpha下系统复传递函数的振幅</formula><formula data-block="">Re(H_{0\alpha}f_{0\alpha})=\frac{1}{m_{\alpha}} (\frac{f_{1\alpha}(\omega_{\alpha}^2-\Omega^2)}{(\omega_{\alpha}^2-\Omega^2)^2+(\eta_{\alpha}\Omega)^2}+\frac{f_{2\alpha}\eta_{\alpha}\Omega}{(\omega_{\alpha}^2-\Omega^2)^2+(\eta_{\alpha}\Omega)^2})</formula><formula data-block="">Im(H_{0\alpha}f_{0\alpha})=\frac{1}{m_{\alpha}} 
+(-\frac{f_{1\alpha}\eta_{\alpha}\Omega}{(\omega_{\alpha}^2-\Omega^2)^2+(\eta_{\alpha}\Omega)^2}+\frac{f_{2\alpha}(\omega_{\alpha}^2-\Omega^2)}{(\omega_{\alpha}^2-\Omega^2)^2+(\eta_{\alpha}\Omega)^2})</formula><p>其中:</p><formula data-block="">\eta_{\alpha}=2\zeta_{\alpha}\omega_{\alpha}+\beta_{\alpha}+\gamma_{\alpha}\omega_{\alpha}^2+\frac{s_{\alpha}\omega_{\alpha}^2}{\Omega}</formula><p>响应的幅值为:</p><formula data-block="">H_{0\alpha}f_{0\alpha}=\sqrt{Re(H_{\alpha})^2+Im(H_{\alpha})^2}=\frac{1}{m_{\alpha}}\frac{1}{\sqrt{(\omega_{\alpha}^2-\Omega^2)^2+(\eta_{\alpha}\Omega)^2}}f_{0\alpha}</formula><p>响应的相位:</p><formula data-block="">\Psi_{\alpha}=acrtan(Im(H_{\alpha})/Re(H_{\alpha}))</formula><p>如果谐波激励以base motion的形式施加, 那么模态载荷如下:</p><formula data-block="">f_{1\alpha}=-\frac{1}{m\alpha} \phi_{\alpha}^{N}M^{NM}\hat{e}_j^{M}a_{1j}exp(i\Omega t)\\
+f_{2\alpha}=-\frac{1}{m\alpha} \phi_{\alpha}^{N}M^{NM}\hat{e}_j^{M}a_{2j}exp(i\Omega t)</formula><p>其中,  <formula>M^{NM}</formula> 是结构的质量矩阵,  <formula>\hat{e}_{j}^{M}是一个vector(在任何接地节点上的基础加速度, 方向上具有单位幅值, 否则为零)</formula></p><p><formula>a_{1j}、a_{2j}</formula> 是base acceleration的实部和虚部。如果施加的是velocity(或者displacement) 则 <formula>a_1=-\Omega v_1\ \ \ a_2=-\Omega v_2</formula> 或( <formula>a_1=-\Omega^2 u_1 \ \ \  a_2=-\Omega^2 u_2</formula> )。</p><p>综上所述, 根据模态叠加的基本假设: 位移写为特征模态的线性组合。
+方程(1)的解 <formula>q_{\alpha}</formula> 为</p><formula data-block="">q_{\alpha}=H_{0\alpha}f_{0\alpha}exp[i(\Omega t+\Phi_{\alpha})]</formula><p>这是外加激励频率为 <formula>\Omega</formula> , 在 <formula>mode\ \alpha</formula> 下的解, 经过模态叠加(如下)后可以得到位移响应(式2):</p><formula data-block="">u^N=\sum_{\alpha}^{n}{\phi_{\alpha}^N q_{\alpha}}</formula><p>其中:</p><ul><li><formula data-block="">q_{\alpha}:每个模态的幅值求解结果</formula></li><li><formula data-block="">\phi_{\alpha}^N:mode\ \alpha的特征向量向量(N \times1)即振型向量</formula></li></ul><p>稳态响应以通过用户指定频率范围的频率扫描形式给出。依次扫描频率点, 就可以求出结构的频域响应</p><h2 id="参考资料">参考资料</h2><ul><li><a href="https://cn.comsol.com/multiphysics/mode-superposition?parent=structural-mechanics-0182-222">COMSOL仿真百科</a></li><li><a href="https://abaqus-docs.mit.edu/2017/English/DSSIMULIA_Established.htm">ABAQUS Theory-稳态动力学分析</a></li><li><a href="https://www.icourse163.org/learn/TJU-1003155001?tid=1450391454#/learn/content?type=detail&id=1214738633&cid=1218772194">MOOC-振动理论</a></li><li><a href="">《结构动力学 第二版》作者: R。克拉夫等</a></li></ul><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
