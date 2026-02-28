@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>blog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="pyvista可视化入门" data-depth="1"><a href="#pyvista可视化入门">Pyvista可视化入门</a><ol><li data-target-id="网格创建" data-depth="2"><a href="#网格创建">网格创建</a><ol><li data-target-id="_1-非结构网格对象" data-depth="3"><a href="#_1-非结构网格对象">1. 非结构网格对象</a></li><li data-target-id="_2-在网格中添加显示点对象" data-depth="3"><a href="#_2-在网格中添加显示点对象">2. 在网格中添加显示点对象</a></li><li data-target-id="_3-制作箭头并附加到dataset的位置" data-depth="3"><a href="#_3-制作箭头并附加到dataset的位置">3. 制作箭头并附加到Dataset的位置</a></li></ol></li><li data-target-id="绘图选项" data-depth="2"><a href="#绘图选项">绘图选项</a></li><li data-target-id="点云" data-depth="2"><a href="#点云">点云</a></li><li data-target-id="单元类型" data-depth="2"><a href="#单元类型">单元类型</a></li></ol></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="pyvista可视化入门" data-depth="1"><a href="#pyvista可视化入门">Pyvista可视化入门</a><ol><li data-target-id="网格创建" data-depth="2"><a href="#网格创建">网格创建</a><ol><li data-target-id="_1-非结构网格对象" data-depth="3"><a href="#_1-非结构网格对象">1. 非结构网格对象</a></li><li data-target-id="_2-在网格中添加显示点对象" data-depth="3"><a href="#_2-在网格中添加显示点对象">2. 在网格中添加显示点对象</a></li><li data-target-id="_3-制作箭头并附加到dataset的位置" data-depth="3"><a href="#_3-制作箭头并附加到dataset的位置">3. 制作箭头并附加到Dataset的位置</a></li></ol></li><li data-target-id="绘图选项" data-depth="2"><a href="#绘图选项">绘图选项</a></li><li data-target-id="点云" data-depth="2"><a href="#点云">点云</a></li><li data-target-id="单元类型" data-depth="2"><a href="#单元类型">单元类型</a></li></ol></li></ol></nav><p></p><div class="page-break" data-hidden=""></div><h1 id="pyvista可视化入门">Pyvista可视化入门</h1><h2 id="网格创建">网格创建</h2><h3 id="_1-非结构网格对象">1. 非结构网格对象</h3><pre><code class="language-shell">&quot;&quot;&quot;this script is used to visualize the point cloud of the mesh
+&quot;&quot;&quot;
+import numpy as np
+import pyvista as pv
+from pyvista import CellType
+# node data
+# these points will all be shared between the cells
+points = np.array(
+    [
+        [0.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [0.5, 0.0, 0.0],
+        [1.0, 1.0, 0.0],
+        [1.0, 0.5, 0.0],
+        [0.0, 1.0, 0.0],
+        [0.5, 1.0, 0.0],
+        [0.0, 0.5, 0.0],
+        [0.5, 0.5, 0.0],
+        [1.0, 0.0, 0.5],
+        [1.0, 0.0, 1.0],
+        [0.0, 0.0, 0.5],
+        [0.0, 0.0, 1.0],
+        [0.5, 0.0, 0.5],
+        [0.5, 0.0, 1.0],
+        [1.0, 1.0, 0.5],
+        [1.0, 1.0, 1.0],
+        [1.0, 0.5, 0.5],
+        [1.0, 0.5, 1.0],
+        [0.0, 1.0, 0.5],
+        [0.0, 1.0, 1.0],
+        [0.5, 1.0, 0.5],
+        [0.5, 1.0, 1.0],
+        [0.0, 0.5, 0.5],
+        [0.0, 0.5, 1.0],
+        [0.5, 0.5, 0.5],
+        [0.5, 0.5, 1.0],
+    ],
+)
+# 定义单元的连通性,第一列是单元节点个数,后续是节点编号(0-based)
+cells = np.array(
+    [
+        [8, 0, 2, 8, 7, 11, 13, 25, 23],
+        [8, 2, 1, 4, 8, 13, 9, 17, 25],
+        [8, 7, 8, 6, 5, 23, 25, 21, 19],
+        [8, 8, 4, 3, 6, 25, 17, 15, 21],
+        [8, 11, 13, 25, 23, 12, 14, 26, 24],
+        [8, 13, 9, 17, 25, 14, 10, 18, 26],
+        [8, 23, 25, 21, 19, 24, 26, 22, 20],
+        [8, 25, 17, 15, 21, 26, 18, 16, 22],
+    ],dtype=int)
+
+# 定义单元类型数组,每个单元类型对应一个整数
+celltypes = CellType.HEXAHEDRON*np.ones(cells.shape[0],dtype=int)
+# 初始化pyvista的UnstructuredGrid对象
+grid = pv.UnstructuredGrid(cells, celltypes, points)
+# 显示网格
+grid.plot(show_edges=True, color=&#39;w&#39;, point_size=10)</code></pre><figure><img src="media/img-20250328202908@720832574.png" alt="Img" /></figure><h3 id="_2-在网格中添加显示点对象">2. 在网格中添加显示点对象</h3><p>通过突出显示点对象可以，代表约束的节点</p><pre><code class="language-shell">&quot;&quot;&quot;this script is used to visualize the point cloud of the mesh
+&quot;&quot;&quot;
+import numpy as np
+import pyvista as pv
+from pyvista import CellType
+# node data
+# these points will all be shared between the cells
+points = np.array(
+    [
+        [0.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [0.5, 0.0, 0.0],
+        [1.0, 1.0, 0.0],
+        [1.0, 0.5, 0.0],
+        [0.0, 1.0, 0.0],
+        [0.5, 1.0, 0.0],
+        [0.0, 0.5, 0.0],
+        [0.5, 0.5, 0.0],
+        [1.0, 0.0, 0.5],
+        [1.0, 0.0, 1.0],
+        [0.0, 0.0, 0.5],
+        [0.0, 0.0, 1.0],
+        [0.5, 0.0, 0.5],
+        [0.5, 0.0, 1.0],
+        [1.0, 1.0, 0.5],
+        [1.0, 1.0, 1.0],
+        [1.0, 0.5, 0.5],
+        [1.0, 0.5, 1.0],
+        [0.0, 1.0, 0.5],
+        [0.0, 1.0, 1.0],
+        [0.5, 1.0, 0.5],
+        [0.5, 1.0, 1.0],
+        [0.0, 0.5, 0.5],
+        [0.0, 0.5, 1.0],
+        [0.5, 0.5, 0.5],
+        [0.5, 0.5, 1.0],
+    ],
+)
+# 定义单元的连通性,第一列是单元节点个数,后续是节点编号(0-based)
+cells = np.array(
+    [
+        [8, 0, 2, 8, 7, 11, 13, 25, 23],
+        [8, 2, 1, 4, 8, 13, 9, 17, 25],
+        [8, 7, 8, 6, 5, 23, 25, 21, 19],
+        [8, 8, 4, 3, 6, 25, 17, 15, 21],
+        [8, 11, 13, 25, 23, 12, 14, 26, 24],
+        [8, 13, 9, 17, 25, 14, 10, 18, 26],
+        [8, 23, 25, 21, 19, 24, 26, 22, 20],
+        [8, 25, 17, 15, 21, 26, 18, 16, 22],
+    ],dtype=int)
+
+# 定义单元类型数组,每个单元类型对应一个整数
+celltypes = CellType.HEXAHEDRON*np.ones(cells.shape[0],dtype=int)
+# 初始化pyvista的UnstructuredGrid对象
+grid = pv.UnstructuredGrid(cells, celltypes, points)
+# 显示网格
+# grid.plot(show_edges=True, color=&#39;w&#39;, point_size=10)
+
+point_cloud=pv.PolyData(points[:9,:])
+
+p=pv.Plotter()
+# 给plotter()添加网格和控制这个网格显示的参数
+p.add_mesh(grid,show_edges=True, color=&#39;r&#39;,style=&#39;wireframe&#39;)
+# 将点云加入绘图器,并且设置点的大小和颜色
+p.add_mesh(point_cloud,color=&#39;b&#39;,point_size=15,render_points_as_spheres=True)
+p.show()</code></pre><figure><img src="media/img-20250328205520@-1845773841.png" alt="Img" /></figure><h3 id="_3-制作箭头并附加到dataset的位置">3. 制作箭头并附加到Dataset的位置</h3><pre><code class="language-shell">import pyvista as pv
+from pyvista import examples
+mesh = examples.load_random_hills()
+arrows = mesh.glyph(
+    scale=&quot;Normals&quot;, orient=&quot;Normals&quot;, tolerance=0.05
+)
+pl = pv.Plotter()
+actor = pl.add_mesh(arrows, color=&quot;black&quot;)
+actor = pl.add_mesh(
+    mesh,
+    scalars=&quot;Elevation&quot;,
+    cmap=&quot;terrain&quot;,
+    show_scalar_bar=False,
+)
+pl.show()
+</code></pre><figure><img src="media/img-20250328210428@-364859782.png" alt="Img" /></figure><h2 id="绘图选项">绘图选项</h2><p>pyvista的绘图接口有两种方法:</p><ul><li>使用数据对象的plot()方法</li></ul><pre><code class="language-shell">import numpy as np
+import pyvista as pv
+from pyvista import CellType
+# node data
+# these points will all be shared between the cells
+points = np.array(
+    [
+...
+    ],
+)
+# 定义单元的连通性,第一列是单元节点个数,后续是节点编号(0-based)
+cells = np.array(
+    [
+.....
+    ],dtype=int)
+
+# 定义单元类型数组,每个单元类型对应一个整数
+celltypes = CellType.HEXAHEDRON*np.ones(cells.shape[0],dtype=int)
+# 初始化pyvista的UnstructuredGrid对象
+grid = pv.UnstructuredGrid(cells, celltypes, points)
+# 显示网格
+grid.plot(show_edges=True, color=&#39;w&#39;, point_size=10)</code></pre><ul><li>使用pyvista.Plotter()的show()方法</li></ul><pre><code class="language-shell">&quot;&quot;&quot;this script is used to visualize the point cloud of the mesh
+&quot;&quot;&quot;
+import numpy as np
+import pyvista as pv
+from pyvista import CellType
+# node data
+# these points will all be shared between the cells
+points = np.array(
+    [
+.....
+    ],
+)
+# 定义单元的连通性,第一列是单元节点个数,后续是节点编号(0-based)
+cells = np.array(
+    [
+...
+    ],dtype=int)
+
+# 定义单元类型数组,每个单元类型对应一个整数
+celltypes = CellType.HEXAHEDRON*np.ones(cells.shape[0],dtype=int)
+# 初始化pyvista的UnstructuredGrid对象
+grid = pv.UnstructuredGrid(cells, celltypes, points)
+# 显示网格
+p=pv.Plotter()
+# 给plotter()添加网格和控制这个网格显示的参数
+p.add_mesh(grid,show_edges=True, color=&#39;r&#39;, point_size=10,style=&#39;wireframe&#39;,render_points_as_spheres=False)
+p.show()</code></pre><figure><img src="media/img-20250328204123@1451969679.png" alt="Img" /></figure><h2 id="点云">点云</h2><p><a href="https://docs.pyvista.org/examples/02-plot/point-clouds.html">https://docs.pyvista.org/examples/02-plot/point-clouds.html</a></p><h2 id="单元类型">单元类型</h2><figure><img src="media/img-20250328204535@739334226.png" alt="Img" /></figure><figure><img src="media/img-20250328204544@767073136.png" alt="Img" /></figure><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
