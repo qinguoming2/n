@@ -41,7 +41,7 @@ p {
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="python调用和编译eigen库函数">Python调用和编译Eigen库函数</h1><p>资料:</p><ul><li><a href="https://pybind11.readthedocs.io/en/stable/advanced/cast/eigen.html">https://pybind11.readthedocs.io/en/stable/advanced/cast/eigen.html</a></li><li><a href="https://www.cnblogs.com/hyl2018/p/14089299.html">https://www.cnblogs.com/hyl2018/p/14089299.html</a></li><li><a href="https://www.yingnd.com/python/105835.html">https://www.yingnd.com/python/105835.html</a></li></ul><h2 id="准备">准备</h2><ol><li>安装vs2022,选择C++桌面开发;</li><li>下载<a href="https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip">Eigen源码</a></li><li>安装python3.10+, numpy, pybind11;</li></ol><h2 id="_1-编写cpp代码">1. 编写cpp代码</h2><p>在<span class="codespan-content"><code>solve_KUF.cpp</code></span>中:</p><pre><code class="language-cpp">#include &lt;pybind11/pybind11.h&gt;
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="python调用和编译eigen库函数">Python调用和编译Eigen库函数</h1><p>资料:</p><ul><li><a href="https://pybind11.readthedocs.io/en/stable/advanced/cast/eigen.html">https://pybind11.readthedocs.io/en/stable/advanced/cast/eigen.html</a></li><li><a href="https://www.cnblogs.com/hyl2018/p/14089299.html">https://www.cnblogs.com/hyl2018/p/14089299.html</a></li><li><a href="https://www.yingnd.com/python/105835.html">https://www.yingnd.com/python/105835.html</a></li></ul><h2 id="准备">准备</h2><ol><li>安装vs2022,选择C++桌面开发;</li><li>下载<a href="https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip">Eigen源码</a></li><li>安装python3.10+, numpy, pybind11;</li></ol><h2 id="_1-编写cpp代码">1. 编写cpp代码</h2><p>在<span class="codespan-content"><code>solve_KUF.cpp</code></span>中:</p><pre><code class="language-cpp">#include &lt;pybind11/pybind11.h&gt;
 #include &lt;pybind11/eigen.h&gt;
 #include &lt;Eigen/Dense&gt;
 #include &lt;Eigen/Sparse&gt;
@@ -123,7 +123,7 @@ X = solve_KUF.solveKUF(A, B)
 print(&quot;A:\n&quot;, A)
 print(&quot;\nB:\n&quot;, B)
 print(&quot;\nSolution X:\n&quot;, X)
-print(&quot;\nA @ X (should equal B):\n&quot;, A @ X)</code></pre><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+print(&quot;\nA @ X (should equal B):\n&quot;, A @ X)</code></pre><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>

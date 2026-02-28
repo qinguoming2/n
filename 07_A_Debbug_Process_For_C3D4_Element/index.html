@@ -41,7 +41,7 @@ p {
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="一次c3d4单元的debbug过程">一次C3D4单元的debbug过程</h1><p>20230326使用python编程:</p><ol><li><p>完成C3D4的类实现</p></li><li><p>完成了C3D4尽力分析的计算模板Script_for_C3D4_Static_Analysis.py</p></li><li><p>完成pyvista+tkinter的小型后处理</p></li></ol><p>使用悬臂梁模型和abaqus对比结果,发现对不上,自己的后处理显示很小. abaqus节点力1000N</p><figure><img src="media/img-20250328112443@516896300.png" alt="Img" /></figure><figure><img src="media/img-20250328112754@-1086238671.png" alt="Img" /></figure><p>自编结果:<br /><img src="media/img-20250328112731@-1146267570.png" alt="Img" /></p><p>后来提取其中一个单元的刚度矩阵发现也对不上.</p><pre><code class="language-python"># -------------可视化结果-
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="一次c3d4单元的debbug过程">一次C3D4单元的debbug过程</h1><p>20230326使用python编程:</p><ol><li><p>完成C3D4的类实现</p></li><li><p>完成了C3D4尽力分析的计算模板Script_for_C3D4_Static_Analysis.py</p></li><li><p>完成pyvista+tkinter的小型后处理</p></li></ol><p>使用悬臂梁模型和abaqus对比结果,发现对不上,自己的后处理显示很小. abaqus节点力1000N</p><figure><img src="media/img-20250328112443@516896300.png" alt="Img" /></figure><figure><img src="media/img-20250328112754@-1086238671.png" alt="Img" /></figure><p>自编结果:<br /><img src="media/img-20250328112731@-1146267570.png" alt="Img" /></p><p>后来提取其中一个单元的刚度矩阵发现也对不上.</p><pre><code class="language-python"># -------------可视化结果-
 # ic(element_list[267].label)
 # ic(element_list[267].Ke)
 
@@ -106,7 +106,7 @@ ic(e.Ke[1,7])
 #        [1.1942, 1.1942, 2.7865, 0.    , 0.    , 0.    ],
 #        [0.    , 0.    , 0.    , 0.7962, 0.    , 0.    ],
 #        [0.    , 0.    , 0.    , 0.    , 0.7962, 0.    ],
-#        [0.    , 0.    , 0.    , 0.    , 0.    , 0.7962]])</code></pre><p>最后破案了,弹性矩阵(2,2)忘记赋值了!!!!!!!!!!!!</p><p>后续:修改了之后,还是错误,最后通过提取abaqus刚度矩阵进行对比,发现是刚度矩阵不对.</p><p>解决方案:重新推导单元刚度矩阵,发现之前的推导有误,现在已经修正了,结果和abaqus对上了.</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+#        [0.    , 0.    , 0.    , 0.    , 0.    , 0.7962]])</code></pre><p>最后破案了,弹性矩阵(2,2)忘记赋值了!!!!!!!!!!!!</p><p>后续:修改了之后,还是错误,最后通过提取abaqus刚度矩阵进行对比,发现是刚度矩阵不对.</p><p>解决方案:重新推导单元刚度矩阵,发现之前的推导有误,现在已经修正了,结果和abaqus对上了.</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>

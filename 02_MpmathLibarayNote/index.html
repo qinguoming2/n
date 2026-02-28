@@ -41,7 +41,7 @@ p {
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="page-break" data-hidden=""></div><h1 id="mpmath库笔记">Mpmath库笔记</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><p>Numpy 和 MpMath 都是 Python 中常用的数学库,它们都提供了许多数学函数和工具,但它们的设计目的和实现方式有所不同. Numpy 主要用于处理大规模的数值数据,而 MpMath 则专注于高精度计算和符号计算.</p><p>虽然 Numpy 和 MpMath 的设计目的不同,但它们之间可以进行互操作.具体来说,可以将 Numpy 数组转换为 MpMath 的高精度数值类型,然后使用 MpMath 的函数进行计算.同样地,也可以将 MpMath 的数值类型转换为 Numpy 数组,然后使用 Numpy 的函数进行计算.</p><pre><code class="language-python"># import mpmath as mp
+    <main><div class="page-break" data-hidden=""></div><h1 id="mpmath库笔记">Mpmath库笔记</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><p>Numpy 和 MpMath 都是 Python 中常用的数学库,它们都提供了许多数学函数和工具,但它们的设计目的和实现方式有所不同. Numpy 主要用于处理大规模的数值数据,而 MpMath 则专注于高精度计算和符号计算.</p><p>虽然 Numpy 和 MpMath 的设计目的不同,但它们之间可以进行互操作.具体来说,可以将 Numpy 数组转换为 MpMath 的高精度数值类型,然后使用 MpMath 的函数进行计算.同样地,也可以将 MpMath 的数值类型转换为 Numpy 数组,然后使用 Numpy 的函数进行计算.</p><pre><code class="language-python"># import mpmath as mp
 from mpmath import *
 from icecream import ic
 mp.dps = 50         # Set precision
@@ -509,7 +509,7 @@ matrix(
 &gt;&gt;&gt; norm(A,p=2)
 mpf(&#39;5.4772255750516612&#39;)
 &gt;&gt;&gt; mnorm(A,p=&#39;f&#39;)
-mpf(&#39;5.4772255750516612&#39;)</code></pre><p>未完待续....2024.07.02</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+mpf(&#39;5.4772255750516612&#39;)</code></pre><p>未完待续....2024.07.02</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>

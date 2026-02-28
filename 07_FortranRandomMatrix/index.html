@@ -41,7 +41,7 @@ p {
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="fortran2008数组操作-4-随机矩阵">fortran2008数组操作-4-随机矩阵</h1><p>在 Fortran 中定义随机矩阵有多种方式，以下是几种常用的方法:</p><h2 id="_1-使用内置随机数生成器">1. 使用内置随机数生成器</h2><h3 id="基本方法">基本方法</h3><pre><code class="language-shell">program random_matrix
+    <main><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><div class="page-break" data-hidden=""></div><h1 id="fortran2008数组操作-4-随机矩阵">fortran2008数组操作-4-随机矩阵</h1><p>在 Fortran 中定义随机矩阵有多种方式，以下是几种常用的方法:</p><h2 id="_1-使用内置随机数生成器">1. 使用内置随机数生成器</h2><h3 id="基本方法">基本方法</h3><pre><code class="language-shell">program random_matrix
     implicit none
     integer, parameter :: n = 3
     real :: A(n,n)
@@ -239,7 +239,7 @@ end program</code></pre><h3 id="_62-基于时间的随机种子">6.2 基于时�
     end do
     
     deallocate(seed)
-end program</code></pre><h2 id="_7-性能优化建议">7. 性能优化建议</h2><ol><li><strong>大矩阵生成</strong>:对于大矩阵,考虑按列生成(Fortran是列优先存储)</li><li><strong>并行生成</strong>:使用OpenMP并行化随机数生成</li><li><strong>向量化</strong>:使用数组操作代替循环</li><li><strong>批处理</strong>:一次性生成所有随机数比逐个生成更高效</li></ol><h2 id="_8-注意事项">8. 注意事项</h2><ol><li><strong>随机数质量</strong>:内置<span class="codespan-content"><code>random_number</code></span>不适合加密等高质量随机需求</li><li><strong>并行安全</strong>:某些随机数生成器在并行环境下需要特别处理</li><li><strong>可重复性</strong>:调试时可使用固定种子</li><li><strong>分布特性</strong>:<span class="codespan-content"><code>random_number</code></span>生成均匀分布，其他分布需要转换</li></ol><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+end program</code></pre><h2 id="_7-性能优化建议">7. 性能优化建议</h2><ol><li><strong>大矩阵生成</strong>:对于大矩阵,考虑按列生成(Fortran是列优先存储)</li><li><strong>并行生成</strong>:使用OpenMP并行化随机数生成</li><li><strong>向量化</strong>:使用数组操作代替循环</li><li><strong>批处理</strong>:一次性生成所有随机数比逐个生成更高效</li></ol><h2 id="_8-注意事项">8. 注意事项</h2><ol><li><strong>随机数质量</strong>:内置<span class="codespan-content"><code>random_number</code></span>不适合加密等高质量随机需求</li><li><strong>并行安全</strong>:某些随机数生成器在并行环境下需要特别处理</li><li><strong>可重复性</strong>:调试时可使用固定种子</li><li><strong>分布特性</strong>:<span class="codespan-content"><code>random_number</code></span>生成均匀分布，其他分布需要转换</li></ol><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>

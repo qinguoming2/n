@@ -41,7 +41,7 @@ p {
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="page-break" data-hidden=""></div><h1 id="python与matlab在提取子块矩阵的差异">Python与Matlab在提取子块矩阵的差异</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><p>python 中numpy库可以实现类似matlab多维数组的运算.但两者在索引方式上存在一些差异.这是需要注意的.例如:</p><pre><code class="language-shell">% 定义一个4*4矩阵
+    <main><div class="page-break" data-hidden=""></div><h1 id="python与matlab在提取子块矩阵的差异">Python与Matlab在提取子块矩阵的差异</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><p>python 中numpy库可以实现类似matlab多维数组的运算.但两者在索引方式上存在一些差异.这是需要注意的.例如:</p><pre><code class="language-shell">% 定义一个4*4矩阵
 A=1:16;
 A=reshape(A,[4,4]);
 
@@ -72,7 +72,7 @@ a = A[np.ix_([0, 1], [1, 2])]
 print(a)
 # a=
 # [[ 2  3]
-# [ 6  7]]</code></pre><p>这里<span class="codespan-content"><code>np.ix_</code></span>函数用于创建一个索引数组,它允许我们按照MATLAB的索引方式来选择矩阵的子集.这段代码将得到与MATLAB相同的2x2矩阵结果:</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+# [ 6  7]]</code></pre><p>这里<span class="codespan-content"><code>np.ix_</code></span>函数用于创建一个索引数组,它允许我们按照MATLAB的索引方式来选择矩阵的子集.这段代码将得到与MATLAB相同的2x2矩阵结果:</p><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>

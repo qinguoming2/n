@@ -41,7 +41,7 @@ p {
 </template>  </head>
   <body class="quarkdown quarkdown-plain">
     <aside class="margin-area" id="margin-area-left"></aside>
-    <main><div class="page-break" data-hidden=""></div><h1 id="高斯积分的编程实现">高斯积分的编程实现</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div><h2 id="二维高斯积分">二维高斯积分</h2><pre><code class="language-python">
+    <main><div class="page-break" data-hidden=""></div><h1 id="高斯积分的编程实现">高斯积分的编程实现</h1><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><h2 id="二维高斯积分">二维高斯积分</h2><pre><code class="language-python">
 def Integ2dGuassLegendre(f,lowLimit:List[float]=[-1,-1], 
                             upLimit:List[float]=[1,1], 
                             n:int=3)-&gt;float:
@@ -119,7 +119,7 @@ result3, error = tplquad(integrand3, -1, 1, lambda x: -1, lambda x: 1, lambda x,
 ans2=Integ3dGuassLegendre(integrand3,[-1,-1,-1],[1,1,1],n=5)
 
 print(&quot;numpy三重积分结果:&quot;, result3)
-print(f&quot;本地三重积分结果:{ans2}&quot;)</code></pre><p>输出:</p><ul><li>numpy 二重积分结果: 8.557400519221307</li><li>本地二重积分结果:8.557173227239266</li><li>numpy三重积分结果: 25.03299361973213</li><li>本地三重积分结果:25.03199627931168</li></ul><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://qinguoming.pages.dev/">返回 主页</a></p></div></main>
+print(f&quot;本地三重积分结果:{ans2}&quot;)</code></pre><p>输出:</p><ul><li>numpy 二重积分结果: 8.557400519221307</li><li>本地二重积分结果:8.557173227239266</li><li>numpy三重积分结果: 25.03299361973213</li><li>本地三重积分结果:25.03199627931168</li></ul><div class="container fullwidth" style="justify-items: end; text-align: end;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
     <aside class="margin-area" id="margin-area-right"></aside>
   </body>
 </html>
