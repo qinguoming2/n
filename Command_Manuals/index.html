@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta name="generator" content="Quarkdown">
+    <meta charset="UTF-8">
+    <meta name="description" content="a blog demo">
+    <meta name="author" content="qinguoming">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="quarkdown:root-path" content="..">
+    <title>quarkblog</title>
+    <script src="../script/quarkdown.js"></script>
+    <script>const capabilities = window.quarkdownCapabilities</script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="../theme/theme.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+    <link href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" rel="stylesheet">
+    <script>capabilities.code = true;</script>
+    <style>@font-face { font-family: '-503305824'; src: local('Consolas'); }
+
+body {
+    --qd-code-custom-font: '-503305824';
+    --qd-main-font-size: 12.0pt;}
+
+body.quarkdown-plain.quarkdown-plain,
+body.quarkdown-docs.quarkdown-docs {
+}
+
+body.quarkdown-slides.quarkdown-slides .reveal {
+}
+
+@page {
+    size: auto auto;
+    margin: 0;}
+
+p {
+}</style>
+    <script>prepare(new PlainDocument());</script>
+<template id="sidebar-template"><nav class="sidebar" role="doc-toc"><ol><li data-target-id="git常用命令手册" data-depth="2" data-location="0.1"><a href="#git常用命令手册">Git常用命令手册</a></li><li data-target-id="linux-常用命令手册" data-depth="1" data-location="1"><a href="#linux-常用命令手册">linux 常用命令手册</a></li><li data-target-id="linux-命令速查表" data-depth="1" data-location="2"><a href="#linux-命令速查表">linux 命令速查表</a></li></ol></nav>
+</template>  </head>
+  <body class="quarkdown quarkdown-plain">
+    <aside class="margin-area" id="margin-area-left"></aside>
+    <main><div class="page-break" data-hidden=""></div><h1 id="table-of-contents">目录</h1><nav role="table-of-contents" data-role="table-of-contents"><ol><li data-target-id="git常用命令手册" data-depth="2" data-location="0.1"><a href="#git常用命令手册">Git常用命令手册</a></li><li data-target-id="linux-常用命令手册" data-depth="1" data-location="1"><a href="#linux-常用命令手册">linux 常用命令手册</a></li><li data-target-id="linux-命令速查表" data-depth="1" data-location="2"><a href="#linux-命令速查表">linux 命令速查表</a></li></ol></nav><div class="container fullwidth" style="justify-items: start; text-align: start;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div><h2 id="git常用命令手册" data-location="0.1">Git常用命令手册</h2><pre><code class="language-bash"># ========== 仓库初始化与配置 ==========
+git init                    # 创建一个新的本地仓库，在当前目录初始化Git仓库
+
+# ========== 查看状态与差异 ==========
+git status                  # 查看Git仓库的当前状态，显示已修改、已暂存、未跟踪的文件
+git diff                    # 比较工作区与暂存区文件的差异（显示未暂存的修改）
+git diff --cached           # 比较暂存区与最新提交的差异（显示已暂存但未提交的修改）
+
+# ========== 添加文件到暂存区 ==========
+git add &lt;file&gt;              # 将指定文件暂存到暂存区
+git add .                   # 将当前目录下所有修改/新增的文件添加到暂存区
+git add -A                  # 添加所有修改（包括删除和新增）到暂存区
+
+# ========== 提交修改 ==========
+git commit                  # 提交暂存区的修改到本地仓库（会打开编辑器输入提交信息）
+git commit -m &quot;message&quot;     # 直接附带提交信息进行提交
+git commit -a               # 提交所有已跟踪的文件（跳过 git add 步骤），但不会包含未跟踪的新文件
+git commit --amend          # 修改最后一次提交（可用于补充遗漏文件或修改提交信息）
+
+# ========== 分支操作 ==========
+git checkout &lt;branch&gt;       # 切换到指定分支，并更新工作区
+git checkout -b &lt;new-branch&gt; # 创建一个新分支，并立即切换到该分支
+git branch                  # 列出所有本地分支（当前分支前有 * 标记）
+git branch &lt;branch&gt;         # 创建一个新分支（但不会切换）
+git branch -d &lt;branch&gt;      # 删除指定分支（仅当分支已合并时可用）
+git branch -D &lt;branch&gt;      # 强制删除指定分支（无论是否合并）
+
+# ========== 查看历史 ==========
+git log                     # 显示当前分支的提交历史（按时间倒序）
+git log --oneline           # 简洁模式显示提交历史，每行显示一个提交
+git log --graph             # 以图形化方式显示分支合并历史
+
+# ========== 远程仓库操作 ==========
+git fetch &lt;remote&gt;          # 从远程仓库拉取所有分支到本地（但不自动合并）
+git pull &lt;remote&gt; &lt;branch&gt;  # 从远程仓库拉取指定分支到本地，并自动合并到当前分支
+git push &lt;remote&gt; &lt;branch&gt;  # 将本地仓库的修改上传到远程仓库的指定分支
+
+# ========== 合并与变基 ==========
+git merge &lt;branch&gt;          # 合并指定分支到当前分支（生成一个合并提交）
+git rebase &lt;branch&gt;         # 变基操作，将当前分支的提交放到目标分支之后（保持线性历史）
+
+# ========== 撤销与回退 ==========
+git revert &lt;commit-id&gt;      # 创建一个新提交来撤销指定的历史提交（安全撤销，不丢失历史）
+git reset --soft &lt;commit&gt;   # 回退到指定提交，但保留工作区和暂存区的修改
+git reset --hard &lt;commit&gt;   # 回退到指定提交，丢弃所有工作区和暂存区的修改（⚠️危险操作）
+git reset HEAD &lt;file&gt;       # 将文件从暂存区移除（取消暂存），但保留工作区修改
+git checkout -- &lt;file&gt;      # 丢弃工作区中文件的修改，恢复到暂存区或最新提交的状态
+
+# ========== 其他常用命令 ==========
+git remote -v               # 查看当前配置的远程仓库地址
+git clone &lt;url&gt;             # 克隆远程仓库到本地
+git tag &lt;tagname&gt;           # 给当前提交打标签
+git stash                   # 暂存当前工作区的修改，使工作区恢复干净
+git stash pop               # 恢复最近一次暂存的修改</code></pre><div class="page-break" data-hidden=""></div><h1 id="linux-常用命令手册" data-location="1">linux 常用命令手册</h1><pre><code class="language-bash"># 文件与目录操作
+ls                    # 列出目录内容
+ls -l                 # 以长格式显示详细信息
+ls -a                 # 显示所有文件（包括隐藏文件）
+ls -lh                # 人性化显示文件大小
+ls -lt                # 按修改时间排序
+pwd                   # 显示当前工作目录
+cd &lt;目录&gt;             # 切换工作目录
+cd ~                  # 切换到用户主目录
+cd -                  # 切换到上一个工作目录
+
+mkdir &lt;目录名&gt;        # 创建新目录
+mkdir -p &lt;路径&gt;       # 递归创建多级目录
+rmdir &lt;空目录&gt;        # 删除空目录
+rm &lt;文件&gt;             # 删除文件
+rm -r &lt;目录&gt;          # 递归删除目录及其内容
+rm -f &lt;文件&gt;          # 强制删除，不提示
+
+cp &lt;源&gt; &lt;目标&gt;        # 复制文件或目录
+cp -r &lt;源目录&gt; &lt;目标目录&gt; # 递归复制目录
+mv &lt;源&gt; &lt;目标&gt;        # 移动或重命名文件/目录
+
+ln -s &lt;目标&gt; &lt;链接名&gt; # 创建软链接（符号链接）
+ln &lt;目标&gt; &lt;链接名&gt;    # 创建硬链接
+
+# 文件内容查看
+cat &lt;文件&gt;            # 显示文件全部内容
+less &lt;文件&gt;           # 分页查看文件（支持上下翻页）
+more &lt;文件&gt;           # 分页查看文件（仅向下翻页）
+head &lt;文件&gt;           # 显示文件开头（默认10行）
+tail &lt;文件&gt;           # 显示文件结尾（默认10行）
+tail -f &lt;文件&gt;        # 实时追踪文件更新
+nl &lt;文件&gt;             # 显示文件并添加行号
+
+# 文本处理
+grep &lt;模式&gt; &lt;文件&gt;    # 在文件中搜索匹配的行
+grep -r &lt;模式&gt; &lt;目录&gt; # 递归搜索目录内所有文件
+grep -v &lt;模式&gt; &lt;文件&gt; # 显示不匹配的行
+grep -i &lt;模式&gt; &lt;文件&gt; # 忽略大小写
+grep -n &lt;模式&gt; &lt;文件&gt; # 显示匹配行及行号
+
+wc &lt;文件&gt;             # 统计行数、单词数、字符数
+wc -l &lt;文件&gt;          # 仅统计行数
+sort &lt;文件&gt;           # 对文件内容排序
+uniq &lt;文件&gt;           # 去除重复行（通常与sort配合）
+cut -d&#39;:&#39; -f1 &lt;文件&gt;  # 按分隔符截取字段
+awk &#39;{print $1}&#39;      # 处理文本列（功能强大）
+sed &#39;s/旧/新/g&#39; &lt;文件&gt; # 流编辑器，替换文本
+
+# 文件属性与权限
+stat &lt;文件&gt;           # 显示文件详细状态信息（大小、权限、时间戳等）
+file &lt;文件&gt;           # 识别文件类型
+du -sh &lt;文件/目录&gt;    # 查看文件/目录占用磁盘大小
+df -h                 # 查看磁盘分区使用情况
+ls -l                 # 查看文件权限、所有者等
+chmod 755 &lt;文件&gt;      # 修改文件权限（数字法）
+chmod u+x &lt;文件&gt;      # 添加执行权限
+chown &lt;用户&gt;:&lt;组&gt; &lt;文件&gt; # 修改文件所有者和组
+umask                 # 显示或设置文件权限掩码
+
+# 查找文件
+find &lt;路径&gt; -name &lt;文件名&gt; # 按名称查找文件
+find &lt;路径&gt; -type f   # 只查找普通文件
+find &lt;路径&gt; -mtime -7 # 查找7天内修改过的文件
+locate &lt;文件名&gt;       # 快速查找文件（依赖数据库）
+which &lt;命令&gt;          # 显示命令的绝对路径
+whereis &lt;命令&gt;        # 显示命令及其相关文件位置
+
+# 系统信息
+uname -a              # 查看系统内核版本等信息
+whoami                # 显示当前用户名
+id                    # 显示用户ID和组ID
+date                  # 显示当前日期时间
+cal                   # 显示日历
+uptime                # 查看系统运行时间及负载
+top                   # 实时显示进程动态
+htop                  # 增强版top（需安装）
+ps aux                # 查看所有进程
+kill &lt;PID&gt;            # 终止进程
+kill -9 &lt;PID&gt;         # 强制终止进程
+jobs                  # 显示后台任务
+fg                    # 将后台任务调到前台
+bg                    # 将前台任务放到后台
+
+# 网络相关
+ifconfig              # 查看/配置网络接口（部分系统需安装net-tools）
+ip addr               # 现代系统查看IP信息
+ping &lt;主机&gt;           # 测试网络连通性
+netstat -tuln         # 查看端口监听状态
+ss -tuln              # 更现代的网络统计工具
+curl &lt;URL&gt;            # 发送HTTP请求并获取响应
+wget &lt;URL&gt;            # 下载文件
+ssh &lt;用户&gt;@&lt;主机&gt;     # 远程登录
+
+# 文件传输
+scp &lt;本地文件&gt; &lt;用户&gt;@&lt;主机&gt;:&lt;路径&gt; # 远程复制文件
+scp 用户名@远程服务器IP:远程文件路径 本地保存路径 # 从远程服务器复制文件到本地
+rsync -avP 用户名@远程服务器IP:远程文件路径 本地保存路径 # 使用rsync进行增量同步，支持断点续传、增量同步
+sz 文件名  # 此方式依赖终端软件的Zmodem支持,已在SSH会话中时使用,将文件从服务器发送到本地
+rz         # 此方式依赖终端软件的Zmodem支持,已在SSH会话中时使用,将文件从本地发送到服务器
+
+# 压缩与归档
+tar -cvf archive.tar &lt;文件/目录&gt;   # 打包成tar（不压缩）
+tar -xvf archive.tar               # 解包tar
+tar -czvf archive.tar.gz &lt;文件/目录&gt; # 打包并用gzip压缩
+tar -xzvf archive.tar.gz            # 解压tar.gz
+tar -cjvf archive.tar.bz2 &lt;文件/目录&gt; # 打包并用bzip2压缩
+tar -xjvf archive.tar.bz2           # 解压tar.bz2
+zip -r archive.zip &lt;文件/目录&gt;      # 压缩成zip
+unzip archive.zip                   # 解压zip
+
+# 包管理（以Debian/Ubuntu为例）
+apt update            # 更新软件包列表
+apt upgrade           # 升级已安装软件包
+apt install &lt;软件名&gt;  # 安装软件包
+apt remove &lt;软件名&gt;   # 卸载软件包
+
+# 其他实用命令
+echo &lt;文本&gt;           # 输出文本到标准输出
+export &lt;变量&gt;=&lt;值&gt;    # 设置环境变量
+env                   # 显示所有环境变量
+alias &lt;别名&gt;=&#39;&lt;命令&gt;&#39; # 创建命令别名
+unalias &lt;别名&gt;        # 取消别名
+history               # 显示历史命令
+clear                 # 清屏
+man &lt;命令&gt;            # 查看命令手册
+help &lt;命令&gt;           # 查看shell内置命令帮助
+type &lt;命令&gt;           # 判断命令是内置还是外部</code></pre><div class="page-break" data-hidden=""></div><h1 id="linux-命令速查表" data-location="2">linux 命令速查表</h1><pre><code class="language-bash"># ========== 目录与文件操作 ==========
+ls                      # 列出目录内容
+cd &lt;目录&gt;               # 更改目录
+pwd                     # 显示当前工作目录
+mkdir &lt;目录名&gt;          # 创建目录
+rmdir &lt;空目录&gt;          # 删除空目录
+rm &lt;文件&gt;               # 删除文件或目录（加 -r 删除目录）
+cp &lt;源&gt; &lt;目标&gt;          # 复制文件或目录（加 -r 复制目录）
+mv &lt;源&gt; &lt;目标&gt;          # 移动或重命名文件或目录
+touch &lt;文件名&gt;          # 创建空文件或更新文件时间戳
+
+# ========== 文件内容查看 ==========
+cat &lt;文件&gt;              # 连接并显示文件内容
+less &lt;文件&gt;             # 分页查看文件内容（支持上下翻页）
+more &lt;文件&gt;             # 查看文件内容（仅向下翻页，类似 less）
+head &lt;文件&gt;             # 显示文件开头（默认10行）
+tail &lt;文件&gt;             # 显示文件结尾（默认10行）
+tail -f &lt;文件&gt;          # 实时追踪文件更新
+
+# ========== 文本搜索与查找 ==========
+grep &lt;模式&gt; &lt;文件&gt;      # 在文件内搜索文本
+find &lt;路径&gt; -name &lt;文件名&gt;  # 在目录层次结构中搜索文件
+locate &lt;文件名&gt;         # 按名称快速查找文件（依赖数据库）
+
+# ========== 命令帮助 ==========
+man &lt;命令&gt;              # 显示命令的手册（详细帮助）
+info &lt;命令&gt;             # 显示命令信息（更详细的文档）
+which &lt;命令&gt;            # 定位命令的绝对路径
+
+# ========== 文件权限与属性 ==========
+chmod &lt;权限&gt; &lt;文件&gt;     # 更改文件模式或访问控制列表
+chown &lt;用户&gt;:&lt;组&gt; &lt;文件&gt; # 更改文件所有者/组
+
+# ========== 进程管理 ==========
+ps                      # 报告当前进程的快照
+ps aux                  # 显示所有进程的详细信息
+top                     # 动态显示 Linux 任务（实时刷新）
+htop                    # 交互式进程查看器（增强版 top）
+kill &lt;PID&gt;              # 终止进程（发送指定信号）
+pkill &lt;进程名&gt;          # 按名称终止进程
+
+# ========== 系统资源查看 ==========
+df -h                   # 报告文件系统磁盘空间使用情况（人性化显示）
+du -sh &lt;文件/目录&gt;      # 估计文件空间使用量
+free -h                 # 显示内存使用情况
+uptime                  # 告知系统已运行多长时间、负载情况
+uname -a                # 打印系统信息（内核版本、主机名等）
+
+# ========== 网络操作 ==========
+ifconfig                # 配置网络接口（传统命令，需安装 net-tools）
+ip addr                 # 显示/操作路由、设备、策略路由和隧道（现代命令）
+ping &lt;主机&gt;             # 向网络主机发送 ICMP 请求，测试连通性
+netstat -tuln           # 打印网络连接、路由表、接口统计等
+ss -tuln                # 另一个用于调查套接字的工具（替代 netstat）
+wget &lt;URL&gt;              # 从网络检索文件（非交互式下载）
+curl &lt;URL&gt;              # 从或向服务器传输数据（支持多种协议）
+scp &lt;本地&gt; &lt;用户@主机:路径&gt;  # 安全复制文件（远程文件复制）
+ssh &lt;用户&gt;@&lt;主机&gt;       # OpenSSH 客户端，远程登录
+
+# ========== 压缩与归档 ==========
+tar -cvf archive.tar &lt;文件/目录&gt;   # 存储文件到归档（打包，不压缩）
+tar -xvf archive.tar               # 从归档中提取文件（解包）
+tar -czvf archive.tar.gz &lt;文件/目录&gt; # 使用 gzip 压缩打包
+tar -xzvf archive.tar.gz           # 解压 gzip 格式归档
+gzip &lt;文件&gt;              # 压缩文件（生成 .gz）
+gzip -d &lt;文件.gz&gt;        # 解压 gzip 文件
+bzip2 &lt;文件&gt;             # 使用 bzip2 压缩文件（生成 .bz2）
+bzip2 -d &lt;文件.bz2&gt;      # 解压 bzip2 文件
+xz &lt;文件&gt;                # 使用 XZ 格式压缩文件（生成 .xz）
+xz -d &lt;文件.xz&gt;          # 解压 XZ 文件
+zip -r archive.zip &lt;文件/目录&gt;  # 打包并压缩为 zip 格式
+unzip archive.zip        # 从 zip 归档中提取压缩文件
+
+# ========== 文本输出与编辑器 ==========
+echo &lt;文本&gt;              # 显示一行文本到标准输出
+nano &lt;文件&gt;              # 简单的文本编辑器（适合新手）
+vim &lt;文件&gt;               # 高级文本编辑器（功能强大）</code></pre><div class="container fullwidth" style="justify-items: start; text-align: start;"><p><a href="https://blog.qgm1702.top/">返回 主页</a></p></div></main>
+    <aside class="margin-area" id="margin-area-right"></aside>
+  </body>
+</html>
